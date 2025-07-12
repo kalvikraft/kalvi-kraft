@@ -160,4 +160,33 @@ footer a:hover {
     display: inline-block;
     margin-bottom: 6px;
   }
+  .youtube-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff0000;
+    color: white;
+    border-radius: 30px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
+  }
+  
+  .youtube-bar a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-family: sans-serif;
+  }
+  
+  .youtube-bar .yt-logo {
+    width: 24px;
+    height: 24px;
+  }  
 }
