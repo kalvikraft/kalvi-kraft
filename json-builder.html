@@ -26,8 +26,8 @@
       const folderUrl = document.getElementById('folderUrl').value.trim();
       const output = document.getElementById('output');
 
-      if (!folderUrl.includes('/tree/main/')) {
-        output.textContent = "❌ Please paste a valid GitHub folder URL (must contain /tree/main/)";
+      if (!url.includes("github.com") && !url.includes("api.github.com")) {
+        alert("❌ Please paste a valid GitHub folder or API URL");
         return;
       }
 
