@@ -41,7 +41,6 @@
           </ul>
         </div>
         <div class="leaderboard">
-          <h3>📊 Leaderboard</h3>
           <table id="leaderboard-table">
             <thead>
               <tr>
@@ -50,7 +49,7 @@
                 <th>Score</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="leaderboard-list">
               <tr>
                 <td colspan="3">Loading...</td>
               </tr>
@@ -74,19 +73,68 @@
       </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
     <script>
-      // Fetch Old Question Papers JSON
-      const searchInput = document.getElementById("searchInput");
-      const qpList = document.getElementById("qpList");
+      const firebaseConfig = {
+        apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
+        authDomain: 'kalvi-kraft.firebaseapp.com',
+        databaseURL:
+          'https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app',
+        projectId: 'kalvi-kraft',
+        storageBucket: 'kalvi-kraft.appspot.com',
+        messagingSenderId: '535767835272',
+        appId: '1:535767835272:web:56d04e7c7d6f611194753d',
+        measurementId: 'G-S1YJCR79MN',
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
 
-      fetch("json/old-qps.json")
+    <!-- Load Leaderboard from Firebase -->
+    <script>
+      function loadLeaderboard() {
+        firebase
+          .database()
+          .ref('leaderboard')
+          .once('value')
+          .then((snapshot) => {
+            const scores = [];
+            snapshot.forEach((child) => {
+              scores.push(child.val());
+            });
+            scores.sort((a, b) => b.score - a.score);
+            const list = document.getElementById('leaderboard-list');
+            list.innerHTML = '';
+            scores.slice(0, 10).forEach((item, index) => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `<td>${index + 1}</td><td>${item.name}</td><td>${
+                item.score
+              }</td>`;
+              list.appendChild(tr);
+            });
+          })
+          .catch(() => {
+            document.getElementById('leaderboard-list').innerHTML =
+              '<tr><td colspan="3">⚠️ Failed to load leaderboard</td></tr>';
+          });
+      }
+
+      loadLeaderboard();
+    </script>
+
+    <!-- Load Old Question Papers -->
+    <script>
+      const searchInput = document.getElementById('searchInput');
+      const qpList = document.getElementById('qpList');
+
+      fetch('json/old-qps.json')
         .then((res) => res.json())
         .then((data) => {
           function render(list) {
-            qpList.innerHTML = "";
+            qpList.innerHTML = '';
             list.forEach((item) => {
-              const li = document.createElement("li");
+              const li = document.createElement('li');
               li.innerHTML = `<a href="${item.download_url}" target="_blank">${item.name}</a>`;
               qpList.appendChild(li);
             });
@@ -94,7 +142,7 @@
 
           render(data);
 
-          searchInput.addEventListener("input", () => {
+          searchInput.addEventListener('input', () => {
             const term = searchInput.value.toLowerCase();
             const filtered = data.filter((item) =>
               item.name.toLowerCase().includes(term)
@@ -104,17 +152,19 @@
         })
         .catch(() => {
           qpList.innerHTML =
-            "<li>⚠️ Failed to load question papers. Try again later.</li>";
+            '<li>⚠️ Failed to load question papers. Try again later.</li>';
         });
+    </script>
 
-      // Load Notifications
-      fetch("json/notifications.json")
+    <!-- Load Notifications -->
+    <script>
+      fetch('json/notifications.json')
         .then((res) => res.json())
         .then((data) => {
-          const list = document.getElementById("notification-list");
-          list.innerHTML = "";
+          const list = document.getElementById('notification-list');
+          list.innerHTML = '';
           data.slice(0, 5).forEach((item) => {
-            const li = document.createElement("li");
+            const li = document.createElement('li');
             li.innerHTML = item.link
               ? `<a href="${item.link}" target="_blank">${item.message}</a>`
               : item.message;
@@ -123,40 +173,17 @@
 
           let index = 0;
           setInterval(() => {
-            const items = document.querySelectorAll("#notification-list li");
+            const items = document.querySelectorAll('#notification-list li');
             items.forEach((li, i) => {
-              li.style.display = i === index ? "block" : "none";
+              li.style.display = i === index ? 'block' : 'none';
             });
             index = (index + 1) % items.length;
           }, 2500);
         })
         .catch(() => {
-          document.getElementById("notification-list").innerHTML =
-            "<li>⚠️ Could not load notifications.</li>";
+          document.getElementById('notification-list').innerHTML =
+            '<li>⚠️ Could not load notifications.</li>';
         });
-    </script>
-
-    <script>
-      fetch("json/leaderboard.json")
-      .then(res => res.json())
-      .then(data => {
-        data.sort((a, b) => b.score - a.score); // Sort by score descending
-        const tbody = document.querySelector("#leaderboard-table tbody");
-        tbody.innerHTML = "";
-        data.slice(0, 10).forEach((item, index) => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${item.name}</td>
-          <td>${item.score}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      })
-      .catch(() => {
-        document.querySelector("#leaderboard-table tbody").innerHTML =
-        "<tr><td colspan='3'>⚠️ Could not load leaderboard.</td></tr>";
-      });
     </script>
   </body>
 </html>
