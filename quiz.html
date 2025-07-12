@@ -1,1 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz – Kalvi Kraft</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="ads">
+        <div class="ad">Ad Slot 1</div>
+        <div class="ad">Ad Slot 2</div>
+      </aside>
+
+      <main class="content">
+        <h1>📝 Kalvi Kraft Quiz</h1>
+        <nav class="nav">
+          <a href="index.html">🏠 Home</a>
+          <a href="materials.html">Study Materials</a>
+          <a href="old-qps.html">Old Question Papers</a>
+          <a href="shortener.html">Link Shortener</a>
+          <a href="definitions.html">Definitions</a>
+        </nav>
+
+        <div id="setupScreen">
+          <input type="text" id="username" placeholder="Enter your name" />
+          <select id="categorySelect">
+            <option value="">Select Category</option>
+          </select>
+          <select id="subCategorySelect">
+            <option value="">Select Sub-category</option>
+          </select>
+          <button onclick="startQuiz()">Start Quiz</button>
+        </div>
+
+        <div id="quizScreen" style="display: none">
+          <div id="timer">Time Left: 10:00</div>
+          <div id="questionBox"></div>
+          <button onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+
+        <div id="resultScreen" style="display: none">
+          <h3 id="scoreDisplay"></h3>
+          <a href="quiz.html">Try Again</a>
+        </div>
+      </main>
+
+      <aside class="sidebar">
+        <div class="notifications">
+          <ul id="notification-list">
+            <li>Loading notifications...</li>
+          </ul>
+        </div>
+        <div class="leaderboard">
+          <table style="width: 100%; font-size: 14px">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-list">
+              <tr>
+                <td colspan="3">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      // Notifications
+      fetch('json/notifications.json')
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById('notification-list');
+          list.innerHTML = '';
+          data.slice(0, 5).forEach((item) => {
+            const li = document.createElement('li');
+            li.innerHTML = item.link
+              ? `<a href="${item.link}" target="_blank">${item.message}</a>`
+              : item.message;
+            list.appendChild(li);
+          });
+          let index = 0;
+          setInterval(() => {
+            const items = document.querySelectorAll('#notification-list li');
+            items.forEach((li, i) => {
+              li.style.display = i === index ? 'block' : 'none';
+            });
+            index = (index + 1) % items.length;
+          }, 2500);
+        });
+
+      // Firebase leaderboard
+      function loadLeaderboard() {
+        firebase
+          .database()
+          .ref('leaderboard')
+          .once('value')
+          .then((snapshot) => {
+            const scores = [];
+            snapshot.forEach((child) => {
+              scores.push(child.val());
+            });
+            scores.sort((a, b) => b.score - a.score);
+            const list = document.getElementById('leaderboard-list');
+            list.innerHTML = '';
+            scores.slice(0, 10).forEach((item, index) => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `<td>${index + 1}</td><td>${item.name}</td><td>${
+                item.score
+              }</td>`;
+              list.appendChild(tr);
+            });
+          });
+      }
+
+      let questionsData = {};
+      fetch('json/questions.json')
+        .then((res) => res.json())
+        .then((data) => {
+          questionsData = data;
+          const categorySelect = document.getElementById('categorySelect');
+          const subCategorySelect =
+            document.getElementById('subCategorySelect');
+          for (let category in data) {
+            const opt = document.createElement('option');
+            opt.value = category;
+            opt.textContent = category;
+            categorySelect.appendChild(opt);
+          }
+          categorySelect.addEventListener('change', () => {
+            subCategorySelect.innerHTML =
+              '<option value="">Select Sub-category</option>';
+            if (data[categorySelect.value]) {
+              Object.keys(data[categorySelect.value]).forEach((sub) => {
+                const opt = document.createElement('option');
+                opt.value = sub;
+                opt.textContent = sub;
+                subCategorySelect.appendChild(opt);
+              });
+            }
+          });
+        });
+
+      let selectedQuestions = [];
+      let answers = [];
+      let timerInterval;
+      let timeRemaining = 600;
+
+      function getRandomUniqueQuestions(array, count) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled.slice(0, count);
+      }
+
+      function startQuiz() {
+        const name = document.getElementById('username').value.trim();
+        const category = document.getElementById('categorySelect').value;
+        const subcategory = document.getElementById('subCategorySelect').value;
+        if (!name || !category || !subcategory) {
+          alert('Please enter name, category and sub-category');
+          return;
+        }
+        const pool = questionsData[category][subcategory];
+        if (pool.length < 15) {
+          alert('Minimum 15 questions required.');
+          return;
+        }
+        selectedQuestions = getRandomUniqueQuestions(pool, 15);
+        answers = Array(15).fill(null);
+        document.getElementById('setupScreen').style.display = 'none';
+        document.getElementById('quizScreen').style.display = 'block';
+        startTimer();
+        showQuestions();
+      }
+
+      function startTimer() {
+        const timerDisplay = document.getElementById('timer');
+        timerInterval = setInterval(() => {
+          timeRemaining--;
+          const mins = Math.floor(timeRemaining / 60);
+          const secs = timeRemaining % 60;
+          timerDisplay.textContent = `Time Left: ${String(mins).padStart(
+            2,
+            '0'
+          )}:${String(secs).padStart(2, '0')}`;
+          if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            submitQuiz();
+          }
+        }, 1000);
+      }
+
+      function showQuestions() {
+        const box = document.getElementById('questionBox');
+        box.innerHTML = '';
+        selectedQuestions.forEach((q, i) => {
+          const div = document.createElement('div');
+          div.innerHTML =
+            `<p><strong>Q${i + 1}:</strong> ${q.question}</p>` +
+            q.options
+              .map(
+                (opt, j) =>
+                  `<label><input type="radio" name="q${i}" value="${j}" onchange="answers[${i}]=${j}"> ${opt}</label><br>`
+              )
+              .join('');
+          box.appendChild(div);
+        });
+      }
+
+      function submitQuiz() {
+        clearInterval(timerInterval);
+        let score = 0;
+        selectedQuestions.forEach((q, i) => {
+          if (q.options[answers[i]] === q.answer) score++;
+        });
+        const name = document.getElementById('username').value.trim();
+        firebase.database().ref('leaderboard').push({
+          name: name,
+          score: score,
+          timestamp: Date.now(),
+        });
+        document.getElementById('quizScreen').style.display = 'none';
+        document.getElementById('resultScreen').style.display = 'block';
+        document.getElementById(
+          'scoreDisplay'
+        ).textContent = `Your score: ${score} / ${selectedQuestions.length}`;
+        loadLeaderboard();
+      }
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
+        authDomain: 'kalvi-kraft.firebaseapp.com',
+        databaseURL:
+          'https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app',
+        projectId: 'kalvi-kraft',
+        storageBucket: 'kalvi-kraft.appspot.com',
+        messagingSenderId: '535767835272',
+        appId: '1:535767835272:web:56d04e7c7d6f611194753d',
+        measurementId: 'G-S1YJCR79MN',
+      };
+      firebase.initializeApp(firebaseConfig);
+      loadLeaderboard();
+    </script>
+
+    <!-- Anti-cheating -->
+    <script>
+      document.addEventListener('contextmenu', (e) => e.preventDefault());
+      document.addEventListener('keydown', function (e) {
+        if (
+          (e.ctrlKey && ['c', 'x', 'v', 'u'].includes(e.key.toLowerCase())) ||
+          e.key === 'F12'
+        ) {
+          e.preventDefault();
+        }
+      });
+      document.addEventListener('selectstart', (e) => e.preventDefault());
+    </script>
+  </body>
+</html>
 
