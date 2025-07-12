@@ -4,52 +4,77 @@
       {
         "question": "What is 15 + 28?",
         "options": ["33", "43", "53", "41"],
-        "answer": 1
+        "answer": "43"
+      },
+      {
+        "question": "A man's salary is increased by 10% and then decreased by 10%. What is the change in his salary?",
+        "options": ["No change", "1% increase", "1% decrease", "2% decrease"],
+        "answer": "1% decrease"
+      },
+      {
+        "question": "If 30% of a number is 150, then what is 60% of that number?",
+        "options": ["300", "450", "500", "600"],
+        "answer": "300"
+      },
+      {
+        "question": "If 30% of a number is 150, then what is 60% of that number?",
+        "options": ["300", "450", "500", "600"],
+        "answer": "300"
+      },
+      {
+        "question": "If 30% of a number is 150, then what is 60% of that number?",
+        "options": ["300", "450", "500", "600"],
+        "answer": "300"
+      },
+      {
+        "question": "If 30% of a number is 150, then what is 60% of that number?",
+        "options": ["300", "450", "500", "600"],
+        "answer": "300"
       },
       {
         "question": "What is 15 + 28?",
         "options": ["33", "43", "53", "41"],
-        "answer": 1
+        "answer": "43"
       },
       {
         "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
         "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": 0
+        "answer": "\u20b94"
       },
       {
         "question": "What is 15 + 28?",
         "options": ["33", "43", "53", "41"],
-        "answer": 1
+        "answer": "43"
       },
       {
         "question": "What is 15 + 28?",
         "options": ["33", "43", "53", "41"],
-        "answer": 1
+        "answer": "43"
       },
       {
         "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
         "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": 0
+        "answer": "\u20b94"
       },
       {
         "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
         "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": 0
+        "answer": "\u20b94"
       },
       {
         "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
         "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": 0
+        "answer": "\u20b94"
       },
       {
         "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
         "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": 0
+        "answer": "\u20b94"
       },
       {
         "question": "What is 15 + 28?",
         "options": ["33", "43", "53", "41"],
-        "answer": 1
+        "answer": "43"
       }
     ],
     "Algebra": [
