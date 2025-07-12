@@ -146,7 +146,7 @@ h1 {
 }
 
 .leaderboard::before {
-  content: '📊 Leaderboard';
+  content: '📊 Weekly Leaderboard';
   display: block;
   background-color: var(--highlight);
   color: white;
