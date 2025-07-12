@@ -16,8 +16,9 @@
 
       <!-- Main Content -->
       <main class="content">
-        <h1>✉️ Old Question Papers</h1>
+        <h1>📄 Old Question Papers</h1>
         <nav class="nav">
+          <a href="index.html">🏠 Home</a>
           <a href="materials.html">Study Materials</a>
           <a href="old-qps.html">Old Question Papers</a>
           <a href="quiz.html">Quiz</a>
@@ -30,7 +31,7 @@
           id="searchInput"
           placeholder="Search by title, subject, or university..."
         />
-        <ul id="qpsList"></ul>
+        <ul id="qpList"></ul>
       </main>
 
       <!-- Right Side Panel -->
@@ -68,19 +69,19 @@
 
     <!-- Scripts -->
     <script>
-      // Fetch Old QPs JSON
+      // Fetch Old Question Papers JSON
       const searchInput = document.getElementById("searchInput");
-      const qpsList = document.getElementById("qpsList");
+      const qpList = document.getElementById("qpList");
 
       fetch("json/old-qps.json")
         .then((res) => res.json())
         .then((data) => {
           function render(list) {
-            qpsList.innerHTML = "";
+            qpList.innerHTML = "";
             list.forEach((item) => {
               const li = document.createElement("li");
-              li.innerHTML = `<a href="${item.url}" target="_blank">${item.name}</a>`;
-              qpsList.appendChild(li);
+              li.innerHTML = `<a href="${item.download_url}" target="_blank">${item.name}</a>`;
+              qpList.appendChild(li);
             });
           }
 
@@ -95,7 +96,7 @@
           });
         })
         .catch(() => {
-          qpsList.innerHTML =
+          qpList.innerHTML =
             "<li>⚠️ Failed to load question papers. Try again later.</li>";
         });
 
@@ -129,4 +130,3 @@
     </script>
   </body>
 </html>
-
