@@ -95,7 +95,7 @@ h1 {
   position: relative;
 }
 .notifications::before {
-  content: "Notifications";
+  content: "📢 Notifications";
   display: block;
   background-color: var(--primary);
   color: white;
