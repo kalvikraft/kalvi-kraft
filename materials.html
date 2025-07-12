@@ -36,7 +36,6 @@
       <!-- Right Side Panel -->
       <aside class="sidebar">
         <div class="notifications">
-          <h3>📢 Notifications</h3>
           <ul id="notification-list">
             <li>Loading notifications...</li>
           </ul>
@@ -73,7 +72,7 @@
       const searchInput = document.getElementById("searchInput");
       const materialsList = document.getElementById("materialsList");
 
-      fetch("json/study-materials.json")
+      fetch("json/materials.json")
         .then((res) => res.json())
         .then((data) => {
           function render(list) {
