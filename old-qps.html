@@ -1,1 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Old Question Papers – Kalvi Kraft</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left Ad Column -->
+      <aside class="ads">
+        <div class="ad">Ad Slot 1</div>
+        <div class="ad">Ad Slot 2</div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+        <h1>✉️ Old Question Papers</h1>
+        <nav class="nav">
+          <a href="materials.html">Study Materials</a>
+          <a href="old-qps.html">Old Question Papers</a>
+          <a href="quiz.html">Quiz</a>
+          <a href="shortener.html">Link Shortener & QR Generator</a>
+          <a href="definitions.html">Definitions Treasures</a>
+        </nav>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by title, subject, or university..."
+        />
+        <ul id="qpsList"></ul>
+      </main>
+
+      <!-- Right Side Panel -->
+      <aside class="sidebar">
+        <div class="notifications">
+          <ul id="notification-list">
+            <li>Loading notifications...</li>
+          </ul>
+        </div>
+        <div class="chatbot">
+          <iframe
+            src="https://www.tidio.com/panel/chat"
+            title="ChatBot"
+            width="100%"
+            height="100%"
+            style="border: none"
+          ></iframe>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="youtube-bar">
+        <a href="https://youtube.com/@kalvikraft" target="_blank">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg"
+            alt="YouTube"
+            class="yt-logo"
+          />
+          <span>Kalvi Kraft YouTube</span>
+        </a>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Fetch Old QPs JSON
+      const searchInput = document.getElementById("searchInput");
+      const qpsList = document.getElementById("qpsList");
+
+      fetch("json/old-qps.json")
+        .then((res) => res.json())
+        .then((data) => {
+          function render(list) {
+            qpsList.innerHTML = "";
+            list.forEach((item) => {
+              const li = document.createElement("li");
+              li.innerHTML = `<a href="${item.url}" target="_blank">${item.name}</a>`;
+              qpsList.appendChild(li);
+            });
+          }
+
+          render(data);
+
+          searchInput.addEventListener("input", () => {
+            const term = searchInput.value.toLowerCase();
+            const filtered = data.filter((item) =>
+              item.name.toLowerCase().includes(term)
+            );
+            render(filtered);
+          });
+        })
+        .catch(() => {
+          qpsList.innerHTML =
+            "<li>⚠️ Failed to load question papers. Try again later.</li>";
+        });
+
+      // Load Notifications
+      fetch("json/notifications.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById("notification-list");
+          list.innerHTML = "";
+          data.slice(0, 5).forEach((item) => {
+            const li = document.createElement("li");
+            li.innerHTML = item.link
+              ? `<a href="${item.link}" target="_blank">${item.message}</a>`
+              : item.message;
+            list.appendChild(li);
+          });
+
+          let index = 0;
+          setInterval(() => {
+            const items = document.querySelectorAll("#notification-list li");
+            items.forEach((li, i) => {
+              li.style.display = i === index ? "block" : "none";
+            });
+            index = (index + 1) % items.length;
+          }, 2500);
+        })
+        .catch(() => {
+          document.getElementById("notification-list").innerHTML =
+            "<li>⚠️ Could not load notifications.</li>";
+        });
+    </script>
+  </body>
+</html>
 
