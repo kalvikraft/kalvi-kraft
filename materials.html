@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Materials</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="content">
+    <h2>📘 Study Materials</h2>
+    <input type="text" id="searchInput" placeholder="Search by title, subject, or university..." />
+    <ul id="materialsList"></ul>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const materialsList = document.getElementById("materialsList");
+
+    async function loadMaterials() {
+      const response = await fetch('json/study-materials.json');
+      const data = await response.json();
+
+      function render(list) {
+        materialsList.innerHTML = "";
+        list.forEach(item => {
+          const li = document.createElement("li");
+          li.innerHTML = `<a href="${item.url}" target="_blank">${item.name}</a>`;
+          materialsList.appendChild(li);
+        });
+      }
+
+      render(data);
+
+      // Live search
+      searchInput.addEventListener("input", () => {
+        const term = searchInput.value.toLowerCase();
+        const filtered = data.filter(item =>
+          item.name.toLowerCase().includes(term)
+        );
+        render(filtered);
+      });
+    }
+
+    loadMaterials();
+  </script>
+</body>
+</html>
 
