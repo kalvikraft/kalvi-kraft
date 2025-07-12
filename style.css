@@ -148,25 +148,23 @@ h1 {
 .leaderboard h3 {
   background-color: var(--primary);
   color: white;
+  font-weight: bold;
   padding: 6px 10px;
   border-radius: 6px 6px 0 0;
-  font-size: 14px;
   margin: -10px -10px 10px -10px;
-  font-weight: bold;
+  font-size: 14px;
 }
 
 .leaderboard ol {
   list-style: none;
   padding-left: 0;
   margin: 0;
-  height: 100%;
 }
 
 .leaderboard li {
-  margin: 0;
   font-size: 15px;
-  padding: 5px 0;
-  display: none;
+  padding: 4px 0;
+  display: list-item;
 }
 
 .leaderboard li:first-child {
