@@ -112,7 +112,6 @@
             document.getElementById('shortLink').href = shortUrl;
             document.getElementById('resultBox').style.display = 'block';
 
-            // Generate QR
             const qr = new QRious({
               element: document.createElement('canvas'),
               value: shortUrl,
@@ -155,8 +154,7 @@
             index = (index + 1) % items.length;
           }, 2500);
         });
-    </script>
-    <script>
+
       firebase
         .database()
         .ref('leaderboard')
@@ -171,10 +169,10 @@
           scores.slice(0, 10).forEach((item, index) => {
             const row = document.createElement('tr');
             row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${item.name}</td>
-            <td>${item.score}</td>
-          `;
+              <td>${index + 1}</td>
+              <td>${item.name}</td>
+              <td>${item.score}</td>
+            `;
             tbody.appendChild(row);
           });
         });
