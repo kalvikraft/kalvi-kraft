@@ -38,18 +38,9 @@
       <!-- Right Side Panel -->
       <aside class="sidebar">
         <div class="notifications">
-          <marquee behavior="scroll" direction="up" scrollamount="2">
-            <ul>
-              <li><a href="#">🧾 Quiz on Friday – Real Analysis</a></li>
-              <li><a href="#">📥 Algebra Notes Updated</a></li>
-              <li>
-                <a href="#"
-                  >🔗 <a href="https://example.com">Click here</a> for internal
-                  test dates</a
-                >
-              </li>
-            </ul>
-          </marquee>
+          <ul id="notification-list">
+            <li>Loading notifications...</li>
+          </ul>
         </div>
         <div class="chatbot">
           <iframe
@@ -73,5 +64,36 @@
           </a>
          </div>
     </footer>
+    <script>
+  fetch('json/notifications.json')
+    .then(response => response.json())
+    .then(data => {
+      const list = document.getElementById("notification-list");
+      list.innerHTML = "";
+      data.forEach(item => {
+        const li = document.createElement("li");
+        if (item.link) {
+          li.innerHTML = `<a href="${item.link}" target="_blank">${item.message}</a>`;
+        } else {
+          li.textContent = item.message;
+        }
+        list.appendChild(li);
+      });
+
+      // Auto scroll the list
+      let index = 0;
+      setInterval(() => {
+        const items = document.querySelectorAll('#notification-list li');
+        items.forEach((li, i) => {
+          li.style.display = (i === index) ? 'block' : 'none';
+        });
+        index = (index + 1) % items.length;
+      }, 2500); // 2.5 seconds per item
+    })
+    .catch(() => {
+      document.getElementById("notification-list").innerHTML =
+        "<li>Failed to load notifications.</li>";
+    });
+</script>
   </body>
 </html>
