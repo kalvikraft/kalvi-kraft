@@ -130,19 +130,11 @@
         .then(data => {
           const list = document.getElementById("leaderboard-list");
           list.innerHTML = "";
-          data.slice(0, 10).forEach((item) => {
+          data.slice(0, 10).forEach((item, index) => {
             const li = document.createElement("li");
-            li.textContent = `${item.name} – ${item.score}`;
+            li.textContent = `${index + 1}. ${item.name} – ${item.score}`;
             list.appendChild(li);
           });
-          let index = 0;
-          setInterval(() => {
-            const items = document.querySelectorAll("#leaderboard-list li");
-            items.forEach((li, i) => {
-              li.style.display = i === index ? "block" : "none";
-            });
-            index = (index + 1) % items.length;
-          }, 2500);
         })
         .catch(() => {
           document.getElementById("leaderboard-list").innerHTML =
