@@ -1,1 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Definitions Treasures – Kalvi Kraft</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <aside class="ads">
+        <div class="ad">Ad Slot 1</div>
+        <div class="ad">Ad Slot 2</div>
+      </aside>
+
+      <main class="content">
+        <h1>📚 Definitions Treasures</h1>
+        <nav class="nav">
+          <a href="index.html">🏠 Home</a>
+          <a href="materials.html">Study Materials</a>
+          <a href="old-qps.html">Old Question Papers</a>
+          <a href="quiz.html">Quiz</a>
+          <a href="shortener.html">Link Shortener</a>
+        </nav>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search definitions..."
+        />
+        <div id="definitionsList" style="margin-top: 10px"></div>
+      </main>
+
+      <aside class="sidebar">
+        <div class="notifications">
+          <ul id="notification-list">
+            <li>Loading notifications...</li>
+          </ul>
+        </div>
+        <div class="leaderboard">
+          <h3>📊 Leaderboard</h3>
+          <table id="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="3">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="youtube-bar">
+        <a href="https://youtube.com/@kalvikraft" target="_blank">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg"
+            alt="YouTube"
+            class="yt-logo"
+          />
+          <span>Kalvi Kraft YouTube</span>
+        </a>
+      </div>
+    </footer>
+
+    <!-- Load Definitions -->
+    <script>
+      fetch('json/definitions.json')
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById('definitionsList');
+          const input = document.getElementById('searchInput');
+
+          function render(definitions) {
+            list.innerHTML = '';
+            definitions.forEach((def, index) => {
+              const latexCode = `\\textbf{${def.title}}: ${def.content}`;
+              const card = document.createElement('div');
+              card.className = 'definition-card';
+              card.innerHTML = `
+              <details>
+                <summary><strong>${def.title}</strong></summary>
+                <p>\\(${def.content}\\)</p>
+                ${
+                  def.reference
+                    ? `<small><em>Ref: ${def.reference}</em></small><br/>`
+                    : ''
+                }
+                <button onclick="copyLatex('${latexCode
+                  .replace(/\\/g, '\\\\')
+                  .replace(/'/g, "\\'")}')">📋 Copy LaTeX</button>
+              </details>
+            `;
+              list.appendChild(card);
+            });
+            MathJax.typesetPromise();
+          }
+
+          render(data);
+
+          input.addEventListener('input', () => {
+            const term = input.value.toLowerCase();
+            const filtered = data.filter((def) =>
+              def.title.toLowerCase().includes(term)
+            );
+            render(filtered);
+          });
+        });
+
+      function copyLatex(text) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('✅ LaTeX code copied to clipboard!');
+        });
+      }
+    </script>
+
+    <!-- Notifications -->
+    <script>
+      fetch('json/notifications.json')
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById('notification-list');
+          list.innerHTML = '';
+          data.slice(0, 5).forEach((item) => {
+            const li = document.createElement('li');
+            li.innerHTML = item.link
+              ? `<a href="${item.link}" target="_blank">${item.message}</a>`
+              : item.message;
+            list.appendChild(li);
+          });
+
+          let index = 0;
+          setInterval(() => {
+            const items = document.querySelectorAll('#notification-list li');
+            items.forEach((li, i) => {
+              li.style.display = i === index ? 'block' : 'none';
+            });
+            index = (index + 1) % items.length;
+          }, 2500);
+        });
+    </script>
+
+    <!-- Firebase Leaderboard -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
+        authDomain: 'kalvi-kraft.firebaseapp.com',
+        databaseURL:
+          'https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app',
+        projectId: 'kalvi-kraft',
+        storageBucket: 'kalvi-kraft.appspot.com',
+        messagingSenderId: '535767835272',
+        appId: '1:535767835272:web:56d04e7c7d6f611194753d',
+        measurementId: 'G-S1YJCR79MN',
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase
+        .database()
+        .ref('leaderboard')
+        .once('value')
+        .then((snapshot) => {
+          const scores = [];
+          snapshot.forEach((child) => scores.push(child.val()));
+          scores.sort((a, b) => b.score - a.score);
+
+          const tbody = document.querySelector('#leaderboard-table tbody');
+          tbody.innerHTML = '';
+          scores.slice(0, 10).forEach((item, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${item.name}</td>
+          <td>${item.score}</td>
+        `;
+            tbody.appendChild(row);
+          });
+        });
+    </script>
+  </body>
+</html>
 
