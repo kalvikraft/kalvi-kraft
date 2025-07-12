@@ -1,1 +1,163 @@
+:root {
+  --primary: #4a59e2;
+  --secondary: #f7f9fc;
+  --highlight: #f0b619;
+  --dark: #222;
+}
 
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--secondary);
+  color: var(--dark);
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.ads,
+.sidebar {
+  width: 20%;
+  background: #ffffff;
+  padding: 15px;
+  box-sizing: border-box;
+  border-right: 1px solid #eee;
+}
+
+.content {
+  width: 60%;
+  padding: 25px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+
+.ad {
+  background: #e0e0e0;
+  height: 120px;
+  margin-bottom: 15px;
+  text-align: center;
+  line-height: 120px;
+  border-radius: 12px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: var(--primary);
+  font-size: 28px;
+  margin-top: 0;
+}
+
+.nav {
+  margin: 20px 0;
+}
+
+.nav a {
+  display: inline-block;
+  margin: 8px 12px 8px 0;
+  text-decoration: none;
+  background-color: var(--primary);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.nav a:hover {
+  background-color: var(--highlight);
+}
+
+.notifications {
+  height: 50%;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.notifications ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.notifications li {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.notifications a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.notifications a:hover {
+  text-decoration: underline;
+}
+
+.chatbot {
+  height: 50%;
+  margin-top: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 15px;
+  z-index: 1000;
+}
+
+footer a {
+  color: #ffcc00;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .ads,
+  .sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .chatbot {
+    height: 200px;
+  }
+
+  .notifications {
+    height: 120px;
+  }
+
+  .nav a {
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+}
