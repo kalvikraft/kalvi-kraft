@@ -42,9 +42,20 @@
         </div>
         <div class="leaderboard">
           <h3>📊 Leaderboard</h3>
-          <ol id="leaderboard-list">
-            <li>Loading...</li>
-          </ol>
+          <table id="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="3">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </aside>
     </div>
@@ -124,22 +135,28 @@
             "<li>⚠️ Could not load notifications.</li>";
         });
     </script>
+    
     <script>
       fetch("json/leaderboard.json")
-        .then(res => res.json())
-        .then(data => {
-          const list = document.getElementById("leaderboard-list");
-          list.innerHTML = "";
-          data.slice(0, 10).forEach((item, index) => {
-            const li = document.createElement("li");
-            li.textContent = `${index + 1}. ${item.name} – ${item.score}`;
-            list.appendChild(li);
-          });
-        })
-        .catch(() => {
-          document.getElementById("leaderboard-list").innerHTML =
-            "<li>⚠️ Could not load leaderboard.</li>";
+      .then(res => res.json())
+      .then(data => {
+        data.sort((a, b) => b.score - a.score); // Sort by score descending
+        const tbody = document.querySelector("#leaderboard-table tbody");
+        tbody.innerHTML = "";
+        data.slice(0, 10).forEach((item, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${item.name}</td>
+          <td>${item.score}</td>
+          `;
+          tbody.appendChild(row);
         });
+      })
+      .catch(() => {
+        document.querySelector("#leaderboard-table tbody").innerHTML =
+        "<tr><td colspan='3'>⚠️ Could not load leaderboard.</td></tr>";
+      });
     </script>
   </body>
 </html>
