@@ -42,7 +42,7 @@ h1 {
   font-size: 32px;
   margin-top: 0;
   text-align: center;
-  background-color: #FF0000;
+  background-color: #ff0000;
   padding: 15px 20px;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
@@ -95,7 +95,7 @@ h1 {
   position: relative;
 }
 .notifications::before {
-  content: "📢 Notifications";
+  content: '📢 Notifications';
   display: block;
   background-color: var(--highlight);
   color: white;
@@ -136,7 +136,7 @@ h1 {
 /* === Leader Board === */
 .leaderboard {
   height: 65%;
-  overflow: hidden;
+  overflow: auto;
   border: 1px solid #ddd;
   background-color: #fdfdfd;
   border-radius: 10px;
@@ -145,7 +145,9 @@ h1 {
   position: relative;
 }
 
-.leaderboard h3 {
+.leaderboard::before {
+  content: '📊 Leaderboard';
+  display: block;
   background-color: var(--highlight);
   color: white;
   font-weight: bold;
@@ -155,20 +157,44 @@ h1 {
   font-size: 14px;
 }
 
-.leaderboard ol {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
+/* === Leaderboard Table === */
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
 }
 
-.leaderboard li {
-  font-size: 15px;
-  padding: 4px 0;
-  display: list-item;
+.leaderboard th,
+.leaderboard td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: center;
 }
 
-.leaderboard li:first-child {
-  display: block;
+.leaderboard th {
+  background-color: var(--primary);
+  color: white;
+  font-weight: bold;
+}
+
+.leaderboard tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Highlight top 3 ranks */
+.leaderboard tbody tr:nth-child(1) {
+  background-color: #ffeaa7;
+  font-weight: bold;
+}
+
+.leaderboard tbody tr:nth-child(2) {
+  background-color: #fab1a0;
+  font-weight: bold;
+}
+
+.leaderboard tbody tr:nth-child(3) {
+  background-color: #a29bfe;
+  font-weight: bold;
 }
 
 /* === Chatbot === */
@@ -216,7 +242,7 @@ footer a:hover {
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 9999;
 }
 
