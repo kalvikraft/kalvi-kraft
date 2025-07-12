@@ -145,16 +145,14 @@ h1 {
   position: relative;
 }
 
-.leaderboard::before {
-  content: "📊 Leaderboard";
-  display: block;
+.leaderboard h3 {
   background-color: var(--primary);
   color: white;
-  font-weight: bold;
   padding: 6px 10px;
   border-radius: 6px 6px 0 0;
-  margin: -10px -10px 10px -10px;
   font-size: 14px;
+  margin: -10px -10px 10px -10px;
+  font-weight: bold;
 }
 
 .leaderboard ol {
