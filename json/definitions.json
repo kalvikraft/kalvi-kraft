@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Group",
+    "content": "A set G with a binary operation \\(*\\) such that it satisfies closure, associativity, identity, and invertibility.",
+    "reference": "Abstract Algebra by Dummit & Foote"
+  },
+  {
+    "title": "Eigenvalue",
+    "content": "If \\(A\\vec{v} = \\lambda\\vec{v}\\), then \\(\\lambda\\) is an eigenvalue of A.",
+    "reference": "Linear Algebra by Gilbert Strang"
+  }
+]
