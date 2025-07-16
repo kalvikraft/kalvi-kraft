@@ -51,10 +51,10 @@
     } else {
       db.ref(`shortUrls/${code}`).once('value').then(snapshot => {
         const data = snapshot.val();
-        if (data && data.original) {
+        if (data && data.longUrl) {
           document.getElementById('message').textContent = "✅ Found! Redirecting...";
           setTimeout(() => {
-            window.location.href = data.original;
+            window.location.href = data.longUrl;
           }, 1500);
         } else {
           document.getElementById('message').textContent = "❌ Short URL not found.";
