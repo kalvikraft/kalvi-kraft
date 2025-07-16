@@ -31,13 +31,13 @@
           <select id="subCategorySelect">
             <option value="">Select Sub-category</option>
           </select>
-          <button onclick="startQuiz()">Start Quiz</button>
+          <button class="ripple-btn" onclick="startQuiz()">Start Quiz</button>
         </div>
 
         <div id="quizScreen" style="display: none">
           <div id="timer">Time Left: 10:00</div>
           <div id="questionBox"></div>
-          <button onclick="submitQuiz()">Submit Quiz</button>
+          <button class="ripple-btn" onclick="submitQuiz()">Submit Quiz</button>
         </div>
 
         <div id="resultScreen" style="display: none">
@@ -252,6 +252,8 @@
           <span>Kalvi Kraft YouTube</span>
         </a>
 
+        <button id="toggleMode" class="mode-toggle ripple">🌓</button>
+
         <a href="contact.html" class="contact-bar">
           <img
             src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
@@ -308,6 +310,22 @@
       }
       gtag('js', new Date());
       gtag('config', 'G-S1YJCR79MN');
+    </script>
+
+    <!-- Dark Mode -->
+    <script>
+      const toggleBtn = document.getElementById('toggleMode');
+      const body = document.body;
+
+      // Load saved preference
+      if (localStorage.getItem('dark-mode') === 'true') {
+        body.classList.add('dark-mode');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
+      });
     </script>
   </body>
 </html>
