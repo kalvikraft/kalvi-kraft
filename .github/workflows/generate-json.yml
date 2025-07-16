@@ -1,0 +1,32 @@
+name: Generate old-qps.json
+
+on:
+  push:
+    paths:
+      - 'old-question-papers/**'
+      - 'extract_to_qp_json.py'
+  workflow_dispatch:  # ✅ Allows manual trigger from GitHub
+
+jobs:
+  generate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Run Python script to generate JSON
+      run: python extract_to_qp_json.py
+
+    - name: Commit and push JSON
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add json/old-qps.json
+        git commit -m "Update json/old-qps.json from GitHub Action" || echo "No changes to commit"
+        git push
