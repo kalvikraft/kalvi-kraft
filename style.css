@@ -11,6 +11,10 @@
 }
 
 /* === Base Styles === */
+.content p {
+  text-align: justify;
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -53,6 +57,27 @@ h1 {
   letter-spacing: 1px;
 }
 
+/* === Section === */
+.about-section {
+  background-color: var(--bg-content);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px var(--shadow);
+  margin-top: 30px;
+}
+
+.about-section h2,
+.about-section h3 {
+  color: var(--primary);
+  margin-top: 0;
+}
+
+.about-section p {
+  line-height: 1.6;
+  font-size: 15px;
+  color: var(--text);
+  text-align: justify;
+}
 /* === Navigation Container === */
 .nav {
   text-align: center;
