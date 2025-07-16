@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Definitions Treasures – Kalvi Kraft</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    <!-- MathJax Configuration -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)']],
+          displayMath: [['$$', '$$']],
+        },
+        svg: { fontCache: 'global' },
+      };
+    </script>
     <script
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
       defer
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     ></script>
   </head>
+
   <body>
     <div class="container">
+      <!-- Left Ads -->
       <aside class="ads">
         <div class="ad">Ad Slot 1</div>
         <div class="ad">Ad Slot 2</div>
       </aside>
 
+      <!-- Main Content -->
       <main class="content">
         <h1>📚 Definitions Treasures</h1>
         <nav class="nav">
@@ -34,8 +47,12 @@
           placeholder="Search definitions..."
         />
         <div id="definitionsList" style="margin-top: 10px"></div>
+
+        <h2>📖 References</h2>
+        <ul id="referencesList"></ul>
       </main>
 
+      <!-- Right Sidebar -->
       <aside class="sidebar">
         <div class="notifications">
           <ul id="notification-list">
@@ -51,7 +68,7 @@
                 <th>Score</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="leaderboard-list">
               <tr>
                 <td colspan="3">Loading...</td>
               </tr>
@@ -61,6 +78,7 @@
       </aside>
     </div>
 
+    <!-- Footer -->
     <footer>
       <div class="youtube-bar">
         <a href="https://youtube.com/@kalvikraft" target="_blank">
@@ -74,7 +92,7 @@
       </div>
     </footer>
 
-    <!-- Load Definitions -->
+    <!-- Definitions Loader -->
     <script>
       fetch('json/definitions.json')
         .then((res) => res.json())
@@ -89,19 +107,14 @@
               const card = document.createElement('div');
               card.className = 'definition-card';
               card.innerHTML = `
-              <details>
-                <summary><strong>${def.title}</strong></summary>
-                <p>\\(${def.content}\\)</p>
-                ${
-                  def.reference
-                    ? `<small><em>Ref: ${def.reference}</em></small><br/>`
-                    : ''
-                }
-                <button onclick="copyLatex('${latexCode
-                  .replace(/\\/g, '\\\\')
-                  .replace(/'/g, "\\'")}')">📋 Copy LaTeX</button>
-              </details>
-            `;
+             <details>
+             <summary><strong>${def.title}</strong></summary>
+             <p>${def.content}</p>
+             <button onclick="copyLatex('${latexCode
+               .replace(/\\/g, '\\\\')
+               .replace(/'/g, "\\'")}')">📋 Copy LaTeX</button>
+             </details>
+             `;
               list.appendChild(card);
             });
             MathJax.typesetPromise();
@@ -125,6 +138,21 @@
       }
     </script>
 
+    <!-- References Loader -->
+    <script>
+      fetch('json/references.json')
+        .then((res) => res.json())
+        .then((refs) => {
+          const refList = document.getElementById('referencesList');
+          refList.innerHTML = '';
+          refs.forEach((ref) => {
+            const li = document.createElement('li');
+            li.textContent = ref;
+            refList.appendChild(li);
+          });
+        });
+    </script>
+
     <!-- Notifications -->
     <script>
       fetch('json/notifications.json')
@@ -139,7 +167,6 @@
               : item.message;
             list.appendChild(li);
           });
-
           let index = 0;
           setInterval(() => {
             const items = document.querySelectorAll('#notification-list li');
@@ -152,8 +179,6 @@
     </script>
 
     <!-- Firebase Leaderboard -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
     <script>
       const firebaseConfig = {
         apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
@@ -167,40 +192,49 @@
         measurementId: 'G-S1YJCR79MN',
       };
       firebase.initializeApp(firebaseConfig);
-      firebase
-        .database()
-        .ref('leaderboard')
-        .once('value')
-        .then((snapshot) => {
-          const scores = [];
-          snapshot.forEach((child) => scores.push(child.val()));
-          scores.sort((a, b) => b.score - a.score);
 
-          const tbody = document.querySelector('#leaderboard-table tbody');
-          tbody.innerHTML = '';
-          scores.slice(0, 10).forEach((item, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${item.name}</td>
-          <td>${item.score}</td>
-        `;
-            tbody.appendChild(row);
+      function loadLeaderboard() {
+        firebase
+          .database()
+          .ref('leaderboard')
+          .once('value')
+          .then((snapshot) => {
+            const scores = [];
+            snapshot.forEach((child) => {
+              scores.push(child.val());
+            });
+            scores.sort((a, b) => b.score - a.score);
+            const list = document.getElementById('leaderboard-list');
+            list.innerHTML = '';
+            scores.slice(0, 10).forEach((item, index) => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `<td>${index + 1}</td><td>${item.name}</td><td>${
+                item.score
+              }</td>`;
+              list.appendChild(tr);
+            });
+          })
+          .catch(() => {
+            document.getElementById('leaderboard-list').innerHTML =
+              '<tr><td colspan="3">⚠️ Failed to load leaderboard</td></tr>';
           });
-        });
+      }
+
+      loadLeaderboard();
     </script>
 
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YJCR79MN"></script>
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-S1YJCR79MN"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
-      gtag("config", "G-S1YJCR79MN");
+      gtag('js', new Date());
+      gtag('config', 'G-S1YJCR79MN');
     </script>
   </body>
 </html>
-
