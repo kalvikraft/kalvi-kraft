@@ -1,11 +1,15 @@
 name: Generate old-qps.json
 
+# ✅ Add this to allow push access
+permissions:
+  contents: write
+
 on:
   push:
     paths:
       - 'old-question-papers/**'
       - 'extract_to_qp_json.py'
-  workflow_dispatch:  # ✅ Allows manual trigger from GitHub
+  workflow_dispatch:  # Manual trigger
 
 jobs:
   generate-json:
