@@ -1,193 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Link Shortener & QR – Kalvi Kraft</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  </head>
-  <body>
-    <div class="container">
-      <!-- Left Ads -->
-      <aside class="ads">
-        <div class="ad">Ad Slot 1</div>
-        <div class="ad">Ad Slot 2</div>
-      </aside>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Link Shortener & QR – Kalvi Kraft</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Ads -->
+    <aside class="ads">
+      <div class="ad">Ad Slot 1</div>
+      <div class="ad">Ad Slot 2</div>
+    </aside>
 
-      <!-- Main Content -->
-      <main class="content">
-        <h1>🔗 Link Shortener & QR Generator</h1>
-        <nav class="nav">
-          <a href="index.html">🏠 Home</a>
-          <a href="materials.html">Study Materials</a>
-          <a href="old-qps.html">Old Question Papers</a>
-          <a href="quiz.html">Quiz</a>
-          <a href="definitions.html">Definitions Treasures</a>
-        </nav>
+    <!-- Main Content -->
+    <main class="content">
+      <h1>🔗 Link Shortener & QR Generator</h1>
+      <nav class="nav">
+        <a href="index.html">🏠 Home</a>
+        <a href="materials.html">Study Materials</a>
+        <a href="old-qps.html">Old Question Papers</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="definitions.html">Definitions Treasures</a>
+      </nav>
 
-        <input type="text" id="longUrl" placeholder="Enter your long URL..." />
-        <button onclick="shortenURL()">Shorten</button>
+      <input type="text" id="longUrl" placeholder="Enter your long URL..." />
+      <button onclick="shortenURL()">Shorten</button>
 
-        <div id="resultBox" style="display: none; margin-top: 10px">
-          <p>🔗 Short URL: <a href="#" id="shortLink" target="_blank"></a></p>
-          <button onclick="copyShortUrl()">📋 Copy</button>
-          <div id="qrBox" style="margin-top: 10px"></div>
-        </div>
-      </main>
-
-      <!-- Right Sidebar -->
-      <aside class="sidebar">
-        <div class="notifications">
-          <ul id="notification-list">
-            <li>Loading notifications...</li>
-          </ul>
-        </div>
-        <div class="leaderboard">
-          <table id="leaderboard-table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colspan="3">Loading...</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </aside>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <div class="youtube-bar">
-        <a href="https://youtube.com/@kalvikraft" target="_blank">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg"
-            alt="YouTube"
-            class="yt-logo"
-          />
-          <span>Kalvi Kraft YouTube</span>
-        </a>
+      <div id="resultBox" style="display: none; margin-top: 10px">
+        <p>
+          🔗 Short URL: <a href="#" id="shortLink" target="_blank"></a>
+        </p>
+        <button onclick="copyShortUrl()">📋 Copy</button>
+        <div id="qrBox" style="margin-top: 10px"></div>
       </div>
-    </footer>
+    </main>
 
-    <!-- QR & Firebase Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qr.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-    <script>
-      const firebaseConfig = {
-        apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
-        authDomain: 'kalvi-kraft.firebaseapp.com',
-        databaseURL:
-          'https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app',
-        projectId: 'kalvi-kraft',
-        storageBucket: 'kalvi-kraft.appspot.com',
-        messagingSenderId: '535767835272',
-        appId: '1:535767835272:web:56d04e7c7d6f611194753d',
-        measurementId: 'G-S1YJCR79MN',
-      };
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.database();
+    <!-- Right Sidebar -->
+    <aside class="sidebar">
+      <div class="notifications">
+        <ul id="notification-list">
+          <li>Loading notifications...</li>
+        </ul>
+      </div>
+      <div class="leaderboard">
+        <table id="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Name</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="3">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </aside>
+  </div>
 
-      function generateShortCode() {
-        return Math.random().toString(36).substring(2, 7);
-      }
+  <!-- Footer -->
+  <footer>
+    <div class="youtube-bar">
+      <a href="https://youtube.com/@kalvikraft" target="_blank">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg"
+          alt="YouTube"
+          class="yt-logo"
+        />
+        <span>Kalvi Kraft YouTube</span>
+      </a>
+    </div>
+  </footer>
 
-      function shortenURL() {
-        const longUrl = document.getElementById('longUrl').value.trim();
-        if (!longUrl) return alert('Please enter a valid URL');
+  <!-- QR & Firebase Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qr.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14",
+      authDomain: "kalvi-kraft.firebaseapp.com",
+      databaseURL: "https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "kalvi-kraft",
+      storageBucket: "kalvi-kraft.appspot.com",
+      messagingSenderId: "535767835272",
+      appId: "1:535767835272:web:56d04e7c7d6f611194753d",
+      measurementId: "G-S1YJCR79MN"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-        const code = generateShortCode();
-        db.ref('shortUrls/' + code)
-          .set({ longUrl })
-          .then(() => {
-            const shortUrl = `${location.origin}/s/${code}`;
-            document.getElementById('shortLink').textContent = shortUrl;
-            document.getElementById('shortLink').href = shortUrl;
-            document.getElementById('resultBox').style.display = 'block';
+    function generateShortCode() {
+      return Math.random().toString(36).substring(2, 7);
+    }
 
-            const qr = new QRious({
-              element: document.createElement('canvas'),
-              value: shortUrl,
-              size: 150,
-            });
-            const qrBox = document.getElementById('qrBox');
-            qrBox.innerHTML = '';
-            qrBox.appendChild(qr.element);
+    function shortenURL() {
+      const longUrl = document.getElementById("longUrl").value.trim();
+      if (!longUrl) return alert("Please enter a valid URL");
+
+      const code = generateShortCode();
+      db.ref("shortUrls/" + code)
+        .set({ longUrl })
+        .then(() => {
+          const shortUrl = `${location.origin}/s/${code}`;
+          document.getElementById("shortLink").textContent = shortUrl;
+          document.getElementById("shortLink").href = shortUrl;
+          document.getElementById("resultBox").style.display = "block";
+
+          const canvas = document.createElement("canvas");
+          const qr = new QRious({
+            element: canvas,
+            value: shortUrl,
+            size: 150
           });
-      }
 
-      function copyShortUrl() {
-        const url = document.getElementById('shortLink').textContent;
-        navigator.clipboard
-          .writeText(url)
-          .then(() => alert('Short URL copied to clipboard!'));
-      }
-    </script>
+          const qrBox = document.getElementById("qrBox");
+          qrBox.innerHTML = "";
+          qrBox.appendChild(canvas);
+        })
+        .catch(() => alert("Something went wrong. Try again."));
+    }
 
-    <!-- Notifications + Leaderboard -->
-    <script>
-      fetch('json/notifications.json')
-        .then((res) => res.json())
-        .then((data) => {
-          const list = document.getElementById('notification-list');
-          list.innerHTML = '';
-          data.slice(0, 5).forEach((item) => {
-            const li = document.createElement('li');
-            li.innerHTML = item.link
-              ? `<a href="${item.link}" target="_blank">${item.message}</a>`
-              : item.message;
-            list.appendChild(li);
-          });
-          let index = 0;
-          setInterval(() => {
-            const items = document.querySelectorAll('#notification-list li');
-            items.forEach((li, i) => {
-              li.style.display = i === index ? 'block' : 'none';
-            });
-            index = (index + 1) % items.length;
-          }, 2500);
+    function copyShortUrl() {
+      const url = document.getElementById("shortLink").textContent;
+      navigator.clipboard.writeText(url).then(() =>
+        alert("✅ Short URL copied to clipboard!")
+      );
+    }
+  </script>
+
+  <!-- Notifications + Leaderboard -->
+  <script>
+    fetch("json/notifications.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const list = document.getElementById("notification-list");
+        list.innerHTML = "";
+        data.slice(0, 5).forEach((item) => {
+          const li = document.createElement("li");
+          li.innerHTML = item.link
+            ? `<a href="${item.link}" target="_blank">${item.message}</a>`
+            : item.message;
+          list.appendChild(li);
         });
 
-      firebase
-        .database()
-        .ref('leaderboard')
-        .once('value')
-        .then((snapshot) => {
-          const scores = [];
-          snapshot.forEach((child) => scores.push(child.val()));
-          scores.sort((a, b) => b.score - a.score);
-
-          const tbody = document.querySelector('#leaderboard-table tbody');
-          tbody.innerHTML = '';
-          scores.slice(0, 10).forEach((item, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-              <td>${index + 1}</td>
-              <td>${item.name}</td>
-              <td>${item.score}</td>
-            `;
-            tbody.appendChild(row);
+        let index = 0;
+        setInterval(() => {
+          const items = document.querySelectorAll("#notification-list li");
+          items.forEach((li, i) => {
+            li.style.display = i === index ? "block" : "none";
           });
-        });
-    </script>
+          index = (index + 1) % items.length;
+        }, 2500);
+      });
 
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YJCR79MN"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-S1YJCR79MN");
-    </script>
-  </body>
+    firebase
+      .database()
+      .ref("leaderboard")
+      .once("value")
+      .then((snapshot) => {
+        const scores = [];
+        snapshot.forEach((child) => scores.push(child.val()));
+        scores.sort((a, b) => b.score - a.score);
+
+        const tbody = document.querySelector("#leaderboard-table tbody");
+        tbody.innerHTML = "";
+        scores.slice(0, 10).forEach((item, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.name}</td>
+            <td>${item.score}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      });
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1YJCR79MN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "G-S1YJCR79MN");
+  </script>
+</body>
 </html>
