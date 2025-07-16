@@ -94,6 +94,8 @@
           <span>Kalvi Kraft YouTube</span>
         </a>
 
+        <button id="toggleMode" class="mode-toggle ripple">🌓</button>
+
         <a href="contact.html" class="contact-bar">
           <img
             src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
@@ -123,7 +125,7 @@
              <details>
              <summary><strong>${def.title}</strong></summary>
              <p>${def.content}</p>
-             <button onclick="copyLatex('${latexCode
+             <button class="ripple-btn" onclick="copyLatex('${latexCode
                .replace(/\\/g, '\\\\')
                .replace(/'/g, "\\'")}')">📋 Copy LaTeX</button>
              </details>
@@ -146,8 +148,17 @@
 
       function copyLatex(text) {
         navigator.clipboard.writeText(text).then(() => {
-          alert('✅ LaTeX code copied to clipboard!');
+          showToast('✅ LaTeX code copied to clipboard!');
         });
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
       }
     </script>
 
@@ -248,6 +259,24 @@
       }
       gtag('js', new Date());
       gtag('config', 'G-S1YJCR79MN');
+    </script>
+
+    <div id="toast" class="toast">✅ LaTeX copied!</div>
+
+    <!-- Dark Mode -->
+    <script>
+      const toggleBtn = document.getElementById('toggleMode');
+      const body = document.body;
+
+      // Load saved preference
+      if (localStorage.getItem('dark-mode') === 'true') {
+        body.classList.add('dark-mode');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
+      });
     </script>
   </body>
 </html>
