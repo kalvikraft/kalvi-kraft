@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact – Kalvi Kraft</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left Ads -->
+      <aside class="ads">
+        <div class="ad">Ad Slot 1</div>
+        <div class="ad">Ad Slot 2</div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+        <h1>📞 Contact Us</h1>
+        <nav class="nav">
+          <a href="index.html">🏠 Home</a>
+          <a href="materials.html">Study Materials</a>
+          <a href="old-qps.html">Old Question Papers</a>
+          <a href="quiz.html">Aptitude & Reasoning Quiz</a>
+          <a href="definitions.html">Definitions Treasures</a>
+        </nav>
+
+        <section class="about-section">
+          <h2>📬 Reach Out</h2>
+          <p style="text-align: justify">
+            Have questions, suggestions, or found something that needs fixing?
+            We'd love to hear from you. Use the options below to get in touch.
+          </p>
+          <ul style="line-height: 2; padding-left: 20px">
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:kalvikraft@gmail.com">kalvikraft@gmail.com</a>
+            </li>
+            <li>
+              <strong>YouTube:</strong>
+              <a href="https://youtube.com/@kalvikraft" target="_blank"
+                >@kalvikraft</a
+              >
+            </li>
+          </ul>
+
+          <h3>⚠️ Important Note</h3>
+          <p style="text-align: justify">
+            Kalvi Kraft is a student-maintained site. We try our best to respond
+            within 2–3 working days. Please be polite and clear in your message.
+            Thanks for supporting the platform!
+          </p>
+        </section>
+      </main>
+
+      <!-- Right Sidebar -->
+      <aside class="sidebar">
+        <div class="notifications">
+          <ul id="notification-list">
+            <li>Loading notifications...</li>
+          </ul>
+        </div>
+        <div class="leaderboard">
+          <table id="leaderboard-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-list">
+              <tr>
+                <td colspan="3">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </div>
+    <!-- Footer -->
+    <footer>
+      <div class="footer-bar">
+        <a
+          href="https://youtube.com/@kalvikraft"
+          target="_blank"
+          class="youtube-bar"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg"
+            alt="YouTube"
+            class="yt-logo"
+          />
+          <span>Kalvi Kraft YouTube</span>
+        </a>
+      </div>
+    </footer>
+    <!-- Load Firebase + Leaderboard -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
+        authDomain: 'kalvi-kraft.firebaseapp.com',
+        databaseURL:
+          'https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app',
+        projectId: 'kalvi-kraft',
+        storageBucket: 'kalvi-kraft.appspot.com',
+        messagingSenderId: '535767835272',
+        appId: '1:535767835272:web:56d04e7c7d6f611194753d',
+        measurementId: 'G-S1YJCR79MN',
+      };
+      firebase.initializeApp(firebaseConfig);
+      function loadLeaderboard() {
+        firebase
+          .database()
+          .ref('leaderboard')
+          .once('value')
+          .then((snapshot) => {
+            const scores = [];
+            snapshot.forEach((child) => {
+              scores.push(child.val());
+            });
+            scores.sort((a, b) => b.score - a.score);
+            const list = document.getElementById('leaderboard-list');
+            list.innerHTML = '';
+            scores.slice(0, 10).forEach((item, index) => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `<td>${index + 1}</td><td>${item.name}</td><td>${
+                item.score
+              }</td>`;
+              list.appendChild(tr);
+            });
+          })
+          .catch(() => {
+            document.getElementById('leaderboard-list').innerHTML =
+              '<tr><td colspan="3">⚠️ Failed to load leaderboard</td></tr>';
+          });
+      }
+      loadLeaderboard();
+    </script>
+
+    <!-- Load Notifications -->
+    <script>
+      fetch('json/notifications.json')
+        .then((res) => res.json())
+        .then((data) => {
+          const list = document.getElementById('notification-list');
+          list.innerHTML = '';
+          data.slice(0, 5).forEach((item) => {
+            const li = document.createElement('li');
+            li.innerHTML = item.link
+              ? `<a href="${item.link}" target="_blank">${item.message}</a>`
+              : item.message;
+            list.appendChild(li);
+          });
+          let index = 0;
+          setInterval(() => {
+            const items = document.querySelectorAll('#notification-list li');
+            items.forEach((li, i) => {
+              li.style.display = i === index ? 'block' : 'none';
+            });
+            index = (index + 1) % items.length;
+          }, 2500);
+        });
+    </script>
+  </body>
+</html>
