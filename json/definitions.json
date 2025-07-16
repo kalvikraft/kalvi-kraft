@@ -8,5 +8,429 @@
     "title": "Eigenvalue",
     "content": "If \\(A\\vec{v} = \\lambda\\vec{v}\\), then \\(\\lambda\\) is an eigenvalue of A.",
     "reference": "Linear Algebra by Gilbert Strang"
+  },
+  {
+    "title": "Order Property of $IR$",
+    "content": "Given $x$, $y$ $\\in \\IR$, with $x < y$ then $\\forall~c~\\in \\IR (x+c~<~y+c)$ and $\\forall~c~\\in \\IR$,$c>0(x+c~<~y+c)$. Also, $\\forall (x,y,z) \\in \\IR \\times \\IR \\times \\IR$, with $x <y$ and $y<z$ then $x<z$ (Transitive). $\\forall (x,y) \\in \\IR \\times \\IR$ exactly one of the following holds: $x<y$, $x=y$, or $x>y$ (Law of Trichotomy)."
+  },
+  {
+    "title": "Upper Bound",
+    "content": "Let $A \\subseteq \\IR$. Given $\\alpha$ is said to be an upper bound of $A$ if  $\\forall~a~\\in A$, $(a \\leq \\alpha)$."
+  },
+  {
+    "title": "Lower Bound",
+    "content": "Let $A \\subseteq \\IR$. Given $\\beta$ is said to be a lower bound of $A$ if  $\\forall~a~\\in A$, $(\\beta \\leq a)$."
+  },
+  {
+    "title": "Bounded Above",
+    "content": "Let $A \\subseteq \\IR$, is said to be bounded above if $\\exists \\alpha \\in \\IR$ such that $\\alpha$ is an upper bound of $A$."
+  },
+  {
+    "title": "Bounded Below",
+    "content": "Let $A \\subseteq \\IR$, is said to be bounded below if $\\exists \\beta \\in \\IR$ such that $\\beta$ is a lower bound of $A$."
+  },
+  {
+    "title": "Bounded",
+    "content": "Let $A \\subseteq \\IR$, is said to be bounded if $\\exists \\alpha$, $\\beta \\in \\IR$ such that $\\alpha$ is an upper bound of $A$ and $\\beta$ is a lower bound of $A$."
+  },
+  {
+    "title": "Least Upper Bound",
+    "content": "Let $A \\subseteq \\IR$. Given $\\alpha$ is said to be an least upper bound for $A$ if $\\alpha$ is a upper bound for $A$ and given any upper bound $\\gamma \\in \\IR$ for $A$ then $\\alpha \\leq \\gamma$ or given any real number $\\gamma < \\alpha$, then $\\gamma$ is not a upper bound for $A$."
+  },
+  {
+    "title": "Greatest Lower Bound",
+    "content": "Let $A \\subseteq \\IR$. Given $\\beta$ is said to be a greatest lower bound for $A$ if $\\beta$ is a lower bound for $A$ and given any lower bound $\\gamma \\in \\IR$ for $A$ then $\\beta \\geq \\gamma$ or given any real number $\\gamma < \\beta$, then $\\gamma$ is not a lower bound for $A$."
+  },
+  {
+    "title": "Least Upper Bound Axiom",
+    "content": "Let $A$ be a non-empty subset of $\\IR$, then $\\exists \\alpha \\in \\IR$ such that $\\alpha$ is a least upper bound for $A$."
+  },
+  {
+    "title": "Archimedean Property",
+    "content": "$\\IN$ is not bounded above."
+  },
+  {
+    "title": "$IQ$ is dense in $IR$",
+    "content": "Given $a,b \\in \\IR$ with $a<b$ then there exists $x \\in \\IQ$ such that $a<x<b$."
+  },
+  {
+    "title": "Existance of $n^{th}$ root",
+    "content": "Let $\\alpha$ be a non-negative real number and $n \\in \\IN$. Then there exists a unique non-negative $x \\in \\IR$ such that $x^n=\\alpha$."
+  },
+  {
+    "title": "Greatest Integer Function",
+    "content": "Let $x \\in \\IR$. Then there exists a unique $m$ in $\\IZ$, such that $m \\leq x < m+1$."
+  },
+  {
+    "title": "Sequence",
+    "content": "Let $X\\subseteq\\IR$ be a non-empty set. A Sequence in $X$ is a function $f:\\IN \\to X$. We let $x_n:=f(n)$ and call $x_n$ as the $n^{\\text{th}}$ term of the sequence. The sequence is denoted by $(x_n)$."
+  },
+  {
+    "title": "Bounded Sequence",
+    "content": "A sequence $(x_n)$ is said to be bounded sequence if there exists $M>0$, such that $\\forall n \\in \\IN$, $|x_n| \\leq M$."
+  },
+  {
+    "title": "Constant sequence",
+    "content": "A sequence $(x_n)$ is said to be constant sequence if there exists $c \\in X$ such that given $n \\in \\IN$, $x_n =c$."
+  },
+  {
+    "title": "Eventually constant sequence",
+    "content": "A sequence $(x_n)$ is said to be eventually constant sequence if there exists $c \\in X$, $n_0 \\in \\IN$ such that $\\forall n \\geq n_0$, $x_n =c$."
+  },
+  {
+    "title": "Convergent Sequence",
+    "content": "A sequence $(x_n)$ is said to be convergent sequence if there exists $a \\in \\IR$ such that the terms of the sequence gets arbitrarilly close to $a$. i.e., given $\\epsilon>0(\\exists n_0 \\in \\IN(\\forall n \\geq n_0(|x_n-a|<\\epsilon)))$. We denote as $x_n \\to a$."
+  },
+  {
+    "title": "Cauchy Sequence",
+    "content": "A sequence $(x_n)$ is said to be cauchy sequence if the terms of the sequence gets arbitrarilly closer. i.e.,$\\forall \\epsilon>0(\\exists n_0 \\in \\IN(\\forall n$,$m \\geq n_0(|x_n-x_m|<\\epsilon)))$."
+  },
+  {
+    "title": "Sandwich Lemma",
+    "content": "Let $(x_n)$,$(y_n)$ and $(z_n)$ be sequences such that $\\forall n \\in \\IN$, $x_n \\leq y_n \\leq z_n$. If $x_n \\to a$ and $z_n \\to a$ then $y_n \\to a $."
+  },
+  {
+    "title": "Algebra of Convergent Sequence",
+    "content": "Let $x_n \\to x$ and $y_n \\to y$ then $x_n+y_n \\to x+y$. Let $x_n \\to x$ and $\\alpha \\in \\IR$ then $\\alpha x_n \\to \\alpha x$. Let $x_n \\to x$ and $y_n \\to y$ then $x_n y_n \\to xy$. Let $x_n \\to x$ and $\\forall n \\in \\IN$, $x_n \\neq 0$ \\& $x \\neq 0$ then $\\dfrac{1}{x_n} \\to \\dfrac{1}{x}$. If for $\\forall n \\in \\IN$, $x_n \\geq 0$ then $\\sqrt{x_n} \\to \\sqrt{x}$."
+  },
+  {
+    "title": "Fixed Point",
+    "content": "Let $X$ be a nonempty set and $T$ be a self map of $X$. An element $x\\in X$ is called a fixed point of $T$, if $Tx=x$."
+  },
+  {
+    "title": "Homotopy",
+    "content": "Let $f$ and $g$ be continuous function from $X$ to $Y$. Then a continuous map $H: I \\times X \\to Y$ such that $H(0,x)=f(x)$ and $H(1,x)=g(x)$ is called as a Homotopy from $f$ to $g$."
+  },
+  {
+    "title": "Homotopic",
+    "content": "Let $f$ and $g$ be continuous function from $X$ to $Y$. Then $f$ and $g$ are said to be homotopic if there exists a Homotopy from $f$ to $g$."
+  },
+  {
+    "title": "Contractible",
+    "content": "A space is said to be contractible if there is a homotopy between identity map and a constant map."
+  },
+  {
+    "title": "Retraction",
+    "content": "A subset $A$ of a space $X$ is said to be a retract of $X$ if there exists a continuous function $r: X \\to A $ such that $r(a) = a$ for all $a \\in A$."
+  },
+  {
+    "title": "Normal Structure",
+    "content": "Let $X$ be a normed linear space. A convex set $K \\subset X$ is said to have normal structure if for each bounded, closed convex subset $H$ of $K$ which contains more than one point, there exists $x \\in H$ such that it is not a diametral point of $H.$"
+  },
+  {
+    "title": "Schauders fixed point theorem",
+    "content": "If $K$ is compact convex subset of a normed linear space, then every continuous map $f:K \\to K$ admits a fixed point."
+  },
+  {
+    "title": "Strictly Convex",
+    "content": "A normed space $X$ is said to be strictly convex if for $x\\neq y$ in $X$ with $\\norm{x} = 1 = \\norm{y}$ , we have $\\norm{x+y} < 2$."
+  },
+  {
+    "title": "Uniformly Convex",
+    "content": "A normed space $X$ is said to be uniformly convex if for every $\\epsilon > 0$, there exists some $\\delta > 0$ such that for all $x$ and $y$ in $X$ with $\\norm{x}\\leq 1$, $\\norm{y} \\leq 1$ and $\\norm{x -y} \\geq \\epsilon$, we have $\\norm{x + y} \\leq 2 (1 - \\delta)$."
+  },
+  {
+    "title": "Lipschitzian Mapping",
+    "content": "Let $X$ be a metric space. A mapping $T:X\\rightarrow X$ is said to be Lipschitzian, if there is a constant $k\\geq 0$ such that $d(Tx,Ty)\\leq kd(x,y),\\quad\\text{   for all}\\quad x,y\\in X$."
+  },
+  {
+    "title": "Non-expansive",
+    "content": "A Lipschitzian mapping $T:X\\rightarrow X$ with Lipschitz constant $0 \\leq k = 1 $ is said to be a nonexpansive mapping."
+  },
+  {
+    "title": "Banach Contraction Principle",
+    "content": "Let $X$ be a complete metric space and let $T:X\\rightarrow X$ be a contraction mapping. Then $T$ has a unique fixed point. Further, if $x_0\\in X$ and $x_{n+1}=Tx_n,$ then  $\\{x_n\\}$ converges to the fixed point."
+  },
+  {
+    "title": "Brouwer fixed point theorem",
+    "content": "Let $B^n = B[0,1] \\subseteq \\mathds{R}^2$, $f:B^n \\to B^n$ be a continuous map. Then $f$ admits a fixed point."
+  },
+  {
+    "title": "Frechet differentiability",
+    "content": "Let $X$, $Y$ be (real or complex) Banach spaces, $U \\subseteq X$, $U$ open, $x_0 \\in U$ , and $f : U \\to Y$. $f$ is Frechet differentiable at $x_0$ if there exists $T \\in L(X,Y)$ and $\\sigma : X \\to Y$ , with $\\frac{\\| \\sigma(x) \\|_X}{\\|x \\|_Y} \\to 0$ uniformly as ${\\|x\\|_X} \\to 0$ such that $f (x) - f (x_0 ) = T (x - x_0 ) + \\sigma(x -x_0 ), \\forall x \\in U$. The operator $T$ is called the Frechet derivative of $f$ at $x_0$ , and is denoted by $f^{'} (x_0 )$."
+  },
+  {
+    "title": "Graph",
+    "content": "A linear graph $G=(V,E)$ consists of a set of objects $V=\\{v_1,v_2,\\ldots\\}$ called vertices and another set $E=\\{e_1,e_2,\\ldots\\}$ whose elements are called edges, such that each edge $e_k$ is identified with an unordered pair $(v_i,v_j)$ of vertices."
+  },
+  {
+    "title": "Self-loop",
+    "content": "An edge of a graph having the same vertex as both its end vertices is called a self-loop."
+  },
+  {
+    "title": "Parallel edges",
+    "content": "Two or more edges of a graph are called parallel edges, when they have same end vertices."
+  },
+  {
+    "title": "Simple graph",
+    "content": "A graph that has neither self-loops nor parallel edges is called a simple graph."
+  },
+  {
+    "title": "Walk",
+    "content": "A walk of a simple graph is defined as a finite alternating sequence of vertices and edges, beginning and ending with vertices, such that each edge is incident with the vertices preceding and following it. No edge appears more than once in a walk. A vertices, however may appear more than once."
+  },
+  {
+    "title": "Path",
+    "content": "An open walk in which no vertex appears more than once is called a path."
+  },
+  {
+    "title": "Adjacent Vertices",
+    "content": "Two nonparallel edges are said to be adjacent if they are incident on a common vertex. Similarly, two vertices are said to be adjacent if they are the end vertices of the same edge."
+  },
+  {
+    "title": "Degree of a vertex",
+    "content": "The number of edges incident on a vertex $v_i$ with self-loops counted twice is called the degree $d(v_i)$ of the vertex $v_i$."
+  },
+  {
+    "title": "Unimodular matrix",
+    "content": "A matrix is said to be unimodular if the determinant of its every square submatrix is 1."
+  },
+  {
+    "title": "Adjacency matrix of a graph",
+    "content": "Let $G$ be a graph of order $n$ with vertex $V$=\\{$v_1,v_2,\\cdots ,v_n$\\}. The adjacency matrix of $G$ with respect to the labelling of $V$ is the $n\\times n$ matrix, $X=(x_{ij})$, where $x_{ij}=1$ if $v_i$ is adjacdent to $v_j$ in G, and 0 otherwise."
+  },
+  {
+    "title": "Edge Sequence",
+    "content": "An edge sequence is a sequence of edges in which each edge, except the first and the last, has one vertex in common with the edge preceding it and one vertex in common with the edge following it. A walk and a path are the examples of an edge sequence. An edge can appear more than once in an edge sequence."
+  },
+  {
+    "title": "Set",
+    "content": "A set is a collection of objects known as elements or members. Elements of a set can be anything such as numbers, lines fishes or even sets."
+  },
+  {
+    "title": "Empty Set",
+    "content": "The set that has no element is called the empty set or (null set). It is denoted by $\\left\\{\\right\\}$ or $\\phi$. For a set $A$ to be a non-empty set, if $A$ has atleast one element."
+  },
+  {
+    "title": "Subsets",
+    "content": "Suppose $A$ and $B$ are two sets. We say that, If $A$ is a subset of $B$, if every element of $A$ is also an element of $B$."
+  },
+  {
+    "title": "Equality of sets",
+    "content": "Two sets $A$ and $B$ are said to be equal, if they have same elements. i.e., $A=B ~\\text{iff}~ \\forall x \\in A ~(x \\in B)\\text{and}~ \\forall x \\in B~(x \\in A)$ i.e., iff $A \\subseteq B~ \\&~ B \\subseteq A$."
+  },
+  {
+    "title": "Union of Sets",
+    "content": "Let $A, B$ be two sets. The union of $A$ and $B$ is the set defined by $A \\cup B=\\{x: x \\in A \\text { or } x \\in B\\}$."
+  },
+  {
+    "title": "Intersection of Sets",
+    "content": "Let $A$ and $B$ be two sets. The intersection of $A$ and $B$ is the set defined by $A \\cap B=\\{x: x \\in A \\text { and } x \\in B\\}$."
+  },
+  {
+    "title": "Disjoint Sets",
+    "content": "Two sets $A$ and $B$ are said to be disjoint if $A \\cap B=\\emptyset$, that is, if $A$ and $B$ do not have any element in common."
+  },
+  {
+    "title": "Difference between two sets",
+    "content": "Set difference for sets $A$ and $B$ the set difference of $B$ from $A$ is defined to be the set $A \\backslash B=\\{x \\in A: x \\notin B\\}$."
+  },
+  {
+    "title": "Complement of a Set",
+    "content": "If $A$ is a part of the universe $U$, that is, if $A \\subseteq U$, then the complement of $A$ (in $U$ ), written as $A^{c}$, is defined to be $A^{c}:=U \\backslash A=\\{x \\in U: x \\notin A\\}$."
+  },
+  {
+    "title": "Index Set",
+    "content": "Suppose $\\Lambda$ is a nonempty set, and for each $\\alpha \\in \\Lambda$ there is a set $A_{\\alpha}$. Then, we have a family of sets indexed by $\\Lambda$ which is written as $\\left\\{A_{\\alpha}: \\alpha \\in \\Lambda\\right\\}$. Here, the set $\\Lambda$ is called the index set."
+  },
+  {
+    "title": "Pairwise Disjoint Sets",
+    "content": "Let $\\left\\{A_{\\alpha}: \\alpha \\in \\Lambda\\right\\}$ be indexed by a set $\\Lambda$. Then, the set $A$ is said to be disjoint if $\\bigcap_{\\alpha \\in \\Lambda} A_{\\alpha}=\\emptyset$. The set $A$ is said to be a pairwise disjoint if for every pair of elements $\\alpha, \\beta \\in \\Lambda$, with $\\alpha \\neq \\beta$, we have $A_{\\alpha} \\cap A_{\\beta}=\\emptyset$."
+  },
+  {
+    "title": "Power Set",
+    "content": "For a set $S$, the power set of $S$ is defined to be the family of all subsets of $S$, and is denoted by $P(S)$. Thus $P(S)=\\{A: A \\subseteq S\\}$."
+  },
+  {
+    "title": "Cartesian Product of two sets",
+    "content": "The Cartesian product of two sets $A$ and $B$, denoted by $A \\times B$, is defined as the set $\\{(a, b): a \\in A, b \\in B\\}$. Here $(a, b)$ is called an ordered pair."
+  },
+  {
+    "title": "Function",
+    "content": "Let $X$ and $Y$ be nonempty sets. A function (or map or mapping) $f$ from $X$ to $Y$ is a rule (or correspondence, association) that assigns to each element in $X$, a unique element in $Y$."
+  },
+  {
+    "title": "Range of a set",
+    "content": "If $f$ is function from $X$ to $Y$, then $X$ is called the domain of $f$ and $Y$ is called the co-domain of $f$. If $x \\in X$ is associated to the element $y$ in $Y$, we say that $y$ is the image of $x$ under $f$ and write $y=f(x)$. If $y=f(x)$, then $x$ is called a pre-image of $y$. The range of $f: X \\rightarrow Y$ is defined to be the subset $R(f):=\\{y \\in Y: \\exists x \\in X \\text { such that } y=f(x)\\}$ of $Y$, that is, the set of images of all elements of $X$."
+  },
+  {
+    "title": "Constant Function",
+    "content": "Let $X, Y$ be nonempty sets. Fix $y_{0} \\in Y$. The function $f: X \\rightarrow Y$ defined by $f(x)=y_{0}$ for each $x \\in X$ is called a constant function."
+  },
+  {
+    "title": "Identity Function",
+    "content": "For any nonempty set $X$, the function $f: X \\rightarrow X$ defined by $f(x)=x$ for $x \\in X$ is called the identity function on $X$. The identity function on $X$ is denoted by $I d_{X}$."
+  },
+  {
+    "title": "Inclusion Function",
+    "content": "Let $X$ be a nonempty set and $X \\subseteq Y$. Then we have a function $f: X \\rightarrow Y$ defined by $f(x)=x$ for $x \\in X$. The function $f$ is called the inclusion function (also called embedding) of $X$ in $Y$."
+  },
+  {
+    "title": "Polynomial Function",
+    "content": "For a non-negative integer $n$, and real numbers $a_{0}, a_{1}, \\ldots, a_{n}$, $p(x)=a_{0}+a_{1} x+\\cdots+a_{n} x^{n}$ is called a polynomial in $\\mathbb{R}$. If $p(x)$ is a polynomial, we have a function $f: \\mathbb{R} \\rightarrow \\mathbb{R}$ defined by $f(x)=p(x)$, called a polynomial function."
+  },
+  {
+    "title": "Equality of Functions",
+    "content": "Let $X, Y, Z, W$ he nonempty sets, and $f: X \\rightarrow Y$ and $g: Z \\rightarrow W$ be two functions. We say that $f$ is equal to $g$, and write $f=g$, if (i) $X=Z$ and $Y=W$, that is, domains and co-domains of $f$ and $g$ are equal, and (ii) for each $x \\in X=Z$, we have $f(x)=g(x)$."
+  },
+  {
+    "title": "Graph of a function",
+    "content": "Let $f: X \\rightarrow Y$ be a function. Then the $\\operatorname{graph} G(f)$ of $f$ is the subset of $X \\times Y$ defined by $G(f):=\\{(x, y) \\in X \\times Y: y=f(x)\\}$."
+  },
+  {
+    "title": "One-to-One Function",
+    "content": "A function $f: X \\rightarrow Y$ is said to be one-one or one to one if for each pair of points $x_{1}, x_{2} \\in X$ with $x_{1} \\neq x_{2}$, we have $f\\left(x_{1}\\right) \\neq f\\left(x_{2}\\right)$. One-one functions are also known as injective functions."
+  },
+  {
+    "title": "Onto Function",
+    "content": "A function $f: X \\rightarrow Y$ is said to be onto if for each $y \\in Y$, there exists $x \\in X$ such that $y=f(x)$. In other words, $f: X \\rightarrow Y \\text { is onto, if } \\forall y \\in Y(\\exists x \\in X(y=f(x))$. An onto function is also called a surjective functions."
+  },
+  {
+    "title": "Bijection of a Function",
+    "content": "A function $f: X \\rightarrow Y$ which is both one-one and onto is called a bijection or a one-one onto function."
+  },
+  {
+    "title": "Increasing function",
+    "content": "Let $I \\subset \\mathbb{R}$ be any nonempty subset. A function $f: I \\rightarrow \\mathbb{R}$ is said to be increasing if for every $x, y \\in I, x<y$ implies $f(x) \\leq f(y)$. If for every $x, y \\in I, x<y$ implies $f(x)<f(y)$, then we say that $f$ is strictly increasing."
+  },
+  {
+    "title": "Decreasing function",
+    "content": "A function $f: I \\rightarrow \\mathbb{R}$ is said to be decreasing if for every $x, y \\in I, x<y$ implies $f(x) \\geq f(y)$. If for every $x, y \\in I, x<y$ implies $f(x)>f(y)$, then we say that $f$ is strictly decreasing."
+  },
+  {
+    "title": "Monotone function",
+    "content": "A function which is either increasing or decreasing is called a monotone function."
+  },
+  {
+    "title": "Composition of a Function",
+    "content": "Let $f: X \\rightarrow Y$ and $g: Y \\rightarrow Z$ be two functions. Then the composition of $f$ and $g$ is the function $g \\circ f: X \\rightarrow Z$ defined by $(g \\circ f)(x)= g(f(x))$."
+  },
+  {
+    "title": "Inverse of a function",
+    "content": "Let $f: X \\rightarrow Y$ be a bijection. An inverse of $f$ is a map $g: Y \\rightarrow X$ such that if $f(x)=y$, then $g(y)=x$. The inverse of a bijection $f: X \\rightarrow Y$ is denoted by $f^{-1}$ which is a function from $Y$ to $X$."
+  },
+  {
+    "title": "Involutory function",
+    "content": "The function $f: X \\rightarrow X$ is said to be a involutory function if for all $x \\in X$, $f(f(x))=x$."
+  },
+  {
+    "title": "Matrix",
+    "content": "A matrix is a rectangular array of elements. The horizontal arrangements are called rows and vertical arrangements are called columns."
+  },
+  {
+    "title": "Order of a matrix",
+    "content": "If a matrix $A$ has $m$ number of rows and $n$ number of columns, then the order of the matrix $A$ is (Number of rows)$\\times$(Number of columns) that is, $m\\times n$."
+  },
+  {
+    "title": "Row Matrix",
+    "content": "A matrix is said to be a row matrix if it has only one row and any number of columns. A row matrix is also called as a row vector."
+  },
+  {
+    "title": "Column Matrix",
+    "content": "A matrix is said to be a column matrix if it has only one column and any number of rows. It is also called as a column vector."
+  },
+  {
+    "title": "Square Matrix",
+    "content": "A matrix in which the number of rows is equal to the number of columns is called a square matrix."
+  },
+  {
+    "title": "Principal Diagonal Elements",
+    "content": "In a square matrix, the elements of the form $a_{11}$, $a_{22}$, $\\ldots$ (i.e) $a_{ii}$ are called principal diagonal elements."
+  },
+  {
+    "title": "Diagonal Matrix",
+    "content": "A square matrix, all of whose elements, except those in the principal diagonal are zero is called a diagonal matrix."
+  },
+  {
+    "title": "Scalar Matrix",
+    "content": "A diagonal matrix in which all the principal diagonal elements are equal is called a scalar matrix."
+  },
+  {
+    "title": "Identity (or) Unit Matrix",
+    "content": "A square matrix in which elements in the principal diagonal are all ``1'' and rest are all zero is called an identity matrix or unit matrix."
+  },
+  {
+    "title": "Zero matrix (or) null matrix",
+    "content": "A matrix is said to be a zero matrix or null matrix if all its elements are zero."
+  },
+  {
+    "title": "Transpose of a matrix",
+    "content": "The matrix which is obtained by interchanging the elements in rows and columns of the given matrix $A$ is called transpose of $A$ and is denoted by $A^T$."
+  },
+  {
+    "title": "Lower triangular matrix",
+    "content": "A square matrix in which all the entries above the principal diagonal are zero is called a lower triangular matrix.That is a square matrix $A=(a_{ij})_{n\\times n}$ is is called lower triangular matrix if $a_{ij} = 0$ for $i<j$."
+  },
+  {
+    "title": "Upper triangular matrix",
+    "content": "A square matrix in which all the entries below the principal diagonal are zero, then it is called an upper triangular matrix. That is a square matrix $A=(a_{ij})_{n\\times n}$ is is called upper triangular matrix if $a_{ij} = 0$ for $i>j$."
+  },
+  {
+    "title": "Equality of Matrices",
+    "content": "Two matrices $A$ and $B$ are said to be equal if and only if they have the same order and each element of matrix $A$ is equal to the corresponding element of matrix $B$. That is, $a_{ij}=b_{ij}$ for all $i$,$j$."
+  },
+  {
+    "title": "Symmetric Matrix",
+    "content": "A square matrix $A$ is said to be symmetric if $A^T = A$. That is $A=(a_{ij})_{m\\times n}$ is symmetric if $a_{ij}=a_{ji}$ for $i,j$."
+  },
+  {
+    "title": "Skew-symmetric Matrix",
+    "content": "A square matrix $A$ is said to be skew-symmetric if $A^T = -A$. That is $A=(a_{ij})_{m\\times n}$ is skew-symmetric if $a_{ij}=-a_{ji}$ for $i,j$."
+  },
+  {
+    "title": "Non-singular Matrix",
+    "content": "A square matrix is called a non-singular matrix if its determinant is not equal to zero."
+  },
+  {
+    "title": "Singular Matrix",
+    "content": "A square matrix is called a singular matrix if its determinant is equal to zero."
+  },
+  {
+    "title": "Inverse of a Matrix",
+    "content": "Let $A$ be a square matrix of order $n$. If there exists a square matrix $B$ of order $n$ such that $AB = BA = I_n$, then the matrix $B$ is called an inverse of $A$."
+  },
+  {
+    "title": "Orthogonal Matrix",
+    "content": "A square matrix $A$ is said to be orthogonal if $A A^T = A^T A = I$."
+  },
+  {
+    "title": "Row-echelon form",
+    "content": "A non-zero matrix $E$ is said to be in a row-echelon form if: All zero rows of $E$ occur below every non-zero row of $E$. The first non-zero element in any row $i$ of $E$ occurs in the $j$\\textsuperscript{th} column of $E$, then all other entries in the $j$\\textsuperscript{th} column of $E$ below the first non-zero element of row $i$ are zeros. The first non-zero entry in the $i$\\textsuperscript{th} row of $E$ lies to the left of the first non-zero entry in $(i +1)$\\textsuperscript{th} row of $E$."
+  },
+  {
+    "title": "Rank of a matrix",
+    "content": "The rank of a matrix $A$ is defined as the order of a highest order non-vanishing minor of the matrix $A$. It is denoted by the symbol $\\rho(A)$. The rank of a zero matrix is defined to be 0."
+  },
+  {
+    "title": "Minor of an element of a matrix",
+    "content": "Let $A=(a_{ij})_{n\\times n}$ be any square matrix. The minor of an arbitrary element $a_{ij}$ is the determinant obtained by deleting the $i$\\textsuperscript{th} row and $j$\\textsuperscript{th} column in which the element $a_{ij}$ stands. The minor of $a_{ij}$ is usually denoted by $M_{ij}$."
+  },
+  {
+    "title": "Elementary row (column) operations",
+    "content": "Elementary row (column) operations on a matrix are as follows: The interchanging of any two rows (columns) of the matrix. Replacing a row (column) of the matrix by a non-zero scalar multiple of the row (column) by a non-zero scalar. Replacing a row (column) of the matrix by a sum of the row (column) with a non-zero scalar multiple of another row (column) of the matrix."
+  },
+  {
+    "title": "Elementary Matrix",
+    "content": "An elementary matrix is defined as a matrix which is obtained from an identity matrix by applying only one elementary transformation."
+  },
+  {
+    "title": "Cauchy Completeness of $mathbb{R}$",
+    "content": "A real sequence $(x_n)$ is Cauchy iff it is convergent."
+  },
+  {
+    "title": "Increasing Sequence",
+    "content": "We say a sequence $(x_n)$ of real numbers is increasing if for each $n$, we have $x_n\\leq x_{n+1}$. If for every $n$, we have $x_n < x_{n+1}$, then we say that $(x_n)$ is strictly increasing."
+  },
+  {
+    "title": "Decreasing Sequence",
+    "content": "We say a sequence $(x_n)$ of real numbers is decreasing if for each $n$, we have $x_n\\geq x_{n+1}$. If for every $n$, we have $x_n > x_{n+1}$, then we say that $(x_n)$ is strictly decreasing."
+  },
+  {
+    "title": "Monotone Sequence",
+    "content": "A sequence $(x_n)$ is said to be monotone if it is either increasing or decreasing."
+  },
+  {
+    "title": "The Number $e$ or Euler Number",
+    "content": "Consider the sequence $x_n=\\left(1+\\frac{1}{n}\\right)^n$, which is an increasing sequence and bounded above. Therefore, it is convergent. The real number which is the limit of this sequence is denoted by $e$ and called the Euler number."
   }
 ]
