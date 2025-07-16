@@ -1,52 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Redirecting...</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-  </head>
-  <body>
-    <p>🔗 Redirecting, please wait...</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redirecting...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .loader {
+      margin-top: 20px;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #555;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h2>🔁 Redirecting you to your destination...</h2>
+  <div class="loader"></div>
+  <p id="status"></p>
 
-    <script>
-      // Firebase Config
-      const firebaseConfig = {
-        apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
-        authDomain: 'kalvi-kraft.firebaseapp.com',
-        databaseURL:
-          'https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app',
-        projectId: 'kalvi-kraft',
-        storageBucket: 'kalvi-kraft.appspot.com',
-        messagingSenderId: '535767835272',
-        appId: '1:535767835272:web:56d04e7c7d6f611194753d',
-        measurementId: 'G-S1YJCR79MN',
-      };
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.database();
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script>
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
+      authDomain: 'kalvi-kraft.firebaseapp.com',
+      databaseURL: 'https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app',
+      projectId: 'kalvi-kraft',
+      storageBucket: 'kalvi-kraft.appspot.com',
+      messagingSenderId: '535767835272',
+      appId: '1:535767835272:web:56d04e7c7d6f611194753d'
+    };
+    firebase.initializeApp(firebaseConfig);
 
-      // Extract short code from URL
-      const parts = window.location.pathname.split('/');
-      const code = parts[parts.length - 1];
+    // Get code from URL param
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
 
-      if (!code) {
-        document.body.innerHTML = '<h3>❌ Invalid short link.</h3>';
-      } else {
-        db.ref('shortUrls/' + code)
-          .once('value')
-          .then((snapshot) => {
-            const data = snapshot.val();
-            if (data && data.longUrl) {
-              window.location.href = data.longUrl;
-            } else {
-              document.body.innerHTML = '<h3>❌ Short link not found.</h3>';
-            }
-          })
-          .catch(() => {
-            document.body.innerHTML = '<h3>⚠️ Error while redirecting.</h3>';
-          });
-      }
-    </script>
-  </body>
+    if (!code) {
+      document.getElementById('status').textContent = '⚠️ Invalid or missing code.';
+    } else {
+      firebase.database().ref('shortUrls/' + code).once('value')
+        .then(snapshot => {
+          const data = snapshot.val();
+          if (data && data.longUrl) {
+            window.location.href = data.longUrl;
+          } else {
+            document.getElementById('status').textContent = '⚠️ Short link not found.';
+          }
+        })
+        .catch(() => {
+          document.getElementById('status').textContent = '❌ Failed to connect to database.';
+        });
+    }
+  </script>
+</body>
 </html>
