@@ -21,16 +21,13 @@
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
     ></script>
   </head>
-
   <body>
     <div class="container">
-      <!-- Left Ads -->
       <aside class="ads">
         <div class="ad">Ad Slot 1</div>
         <div class="ad">Ad Slot 2</div>
       </aside>
 
-      <!-- Main Content -->
       <main class="content">
         <h1>📚 Definitions Treasures</h1>
         <nav class="nav">
@@ -38,9 +35,9 @@
           <a href="materials.html">Study Materials</a>
           <a href="old-qps.html">Old Question Papers</a>
           <a href="quiz.html">Aptitude & Reasoning Quiz</a>
-          <!-- <a href="shortener.html">Link Shortener</a> -->
         </nav>
 
+        <div id="alphabetNav" class="alphabet-nav"></div>
         <input
           type="text"
           id="searchInput"
@@ -52,7 +49,6 @@
         <ul id="referencesList"></ul>
       </main>
 
-      <!-- Right Sidebar -->
       <aside class="sidebar">
         <div class="notifications">
           <ul id="notification-list">
@@ -78,7 +74,6 @@
       </aside>
     </div>
 
-    <!-- Footer -->
     <footer>
       <div class="footer-bar">
         <a
@@ -93,9 +88,7 @@
           />
           <span>Kalvi Kraft YouTube</span>
         </a>
-
         <button id="toggleMode" class="mode-toggle ripple">🌓</button>
-
         <a href="contact.html" class="contact-bar">
           <img
             src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
@@ -107,42 +100,91 @@
       </div>
     </footer>
 
-    <!-- Definitions Loader -->
     <script>
       fetch('json/definitions.json')
         .then((res) => res.json())
         .then((data) => {
           const list = document.getElementById('definitionsList');
           const input = document.getElementById('searchInput');
+          const alphabetNav = document.getElementById('alphabetNav');
 
-          function render(definitions) {
-            list.innerHTML = '';
-            definitions.forEach((def, index) => {
+          const groups = {};
+          data.forEach((def) => {
+            const letter = def.title[0].toUpperCase();
+            if (!groups[letter]) groups[letter] = [];
+            groups[letter].push(def);
+          });
+
+          const sortedLetters = Object.keys(groups).sort();
+
+          // Alphabet Nav Buttons
+          sortedLetters.forEach((letter) => {
+            const btn = document.createElement('button');
+            btn.textContent = letter;
+            btn.className = 'alphabet-button';
+            btn.onclick = () => {
+              document
+                .querySelectorAll('.alphabet-button')
+                .forEach((b) => b.classList.remove('active-letter'));
+              btn.classList.add('active-letter');
+
+              const section = document.getElementById(`alpha-${letter}`);
+              if (section) section.scrollIntoView({ behavior: 'smooth' });
+            };
+            alphabetNav.appendChild(btn);
+          });
+
+          // Stack All Definitions
+          sortedLetters.forEach((letter) => {
+            const section = document.createElement('div');
+            section.className = 'alpha-section';
+            section.id = `alpha-${letter}`;
+
+            const details = document.createElement('details');
+            details.open = true;
+            details.innerHTML = `<summary><strong>${letter}</strong></summary>`;
+
+            groups[letter].forEach((def) => {
               const latexCode = `\\textbf{${def.title}}: ${def.content}`;
               const card = document.createElement('div');
               card.className = 'definition-card';
               card.innerHTML = `
-             <details>
-             <summary><strong>${def.title}</strong></summary>
-             <p>${def.content}</p>
-             <button class="ripple-btn" onclick="copyLatex('${latexCode
-               .replace(/\\/g, '\\\\')
-               .replace(/'/g, "\\'")}')">📋 Copy LaTeX</button>
-             </details>
-             `;
-              list.appendChild(card);
+                <details>
+                  <summary><strong>${def.title}</strong></summary>
+                  <p>${def.content}</p>
+                  <button class="ripple-btn" onclick="copyLatex('${latexCode
+                    .replace(/\\/g, '\\\\')
+                    .replace(/'/g, "\\'")}')">📋 Copy LaTeX</button>
+                </details>
+              `;
+              details.appendChild(card);
             });
-            MathJax.typesetPromise();
-          }
 
-          render(data);
+            section.appendChild(details);
+            list.appendChild(section);
+          });
 
+          // "No results found" message
+          const noResultsMsg = document.createElement('p');
+          noResultsMsg.id = 'noResultsMsg';
+          noResultsMsg.style.display = 'none';
+          noResultsMsg.style.fontStyle = 'italic';
+          noResultsMsg.style.color = 'gray';
+          noResultsMsg.textContent = 'No results found.';
+          list.appendChild(noResultsMsg);
+
+          MathJax.typesetPromise();
+
+          // Live Search
           input.addEventListener('input', () => {
             const term = input.value.toLowerCase();
-            const filtered = data.filter((def) =>
-              def.title.toLowerCase().includes(term)
-            );
-            render(filtered);
+            let count = 0;
+            document.querySelectorAll('.definition-card').forEach((card) => {
+              const match = card.textContent.toLowerCase().includes(term);
+              card.style.display = match ? '' : 'none';
+              if (match) count++;
+            });
+            noResultsMsg.style.display = count === 0 ? 'block' : 'none';
           });
         });
 
@@ -162,7 +204,6 @@
       }
     </script>
 
-    <!-- References Loader -->
     <script>
       fetch('json/references.json')
         .then((res) => res.json())
@@ -177,7 +218,6 @@
         });
     </script>
 
-    <!-- Notifications -->
     <script>
       fetch('json/notifications.json')
         .then((res) => res.json())
@@ -202,7 +242,8 @@
         });
     </script>
 
-    <!-- Firebase Leaderboard -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
     <script>
       const firebaseConfig = {
         apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
@@ -224,9 +265,7 @@
           .once('value')
           .then((snapshot) => {
             const scores = [];
-            snapshot.forEach((child) => {
-              scores.push(child.val());
-            });
+            snapshot.forEach((child) => scores.push(child.val()));
             scores.sort((a, b) => b.score - a.score);
             const list = document.getElementById('leaderboard-list');
             list.innerHTML = '';
@@ -243,11 +282,9 @@
               '<tr><td colspan="3">⚠️ Failed to load leaderboard</td></tr>';
           });
       }
-
       loadLeaderboard();
     </script>
 
-    <!-- Google Analytics -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-S1YJCR79MN"
@@ -263,16 +300,12 @@
 
     <div id="toast" class="toast">✅ LaTeX copied!</div>
 
-    <!-- Dark Mode -->
     <script>
       const toggleBtn = document.getElementById('toggleMode');
       const body = document.body;
-
-      // Load saved preference
       if (localStorage.getItem('dark-mode') === 'true') {
         body.classList.add('dark-mode');
       }
-
       toggleBtn.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
         localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
