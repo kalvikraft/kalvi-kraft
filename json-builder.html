@@ -1,126 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Kalvi Kraft – JSON Generator</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      padding: 30px;
-      background-color: #f9f9f9;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 26px;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    input[type="text"] {
-      width: 70%;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      margin: 10px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4444ff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #3333dd;
-    }
-
-    #output {
-      margin-top: 20px;
-      background: #eee;
-      padding: 15px;
-      border-radius: 10px;
-      white-space: pre-wrap;
-      text-align: left;
-    }
-
-    .error {
-      color: red;
-      margin-top: 15px;
-    }
-
-    .copy-success {
-      color: green;
-    }
-  </style>
-</head>
-<body>
-  <h1>📁 GitHub Folder → 📄 JSON Generator</h1>
-
-  <input type="text" id="github-url" placeholder="Paste GitHub folder URL here" />
-  <br />
-  <button onclick="generateJSON()">📄 Generate JSON</button>
-  <button onclick="copyJSON()">📋 Copy JSON</button>
-
-  <div id="message"></div>
-  <div id="output"></div>
-
-  <script>
-    function generateJSON() {
-      let url = document.getElementById("github-url").value.trim();
-      const messageDiv = document.getElementById("message");
-      const outputDiv = document.getElementById("output");
-
-      messageDiv.textContent = "";
-      outputDiv.textContent = "";
-
-      // Auto-convert GitHub folder URL to GitHub API format
-      if (url.includes("github.com") && url.includes("/tree/main/")) {
-        const parts = url.split("/tree/main/");
-        const repoPath = parts[0].replace("https://github.com/", "");
-        const folderPath = parts[1];
-        url = `https://api.github.com/repos/${repoPath}/contents/${folderPath}`;
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kalvi Kraft – JSON Generator</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        padding: 30px;
+        background-color: #f9f9f9;
+        text-align: center;
       }
 
-      // Validate URL
-      if (!url.includes("api.github.com/repos/")) {
-        messageDiv.innerHTML = `<div class="error">❌ Please paste a valid GitHub folder URL (must contain <code>/tree/main/</code>)</div>`;
-        return;
+      h1 {
+        font-size: 26px;
+        color: #333;
+        margin-bottom: 20px;
       }
 
-      fetch(url)
-        .then(res => {
-          if (!res.ok) throw new Error("Unable to fetch folder contents.");
-          return res.json();
-        })
-        .then(data => {
-          const jsonOutput = data
-            .filter(item => item.type === "file")
-            .map(file => ({
-              name: file.name,
-              download_url: file.download_url
-            }));
+      input[type='text'] {
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+      }
 
-          outputDiv.textContent = JSON.stringify(jsonOutput, null, 2);
-        })
-        .catch(err => {
-          messageDiv.innerHTML = `<div class="error">⚠️ Error fetching folder contents. Please check the URL.</div>`;
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4444ff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #3333dd;
+      }
+
+      #output {
+        margin-top: 20px;
+        background: #eee;
+        padding: 15px;
+        border-radius: 10px;
+        white-space: pre-wrap;
+        text-align: left;
+      }
+
+      .error {
+        color: red;
+        margin-top: 15px;
+      }
+
+      .copy-success {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📁 GitHub Folder → 📄 JSON Generator</h1>
+
+    <input
+      type="text"
+      id="github-url"
+      placeholder="Paste GitHub folder URL here"
+    />
+    <br />
+    <button onclick="generateJSON()">📄 Generate JSON</button>
+    <button onclick="copyJSON()">📋 Copy JSON</button>
+
+    <div id="message"></div>
+    <div id="output"></div>
+
+    <script>
+      function generateJSON() {
+        let url = document.getElementById('github-url').value.trim();
+        const messageDiv = document.getElementById('message');
+        const outputDiv = document.getElementById('output');
+
+        messageDiv.textContent = '';
+        outputDiv.textContent = '';
+
+        // Auto-convert GitHub folder URL to GitHub API format
+        if (url.includes('github.com') && url.includes('/tree/main/')) {
+          const parts = url.split('/tree/main/');
+          const repoPath = parts[0].replace('https://github.com/', '');
+          const folderPath = parts[1];
+          url = `https://api.github.com/repos/${repoPath}/contents/${folderPath}`;
+        }
+
+        // Validate URL
+        if (!url.includes('api.github.com/repos/')) {
+          messageDiv.innerHTML = `<div class="error">❌ Please paste a valid GitHub folder URL (must contain <code>/tree/main/</code>)</div>`;
+          return;
+        }
+
+        fetch(url)
+          .then((res) => {
+            if (!res.ok) throw new Error('Unable to fetch folder contents.');
+            return res.json();
+          })
+          .then((data) => {
+            const jsonOutput = data
+              .filter((item) => item.type === 'file')
+              .map((file) => {
+                const nameWithoutExt = file.name.replace('.pdf', '');
+                const parts = nameWithoutExt.split('-');
+
+                return {
+                  university: parts[0]?.trim() || '',
+                  month_year: parts[1]?.trim() || '',
+                  subject: parts.slice(2).join('-').trim() || '',
+                  download_url: file.download_url,
+                };
+              });
+
+            outputDiv.textContent = JSON.stringify(jsonOutput, null, 2);
+          })
+          .catch((err) => {
+            messageDiv.innerHTML = `<div class="error">⚠️ Error fetching folder contents. Please check the URL.</div>`;
+          });
+      }
+
+      function copyJSON() {
+        const output = document.getElementById('output').textContent;
+        if (!output) return;
+
+        navigator.clipboard.writeText(output).then(() => {
+          document.getElementById(
+            'message'
+          ).innerHTML = `<div class="copy-success">✅ JSON copied to clipboard!</div>`;
         });
-    }
-
-    function copyJSON() {
-      const output = document.getElementById("output").textContent;
-      if (!output) return;
-
-      navigator.clipboard.writeText(output).then(() => {
-        document.getElementById("message").innerHTML = `<div class="copy-success">✅ JSON copied to clipboard!</div>`;
-      });
-    }
-  </script>
-</body>
+      }
+    </script>
+  </body>
 </html>
