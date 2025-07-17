@@ -143,6 +143,124 @@ select:disabled {
   color: #aaa;
 }
 
+/* === Material Field Styles for Inputs and Selects === */
+.material-setup {
+  padding: 18px 0 18px 0;
+  max-width: 420px;
+  margin: 0 auto 28px auto;
+}
+.material-field {
+  position: relative;
+  margin-bottom: 28px;
+  min-width: 220px;
+}
+.material-field input[type='text'],
+.material-field select {
+  font-family: inherit;
+  font-size: 16px;
+  width: 100%;
+  padding: 18px 12px 7px 12px;
+  border: none;
+  border-bottom: 2.5px solid #bbb;
+  background: none;
+  color: var(--text);
+  outline: none;
+  border-radius: 0;
+  transition: border-color 0.28s;
+  background-color: transparent;
+  appearance: none;
+  box-shadow: none;
+}
+.material-field input[type='text']:focus,
+.material-field select:focus {
+  border-bottom: 2.5px solid var(--primary);
+}
+.material-field label {
+  position: absolute;
+  left: 12px;
+  top: 19px;
+  color: #666;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.17s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+}
+.material-field input[type='text']:focus + label,
+.material-field input[type='text']:not(:placeholder-shown) + label,
+.material-field input[type='text']:valid + label,
+.material-field select:focus + label,
+.material-field select:valid + label {
+  top: -8px;
+  left: 6px;
+  font-size: 0.88rem;
+  color: var(--primary);
+  background: var(--bg-content);
+  padding: 0 3px;
+  font-weight: 600;
+  border-radius: 3px;
+}
+.material-field select {
+  /* Show custom arrow from theme if desired */
+  background: transparent var(--select-arrow) no-repeat right 8px center/20px
+    20px;
+  padding-right: 32px;
+}
+.material-bar {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2.5px;
+  width: 0;
+  background: var(--primary);
+  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+}
+.material-field input[type='text']:focus ~ .material-bar,
+.material-field select:focus ~ .material-bar {
+  width: 100%;
+}
+.material-field input[type='text']:invalid,
+.material-field select:invalid {
+  color: #888;
+}
+.material-field select option[disabled][selected] {
+  display: none;
+}
+
+body.dark-mode .material-field input[type='text'],
+body.dark-mode .material-field select {
+  color: #f0f0f0;
+  border-bottom-color: #8fa6ff;
+  background-color: transparent;
+}
+body.dark-mode .material-field input[type='text']:focus,
+body.dark-mode .material-field select:focus {
+  border-bottom-color: var(--primary);
+}
+body.dark-mode .material-field label {
+  color: #aaa;
+  background: transparent;
+}
+body.dark-mode .material-bar {
+  background: var(--primary);
+}
+body.dark-mode .material-field input[type='text']:focus + label,
+body.dark-mode
+  .material-field
+  input[type='text']:not(:placeholder-shown)
+  + label,
+body.dark-mode .material-field select:focus + label,
+body.dark-mode .material-field select:valid + label {
+  color: #90caf9;
+  background: var(--bg-content);
+}
+
+.material-field input[type='text']:invalid ~ .material-bar,
+.material-field select:invalid ~ .material-bar {
+  background: #c62828;
+}
+
 /* === Section === */
 .about-section {
   background-color: var(--bg-content);
