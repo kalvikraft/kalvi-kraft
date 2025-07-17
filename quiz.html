@@ -23,14 +23,26 @@
           <a href="definitions.html">Definitions Treasures</a>
         </nav>
 
-        <div id="setupScreen">
-          <input type="text" id="username" placeholder="Enter your name" />
-          <select id="categorySelect">
-            <option value="">Select Category</option>
-          </select>
-          <select id="subCategorySelect">
-            <option value="">Select Sub-category</option>
-          </select>
+        <div id="setupScreen" class="material-setup">
+          <div class="material-field">
+            <input type="text" id="username" required placeholder=" " />
+            <label for="username">Your Name</label>
+            <span class="material-bar"></span>
+          </div>
+          <div class="material-field">
+            <select id="categorySelect" required>
+              <option value="" disabled selected></option>
+            </select>
+            <label for="categorySelect">Category</label>
+            <span class="material-bar"></span>
+          </div>
+          <div class="material-field">
+            <select id="subCategorySelect" required>
+              <option value="" disabled selected></option>
+            </select>
+            <label for="subCategorySelect">Subcategory</label>
+            <span class="material-bar"></span>
+          </div>
           <button class="ripple-btn" onclick="startQuiz()">Start Quiz</button>
         </div>
 
