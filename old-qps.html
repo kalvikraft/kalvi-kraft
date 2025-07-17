@@ -21,16 +21,29 @@
           <a href="index.html">🏠 Home</a>
           <a href="materials.html">Study Materials</a>
           <a href="quiz.html">Aptitude & Reasoning Quiz</a>
-          <!-- <a href="shortener.html">Link Shortener</a> -->
           <a href="definitions.html">Definitions Treasures</a>
         </nav>
 
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search by title, subject, or university..."
-        />
-        <ul id="qpList"></ul>
+        <!-- FILTERS -->
+        <div
+          style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px"
+        >
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by subject, university, or month/year..."
+            style="flex: 2"
+          />
+          <select id="universityFilter" style="flex: 1">
+            <option value="">All Universities</option>
+          </select>
+          <select id="yearFilter" style="flex: 1">
+            <option value="">All Years</option>
+          </select>
+        </div>
+
+        <!-- MATERIAL CARD GRID -->
+        <div class="qp-grid" id="qpGrid"></div>
       </main>
 
       <!-- Right Side Panel -->
@@ -74,9 +87,7 @@
           />
           <span>Kalvi Kraft YouTube</span>
         </a>
-
         <button id="toggleMode" class="mode-toggle ripple">🌓</button>
-
         <a href="contact.html" class="contact-bar">
           <img
             src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
@@ -88,7 +99,7 @@
       </div>
     </footer>
 
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK for leaderboard -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
     <script>
@@ -104,10 +115,7 @@
         measurementId: 'G-S1YJCR79MN',
       };
       firebase.initializeApp(firebaseConfig);
-    </script>
 
-    <!-- Load Leaderboard from Firebase -->
-    <script>
       function loadLeaderboard() {
         firebase
           .database()
@@ -134,44 +142,121 @@
               '<tr><td colspan="3">⚠️ Failed to load leaderboard</td></tr>';
           });
       }
-
       loadLeaderboard();
     </script>
 
-    <!-- Load Old Question Papers -->
+    <!-- Old QP Cards w/ Filtering/Searching -->
     <script>
+      const qpGrid = document.getElementById('qpGrid');
       const searchInput = document.getElementById('searchInput');
-      const qpList = document.getElementById('qpList');
+      const universityFilter = document.getElementById('universityFilter');
+      const yearFilter = document.getElementById('yearFilter');
 
+      let allQPs = [];
+
+      // Utility: Extract year from "month_year" field
+      function extractYear(monthYear) {
+        // e.g. "April 2025" -> 2025, "Dec 2023" -> 2023
+        const match = monthYear && monthYear.match(/\b(20\d{2})\b/);
+        return match ? match[1] : '';
+      }
+
+      // Render Cards
+      function renderQPCards(list) {
+        qpGrid.innerHTML = '';
+        if (!list.length) {
+          qpGrid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:32px; color:#888;">
+            No question papers found for your filter/search.
+          </div>`;
+          return;
+        }
+        list.sort((a, b) => {
+          if (!a.subject || !b.subject) return 0; // fallback for unexpected data
+          return a.subject.localeCompare(b.subject, undefined, {
+            sensitivity: 'base',
+          });
+        });
+        for (const item of list) {
+          qpGrid.innerHTML += `<div class="qp-card">
+              <h3>${item.subject || 'Untitled'}</h3>
+              <div style="font-size:15px; color:#444;">
+                <span style="color:#3f51b5; font-weight:600;">${
+                  item.university
+                }</span>
+                <br>
+                <span style="color:#888;">${item.month_year || ''}</span>
+              </div>
+              <a href="${
+                item.download_url
+              }" class="ripple-btn" target="_blank" download>Download PDF</a>
+            </div>`;
+        }
+      }
+
+      // Populate Filter Dropdowns
+      function populateFilters(data) {
+        // University filter
+        const universities = Array.from(
+          new Set(data.map((qp) => qp.university))
+        ).sort();
+        universityFilter.innerHTML = `<option value="">All Universities</option>`;
+        universities.forEach((u) => {
+          universityFilter.innerHTML += `<option value="${u}">${u}</option>`;
+        });
+
+        // Year filter
+        const years = Array.from(
+          new Set(data.map((qp) => extractYear(qp.month_year)).filter(Boolean))
+        ).sort((a, b) => b - a);
+        yearFilter.innerHTML = `<option value="">All Years</option>`;
+        years.forEach((y) => {
+          yearFilter.innerHTML += `<option value="${y}">${y}</option>`;
+        });
+      }
+
+      // Main filter logic
+      function filterAndRender() {
+        let list = allQPs;
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        const university = universityFilter.value;
+        const year = yearFilter.value;
+
+        if (university)
+          list = list.filter((qp) => qp.university === university);
+        if (year)
+          list = list.filter((qp) => extractYear(qp.month_year) === year);
+
+        if (searchTerm) {
+          list = list.filter(
+            (qp) =>
+              (qp.subject && qp.subject.toLowerCase().includes(searchTerm)) ||
+              (qp.university &&
+                qp.university.toLowerCase().includes(searchTerm)) ||
+              (qp.month_year &&
+                qp.month_year.toLowerCase().includes(searchTerm))
+          );
+        }
+        renderQPCards(list);
+      }
+
+      // Fetch and setup
       fetch('json/old-qps.json')
         .then((res) => res.json())
         .then((data) => {
-          function render(list) {
-            qpList.innerHTML = '';
-            list.forEach((item) => {
-              const li = document.createElement('li');
-              li.innerHTML = `<a href="${item.download_url}" target="_blank">${item.name}</a>`;
-              qpList.appendChild(li);
-            });
-          }
+          allQPs = data;
+          populateFilters(allQPs);
+          renderQPCards(allQPs);
 
-          render(data);
-
-          searchInput.addEventListener('input', () => {
-            const term = searchInput.value.toLowerCase();
-            const filtered = data.filter((item) =>
-              item.name.toLowerCase().includes(term)
-            );
-            render(filtered);
-          });
+          searchInput.addEventListener('input', filterAndRender);
+          universityFilter.addEventListener('change', filterAndRender);
+          yearFilter.addEventListener('change', filterAndRender);
         })
         .catch(() => {
-          qpList.innerHTML =
-            '<li>⚠️ Failed to load question papers. Try again later.</li>';
+          qpGrid.innerHTML = `<div style="padding:32px;">⚠️ Failed to load question papers. Try again later.</div>`;
         });
     </script>
 
-    <!-- Load Notifications -->
+    <!-- Notifications -->
     <script>
       fetch('json/notifications.json')
         .then((res) => res.json())
@@ -201,7 +286,7 @@
         });
     </script>
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-S1YJCR79MN"
@@ -220,7 +305,6 @@
       const toggleBtn = document.getElementById('toggleMode');
       const body = document.body;
 
-      // Load saved preference
       if (localStorage.getItem('dark-mode') === 'true') {
         body.classList.add('dark-mode');
       }
