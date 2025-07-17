@@ -148,9 +148,11 @@
         .then((data) => {
           function renderMaterialsGrid(list) {
             materialsGrid.innerHTML = '';
-            // Sort materials alphabetically by name
+            // Sort by subject/title alphabetically
             list.sort((a, b) =>
-              a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+              (a.subject || '').localeCompare(b.subject || '', undefined, {
+                sensitivity: 'base',
+              })
             );
             if (!list.length) {
               materialsGrid.innerHTML = `
@@ -162,20 +164,12 @@
             for (const item of list) {
               materialsGrid.innerHTML += `
           <div class="qp-card">
+            <h3>${item.subject || 'Untitled'}</h3>
             ${
-              item.subject || item.university
+              item.university
                 ? `
               <div style="font-size:15px; color:#444;">
-                ${
-                  item.subject
-                    ? `<span style="color:#3f51b5; font-weight:600;">${item.subject}</span><br>`
-                    : ''
-                }
-                ${
-                  item.university
-                    ? `<span style="color:#888;">${item.university}</span>`
-                    : ''
-                }
+                <span style="color:#888;">${item.university}</span>
               </div>
             `
                 : ''
@@ -183,7 +177,8 @@
             <a href="${
               item.download_url
             }" target="_blank" class="ripple-btn" download>Download PDF</a>
-          </div>`;
+          </div>
+        `;
             }
           }
 
@@ -193,7 +188,6 @@
             const term = searchInput.value.toLowerCase();
             const filtered = data.filter(
               (item) =>
-                (item.name && item.name.toLowerCase().includes(term)) ||
                 (item.subject && item.subject.toLowerCase().includes(term)) ||
                 (item.university &&
                   item.university.toLowerCase().includes(term))
