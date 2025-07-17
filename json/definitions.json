@@ -429,6 +429,6 @@
   },
   {
     "title": "The Number \\(e\\) or Euler Number",
-    "content": "Consider the sequence \\(x_n=\\left(1+\\frac{1}{n}\\right)^n\\), which is an increasing sequence and bounded above. Therefore, it is convergent. The real number which is the limit of this sequence is denoted by $e$ and called the Euler number."
+    "content": "Consider the sequence \\(x_n=\\left(1+\\frac{1}{n}\\right)^n\\), which is an increasing sequence and bounded above. Therefore, it is convergent. The real number which is the limit of this sequence is denoted by \\(e\\) and called the Euler number."
   }
 ]
