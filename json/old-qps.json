@@ -1,10 +1,14 @@
 [
   {
-    "name": "Bharathidasan university-April 2025-Differential Calculus and Trigonometry.pdf",
+    "university": "Bharathidasan university",
+    "month_year": "April 2025",
+    "subject": "Differential Calculus and Trigonometry",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20university-April%202025-Differential%20Calculus%20and%20Trigonometry.pdf"
   },
   {
-    "name": "Bharathidasan university-April 2025-Integral Calculus and Fourier Series.pdf",
+    "university": "Bharathidasan university",
+    "month_year": "April 2025",
+    "subject": "Integral Calculus and Fourier Series",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20university-April%202025-Integral%20Calculus%20and%20Fourier%20Series.pdf"
   }
 ]
