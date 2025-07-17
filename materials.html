@@ -30,7 +30,7 @@
           id="searchInput"
           placeholder="Search by title, subject, or university..."
         />
-        <ul id="materialsList"></ul>
+        <div class="qp-grid" id="materialsGrid"></div>
       </main>
 
       <!-- Right Side Panel -->
@@ -141,33 +141,71 @@
     <!-- Load Study Materials -->
     <script>
       const searchInput = document.getElementById('searchInput');
-      const materialsList = document.getElementById('materialsList');
+      const materialsGrid = document.getElementById('materialsGrid');
 
       fetch('json/materials.json')
         .then((res) => res.json())
         .then((data) => {
-          function render(list) {
-            materialsList.innerHTML = '';
-            list.forEach((item) => {
-              const li = document.createElement('li');
-              li.innerHTML = `<a href="${item.download_url}" target="_blank">${item.name}</a>`;
-              materialsList.appendChild(li);
-            });
+          function renderMaterialsGrid(list) {
+            materialsGrid.innerHTML = '';
+            // Alphabetically sort by name/title
+            list.sort((a, b) =>
+              a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+            );
+            for (const item of list) {
+              materialsGrid.innerHTML += `
+          <div class="qp-card">
+            <h3>${item.name || 'Untitled'}</h3>
+            ${
+              item.subject || item.university
+                ? `
+            <div style="font-size:15px; color:#444;">
+              ${
+                item.subject
+                  ? `<span style="color:#3f51b5; font-weight:600;">${item.subject}</span><br>`
+                  : ''
+              }
+              ${
+                item.university
+                  ? `<span style="color:#888;">${item.university}</span>`
+                  : ''
+              }
+            </div>`
+                : ''
+            }
+            <a href="${
+              item.download_url
+            }" target="_blank" class="ripple-btn" download>Download PDF</a>
+          </div>
+        `;
+            }
+            if (!list.length) {
+              materialsGrid.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:32px; color:#888;">
+            No study materials found.
+          </div>
+        `;
+            }
           }
 
-          render(data);
+          renderMaterialsGrid(data);
 
           searchInput.addEventListener('input', () => {
             const term = searchInput.value.toLowerCase();
-            const filtered = data.filter((item) =>
-              item.name.toLowerCase().includes(term)
+            const filtered = data.filter(
+              (item) =>
+                (item.name && item.name.toLowerCase().includes(term)) ||
+                (item.subject && item.subject.toLowerCase().includes(term)) ||
+                (item.university &&
+                  item.university.toLowerCase().includes(term))
             );
-            render(filtered);
+            renderMaterialsGrid(filtered);
           });
         })
         .catch(() => {
-          materialsList.innerHTML =
-            '<li>⚠️ Failed to load study materials. Try again later.</li>';
+          materialsGrid.innerHTML = `
+      <div style="padding:32px;">⚠️ Failed to load study materials. Try again later.</div>
+    `;
         });
     </script>
 
