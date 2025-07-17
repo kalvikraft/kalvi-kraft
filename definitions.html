@@ -43,7 +43,8 @@
           id="searchInput"
           placeholder="Search definitions..."
         />
-        <div id="definitionsList" style="margin-top: 10px"></div>
+        <!-- New grid container, replaces definitionsList -->
+        <div class="qp-grid" id="definitionsGrid"></div>
 
         <h2>📖 References</h2>
         <ul id="referencesList"></ul>
@@ -104,88 +105,115 @@
       fetch('json/definitions.json')
         .then((res) => res.json())
         .then((data) => {
-          const list = document.getElementById('definitionsList');
+          const grid = document.getElementById('definitionsGrid');
           const input = document.getElementById('searchInput');
           const alphabetNav = document.getElementById('alphabetNav');
 
-          const groups = {};
-          data.forEach((def) => {
-            const letter = def.title[0].toUpperCase();
-            if (!groups[letter]) groups[letter] = [];
-            groups[letter].push(def);
-          });
+          // Extract sorted unique letters from data
+          const letters = Array.from(
+            new Set(data.map((d) => d.title[0].toUpperCase()))
+          ).sort();
 
-          const sortedLetters = Object.keys(groups).sort();
+          // Clear previous buttons just in case
+          alphabetNav.innerHTML = '';
 
-          // Alphabet Nav Buttons
-          sortedLetters.forEach((letter) => {
+          // Add "Show All" button first
+          const showAllButton = document.createElement('button');
+          showAllButton.textContent = 'Show All';
+          showAllButton.className = 'alphabet-button active-letter'; // Active by default
+          showAllButton.onclick = () => {
+            resetActiveButtons();
+            showAllButton.classList.add('active-letter');
+            renderDefinitionsGrid(data);
+            input.value = '';
+            noResultsMsg.style.display = 'none';
+            MathJax.typesetPromise();
+          };
+          alphabetNav.appendChild(showAllButton);
+
+          // Create alphabet buttons
+          letters.forEach((letter) => {
             const btn = document.createElement('button');
             btn.textContent = letter;
             btn.className = 'alphabet-button';
             btn.onclick = () => {
-              document
-                .querySelectorAll('.alphabet-button')
-                .forEach((b) => b.classList.remove('active-letter'));
+              resetActiveButtons();
               btn.classList.add('active-letter');
-
-              const section = document.getElementById(`alpha-${letter}`);
-              if (section) section.scrollIntoView({ behavior: 'smooth' });
+              // Filter data starting with this letter and render grid
+              const filtered = data.filter(
+                (d) => d.title[0].toUpperCase() === letter
+              );
+              renderDefinitionsGrid(filtered);
+              input.value = '';
+              noResultsMsg.style.display =
+                filtered.length === 0 ? 'block' : 'none';
+              MathJax.typesetPromise();
             };
             alphabetNav.appendChild(btn);
           });
 
-          // Stack All Definitions
-          sortedLetters.forEach((letter) => {
-            const section = document.createElement('div');
-            section.className = 'alpha-section';
-            section.id = `alpha-${letter}`;
+          function resetActiveButtons() {
+            document
+              .querySelectorAll('.alphabet-button')
+              .forEach((b) => b.classList.remove('active-letter'));
+          }
 
-            const details = document.createElement('details');
-            details.open = true;
-            details.innerHTML = `<summary><strong>${letter}</strong></summary>`;
-
-            groups[letter].forEach((def) => {
+          // Render all definitions in a grid of cards
+          function renderDefinitionsGrid(defs) {
+            grid.innerHTML = '';
+            defs.sort((a, b) =>
+              a.title.localeCompare(b.title, undefined, { sensitivity: 'base' })
+            );
+            defs.forEach((def) => {
               const latexCode = `\\textbf{${def.title}}: ${def.content}`;
               const card = document.createElement('div');
-              card.className = 'definition-card';
+              card.className = 'qp-card';
               card.innerHTML = `
-                <details>
-                  <summary><strong>${def.title}</strong></summary>
-                  <p>${def.content}</p>
-                  <button class="ripple-btn" onclick="copyLatex('${latexCode
-                    .replace(/\\/g, '\\\\')
-                    .replace(/'/g, "\\'")}')">📋 Copy LaTeX</button>
-                </details>
+                <h3>${def.title}</h3>
+                <div class="definition-content">${def.content}</div>
+                <button class="ripple-btn" onclick="copyLatex('${latexCode
+                  .replace(/\\/g, '\\\\')
+                  .replace(/'/g, "\\'")}')">📋 Copy LaTeX</button>
               `;
-              details.appendChild(card);
+              grid.appendChild(card);
             });
+          }
 
-            section.appendChild(details);
-            list.appendChild(section);
-          });
-
-          // "No results found" message
+          // Insert "No results found" message
           const noResultsMsg = document.createElement('p');
           noResultsMsg.id = 'noResultsMsg';
           noResultsMsg.style.display = 'none';
           noResultsMsg.style.fontStyle = 'italic';
           noResultsMsg.style.color = 'gray';
           noResultsMsg.textContent = 'No results found.';
-          list.appendChild(noResultsMsg);
+          grid.parentNode.appendChild(noResultsMsg);
 
-          MathJax.typesetPromise();
+          // Initial render: show all definitions in grid, Show All active
+          renderDefinitionsGrid(data);
 
-          // Live Search
+          // Handle live search: disables buttons, shows filtered grid
           input.addEventListener('input', () => {
             const term = input.value.toLowerCase();
-            let count = 0;
-            document.querySelectorAll('.definition-card').forEach((card) => {
-              const match = card.textContent.toLowerCase().includes(term);
-              card.style.display = match ? '' : 'none';
-              if (match) count++;
-            });
-            noResultsMsg.style.display = count === 0 ? 'block' : 'none';
+            resetActiveButtons();
+            if (!term) {
+              renderDefinitionsGrid(data);
+              showAllButton.classList.add('active-letter');
+              noResultsMsg.style.display = 'none';
+              MathJax.typesetPromise();
+              return;
+            }
+            const filtered = data.filter(
+              (d) =>
+                d.title.toLowerCase().includes(term) ||
+                d.content.toLowerCase().includes(term)
+            );
+            renderDefinitionsGrid(filtered);
+            noResultsMsg.style.display =
+              filtered.length === 0 ? 'block' : 'none';
+            MathJax.typesetPromise();
           });
+
+          MathJax.typesetPromise();
         });
 
       function copyLatex(text) {
@@ -265,7 +293,9 @@
           .once('value')
           .then((snapshot) => {
             const scores = [];
-            snapshot.forEach((child) => scores.push(child.val()));
+            snapshot.forEach((child) => {
+              scores.push(child.val());
+            });
             scores.sort((a, b) => b.score - a.score);
             const list = document.getElementById('leaderboard-list');
             list.innerHTML = '';
