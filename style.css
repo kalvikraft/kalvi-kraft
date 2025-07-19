@@ -684,6 +684,14 @@ footer a:hover {
   .sidebar,
   .content {
     width: 100%;
+    order: 1;
+  }
+  .sidebar {
+    order: 2;
+  }
+  .ads {
+    order: 3; 
+    padding: 10px 15px;
   }
   .content {
     margin: 10px 0;
