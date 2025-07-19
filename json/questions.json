@@ -2,579 +2,264 @@
   "Aptitude": {
     "Arithmetic": [
       {
-        "question": "What is 15 + 28?",
-        "options": ["33", "43", "53", "41"],
-        "answer": "43"
+        "question": "What is 25% of 200?",
+        "options": ["25", "50", "75", "100"],
+        "answer": "50"
       },
       {
-        "question": "A man's salary is increased by 10% and then decreased by 10%. What is the change in his salary?",
-        "options": ["No change", "1% increase", "1% decrease", "2% decrease"],
-        "answer": "1% decrease"
+        "question": "If 30% of x = 45, what is x?",
+        "options": ["120", "150", "180", "200"],
+        "answer": "150"
       },
       {
-        "question": "If 30% of a number is 150, then what is 60% of that number?",
-        "options": ["300", "450", "500", "600"],
-        "answer": "300"
+        "question": "A train travels 240 km in 3 hours. What is its speed in km/h?",
+        "options": ["60", "70", "80", "90"],
+        "answer": "80"
       },
       {
-        "question": "If 30% of a number is 150, then what is 60% of that number?",
-        "options": ["300", "450", "500", "600"],
-        "answer": "300"
+        "question": "The average of 6 numbers is 15. If one number is 20, what is the average of the remaining 5?",
+        "options": ["12", "14", "16", "18"],
+        "answer": "14"
       },
       {
-        "question": "If 30% of a number is 150, then what is 60% of that number?",
-        "options": ["300", "450", "500", "600"],
-        "answer": "300"
+        "question": "What is the next number in the series: 3, 9, 27, 81, ___?",
+        "options": ["162", "243", "324", "729"],
+        "answer": "243"
       },
       {
-        "question": "If 30% of a number is 150, then what is 60% of that number?",
-        "options": ["300", "450", "500", "600"],
-        "answer": "300"
+        "question": "A shirt costs ₹400 after a 20% discount. What was its original price?",
+        "options": ["₹480", "₹500", "₹520", "₹600"],
+        "answer": "₹500"
       },
       {
-        "question": "What is 15 + 28?",
-        "options": ["33", "43", "53", "41"],
-        "answer": "43"
+        "question": "If 8 workers can build a wall in 12 days, how many days will 6 workers take?",
+        "options": ["14", "16", "18", "20"],
+        "answer": "16"
       },
       {
-        "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
-        "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": "\u20b94"
+        "question": "What is the LCM of 15 and 25?",
+        "options": ["50", "75", "100", "125"],
+        "answer": "75"
       },
       {
-        "question": "What is 15 + 28?",
-        "options": ["33", "43", "53", "41"],
-        "answer": "43"
+        "question": "Simplify: (0.06 × 0.5) + (0.3 × 0.02)",
+        "options": ["0.03", "0.036", "0.042", "0.048"],
+        "answer": "0.036"
       },
       {
-        "question": "What is 15 + 28?",
-        "options": ["33", "43", "53", "41"],
-        "answer": "43"
+        "question": "A number when divided by 7 leaves remainder 4. What is the remainder when twice the number is divided by 7?",
+        "options": ["0", "1", "2", "3"],
+        "answer": "1"
       },
       {
-        "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
-        "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": "\u20b94"
+        "question": "What is 30% of 40% of 500?",
+        "options": ["40", "50", "60", "70"],
+        "answer": "60"
       },
       {
-        "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
-        "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": "\u20b94"
+        "question": "If 4x - 9 = 15, what is x?",
+        "options": ["4", "5", "6", "7"],
+        "answer": "6"
       },
       {
-        "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
-        "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": "\u20b94"
+        "question": "A square has a perimeter of 40 cm. What is its area?",
+        "options": ["64 cm²", "81 cm²", "100 cm²", "121 cm²"],
+        "answer": "100 cm²"
       },
       {
-        "question": "If a dozen eggs cost \u20b948, what is the cost of one egg?",
-        "options": ["\u20b94", "\u20b95", "\u20b93", "\u20b96"],
-        "answer": "\u20b94"
+        "question": "What is the value of 2³ + 3²?",
+        "options": ["13", "15", "17", "19"],
+        "answer": "17"
       },
       {
-        "question": "What is 15 + 28?",
-        "options": ["33", "43", "53", "41"],
-        "answer": "43"
-      }
-    ],
-    "Algebra": [
-      {
-        "question": "Solve for x: 2x + 3 = 11",
-        "options": ["x=4", "x=3", "x=5", "x=6"],
-        "answer": 0
+        "question": "If 25% of a number is 75, what is 40% of the same number?",
+        "options": ["100", "120", "140", "160"],
+        "answer": "120"
       },
       {
-        "question": "Factor: x^2 - 9",
-        "options": ["(x+3)(x-3)", "(x+1)(x-9)", "(x+9)(x-1)", "(x+2)(x-4)"],
-        "answer": 0
+        "question": "A car travels 360 km in 6 hours. What is its speed in m/s?",
+        "options": ["15", "16.67", "18", "20"],
+        "answer": "16.67"
       },
       {
-        "question": "Solve for x: 2x + 3 = 11",
-        "options": ["x=4", "x=3", "x=5", "x=6"],
-        "answer": 0
+        "question": "What is the smallest composite number?",
+        "options": ["1", "2", "3", "4"],
+        "answer": "4"
       },
       {
-        "question": "Solve for x: 2x + 3 = 11",
-        "options": ["x=4", "x=3", "x=5", "x=6"],
-        "answer": 0
+        "question": "If 6 men can complete a work in 18 days, how many men are needed to complete it in 9 days?",
+        "options": ["8", "10", "12", "15"],
+        "answer": "12"
       },
       {
-        "question": "Factor: x^2 - 9",
-        "options": ["(x+3)(x-3)", "(x+1)(x-9)", "(x+9)(x-1)", "(x+2)(x-4)"],
-        "answer": 0
+        "question": "What is the sum of the first 20 natural numbers?",
+        "options": ["190", "200", "210", "220"],
+        "answer": "210"
       },
       {
-        "question": "Solve for x: 2x + 3 = 11",
-        "options": ["x=4", "x=3", "x=5", "x=6"],
-        "answer": 0
+        "question": "A number is decreased by 15% to become 85. What was the original number?",
+        "options": ["95", "100", "105", "110"],
+        "answer": "100"
       },
       {
-        "question": "Solve for x: 2x + 3 = 11",
-        "options": ["x=4", "x=3", "x=5", "x=6"],
-        "answer": 0
+        "question": "What is the cube root of 125?",
+        "options": ["3", "4", "5", "6"],
+        "answer": "5"
       },
       {
-        "question": "Factor: x^2 - 9",
-        "options": ["(x+3)(x-3)", "(x+1)(x-9)", "(x+9)(x-1)", "(x+2)(x-4)"],
-        "answer": 0
+        "question": "If 5x + 12 = 37, what is x?",
+        "options": ["3", "4", "5", "6"],
+        "answer": "5"
       },
       {
-        "question": "Factor: x^2 - 9",
-        "options": ["(x+3)(x-3)", "(x+1)(x-9)", "(x+9)(x-1)", "(x+2)(x-4)"],
-        "answer": 0
+        "question": "What is 1/5 of 1/4 of 200?",
+        "options": ["5", "10", "15", "20"],
+        "answer": "10"
       },
       {
-        "question": "Solve for x: 2x + 3 = 11",
-        "options": ["x=4", "x=3", "x=5", "x=6"],
-        "answer": 0
-      }
-    ],
-    "Geometry": [
-      {
-        "question": "What is the sum of angles in a triangle?",
-        "options": ["180\u00b0", "360\u00b0", "90\u00b0", "270\u00b0"],
-        "answer": 0
+        "question": "A man buys a book for ₹120 and sells it for ₹150. What is his profit percentage?",
+        "options": ["20%", "25%", "30%", "35%"],
+        "answer": "25%"
       },
       {
-        "question": "Area of a circle with radius 7 is?",
-        "options": ["154", "49", "44", "77"],
-        "answer": 0
-      },
-      {
-        "question": "What is the sum of angles in a triangle?",
-        "options": ["180\u00b0", "360\u00b0", "90\u00b0", "270\u00b0"],
-        "answer": 0
-      },
-      {
-        "question": "What is the sum of angles in a triangle?",
-        "options": ["180\u00b0", "360\u00b0", "90\u00b0", "270\u00b0"],
-        "answer": 0
-      },
-      {
-        "question": "What is the sum of angles in a triangle?",
-        "options": ["180\u00b0", "360\u00b0", "90\u00b0", "270\u00b0"],
-        "answer": 0
-      },
-      {
-        "question": "Area of a circle with radius 7 is?",
-        "options": ["154", "49", "44", "77"],
-        "answer": 0
-      },
-      {
-        "question": "What is the sum of angles in a triangle?",
-        "options": ["180\u00b0", "360\u00b0", "90\u00b0", "270\u00b0"],
-        "answer": 0
-      },
-      {
-        "question": "What is the sum of angles in a triangle?",
-        "options": ["180\u00b0", "360\u00b0", "90\u00b0", "270\u00b0"],
-        "answer": 0
-      },
-      {
-        "question": "What is the sum of angles in a triangle?",
-        "options": ["180\u00b0", "360\u00b0", "90\u00b0", "270\u00b0"],
-        "answer": 0
-      },
-      {
-        "question": "What is the sum of angles in a triangle?",
-        "options": ["180\u00b0", "360\u00b0", "90\u00b0", "270\u00b0"],
-        "answer": 0
-      }
-    ],
-    "Data Interpretation": [
-      {
-        "question": "If 50% of a class are boys, what percent are girls?",
-        "options": ["50%", "60%", "40%", "70%"],
-        "answer": 0
-      },
-      {
-        "question": "What does a bar graph represent?",
-        "options": [
-          "Data over time",
-          "Categorical data",
-          "Geometric shapes",
-          "Statistics only"
-        ],
-        "answer": 1
-      },
-      {
-        "question": "What does a bar graph represent?",
-        "options": [
-          "Data over time",
-          "Categorical data",
-          "Geometric shapes",
-          "Statistics only"
-        ],
-        "answer": 1
-      },
-      {
-        "question": "What does a bar graph represent?",
-        "options": [
-          "Data over time",
-          "Categorical data",
-          "Geometric shapes",
-          "Statistics only"
-        ],
-        "answer": 1
-      },
-      {
-        "question": "What does a bar graph represent?",
-        "options": [
-          "Data over time",
-          "Categorical data",
-          "Geometric shapes",
-          "Statistics only"
-        ],
-        "answer": 1
-      },
-      {
-        "question": "What does a bar graph represent?",
-        "options": [
-          "Data over time",
-          "Categorical data",
-          "Geometric shapes",
-          "Statistics only"
-        ],
-        "answer": 1
-      },
-      {
-        "question": "If 50% of a class are boys, what percent are girls?",
-        "options": ["50%", "60%", "40%", "70%"],
-        "answer": 0
-      },
-      {
-        "question": "If 50% of a class are boys, what percent are girls?",
-        "options": ["50%", "60%", "40%", "70%"],
-        "answer": 0
-      },
-      {
-        "question": "If 50% of a class are boys, what percent are girls?",
-        "options": ["50%", "60%", "40%", "70%"],
-        "answer": 0
-      },
-      {
-        "question": "What does a bar graph represent?",
-        "options": [
-          "Data over time",
-          "Categorical data",
-          "Geometric shapes",
-          "Statistics only"
-        ],
-        "answer": 1
-      }
-    ],
-    "Calculus": [
-      {
-        "question": "What is the derivative of sin(x)?",
-        "options": ["cos(x)", "-cos(x)", "-sin(x)", "tan(x)"],
-        "answer": 0
-      },
-      {
-        "question": "What is the integral of 1/x?",
-        "options": ["ln|x| + C", "1/x + C", "x + C", "x^2/2 + C"],
-        "answer": 0
-      },
-      {
-        "question": "What is the derivative of sin(x)?",
-        "options": ["cos(x)", "-cos(x)", "-sin(x)", "tan(x)"],
-        "answer": 0
-      },
-      {
-        "question": "What is the derivative of sin(x)?",
-        "options": ["cos(x)", "-cos(x)", "-sin(x)", "tan(x)"],
-        "answer": 0
-      },
-      {
-        "question": "What is the integral of 1/x?",
-        "options": ["ln|x| + C", "1/x + C", "x + C", "x^2/2 + C"],
-        "answer": 0
-      },
-      {
-        "question": "What is the integral of 1/x?",
-        "options": ["ln|x| + C", "1/x + C", "x + C", "x^2/2 + C"],
-        "answer": 0
-      },
-      {
-        "question": "What is the integral of 1/x?",
-        "options": ["ln|x| + C", "1/x + C", "x + C", "x^2/2 + C"],
-        "answer": 0
-      },
-      {
-        "question": "What is the integral of 1/x?",
-        "options": ["ln|x| + C", "1/x + C", "x + C", "x^2/2 + C"],
-        "answer": 0
-      },
-      {
-        "question": "What is the derivative of sin(x)?",
-        "options": ["cos(x)", "-cos(x)", "-sin(x)", "tan(x)"],
-        "answer": 0
-      },
-      {
-        "question": "What is the integral of 1/x?",
-        "options": ["ln|x| + C", "1/x + C", "x + C", "x^2/2 + C"],
-        "answer": 0
+        "question": "What is the HCF of 24 and 36?",
+        "options": ["6", "8", "12", "18"],
+        "answer": "12"
       }
     ]
+    
   },
   "Reasoning": {
-    "Logical": [
+    "Logical/Analytical": [
       {
-        "question": "If A > B and B > C, then:",
-        "options": ["A > C", "C > A", "A = C", "None"],
-        "answer": 0
+        "question": "If all roses are flowers and some flowers fade quickly, then:",
+        "options": [
+          "All roses fade quickly",
+          "Some roses fade quickly",
+          "No roses fade quickly",
+          "None of these"
+        ],
+        "answer": "Some roses fade quickly"
       },
       {
-        "question": "All roses are flowers. Some flowers fade quickly. Conclusion: Some roses fade quickly?",
-        "options": ["Yes", "No", "Cannot be determined", "None"],
-        "answer": 2
+        "question": "Find the odd one out: Eagle, Sparrow, Bat, Pigeon",
+        "options": ["Eagle", "Sparrow", "Bat", "Pigeon"],
+        "answer": "Bat"
       },
       {
-        "question": "All roses are flowers. Some flowers fade quickly. Conclusion: Some roses fade quickly?",
-        "options": ["Yes", "No", "Cannot be determined", "None"],
-        "answer": 2
+        "question": "If 'TEA' is coded as '26', how is 'COFFEE' coded?",
+        "options": ["38", "42", "44", "46"],
+        "answer": "38"
       },
       {
-        "question": "All roses are flowers. Some flowers fade quickly. Conclusion: Some roses fade quickly?",
-        "options": ["Yes", "No", "Cannot be determined", "None"],
-        "answer": 2
+        "question": "A is B's father. C is B's daughter. How is A related to C?",
+        "options": ["Father", "Grandfather", "Uncle", "Brother"],
+        "answer": "Grandfather"
       },
       {
-        "question": "All roses are flowers. Some flowers fade quickly. Conclusion: Some roses fade quickly?",
-        "options": ["Yes", "No", "Cannot be determined", "None"],
-        "answer": 2
+        "question": "Complete the series: 5, 10, 20, 40, ___",
+        "options": ["60", "70", "80", "90"],
+        "answer": "80"
       },
       {
-        "question": "If A > B and B > C, then:",
-        "options": ["A > C", "C > A", "A = C", "None"],
-        "answer": 0
+        "question": "If 'RED' is coded as '1854', how is 'GREEN' coded?",
+        "options": ["7185514", "718554", "718555", "718551"],
+        "answer": "7185514"
       },
       {
-        "question": "If A > B and B > C, then:",
-        "options": ["A > C", "C > A", "A = C", "None"],
-        "answer": 0
+        "question": "Find the missing number: 2, 5, 10, 17, ___",
+        "options": ["24", "26", "28", "30"],
+        "answer": "26"
       },
       {
-        "question": "All roses are flowers. Some flowers fade quickly. Conclusion: Some roses fade quickly?",
-        "options": ["Yes", "No", "Cannot be determined", "None"],
-        "answer": 2
+        "question": "If 'APPLE' is written as 'ELPPA', how is 'ORANGE' written?",
+        "options": ["EGNARO", "EGNROA", "EGANRO", "EGARNO"],
+        "answer": "EGNARO"
       },
       {
-        "question": "All roses are flowers. Some flowers fade quickly. Conclusion: Some roses fade quickly?",
-        "options": ["Yes", "No", "Cannot be determined", "None"],
-        "answer": 2
+        "question": "A man walks 10 km north, then 6 km west, then 10 km south. How far is he from the starting point?",
+        "options": ["6 km", "8 km", "10 km", "12 km"],
+        "answer": "6 km"
       },
       {
-        "question": "If A > B and B > C, then:",
-        "options": ["A > C", "C > A", "A = C", "None"],
-        "answer": 0
-      }
-    ],
-    "Verbal": [
-      {
-        "question": "Antonym of 'generous'?",
-        "options": ["Stingy", "Kind", "Giving", "Gentle"],
-        "answer": 0
+        "question": "Find the odd one out: 16, 36, 64, 81, 100",
+        "options": ["16", "36", "81", "100"],
+        "answer": "81"
       },
       {
-        "question": "Antonym of 'generous'?",
-        "options": ["Stingy", "Kind", "Giving", "Gentle"],
-        "answer": 0
+        "question": "If 'A' = 1, 'B' = 2, ..., 'Z' = 26, what is the sum of the letters in 'DOG'?",
+        "options": ["26", "27", "28", "29"],
+        "answer": "26"
       },
       {
-        "question": "Choose the correct synonym for 'abundant'",
-        "options": ["Plenty", "Scarce", "Empty", "Poor"],
-        "answer": 0
+        "question": "Which number replaces the '?': 1, 4, 9, 16, ?",
+        "options": ["20", "23", "25", "28"],
+        "answer": "25"
       },
       {
-        "question": "Choose the correct synonym for 'abundant'",
-        "options": ["Plenty", "Scarce", "Empty", "Poor"],
-        "answer": 0
+        "question": "If 'DAY' is to 'NIGHT', then 'WHITE' is to:",
+        "options": ["BLACK", "DARK", "LIGHT", "BRIGHT"],
+        "answer": "BLACK"
       },
       {
-        "question": "Antonym of 'generous'?",
-        "options": ["Stingy", "Kind", "Giving", "Gentle"],
-        "answer": 0
+        "question": "Find the missing letter: B, E, H, K, ___",
+        "options": ["M", "N", "O", "P"],
+        "answer": "N"
       },
       {
-        "question": "Antonym of 'generous'?",
-        "options": ["Stingy", "Kind", "Giving", "Gentle"],
-        "answer": 0
+        "question": "If 'MARCH' is written as 'HCRAM', how is 'APRIL' written?",
+        "options": ["LIRPA", "LIRAP", "LIPRA", "LARPI"],
+        "answer": "LIRPA"
       },
       {
-        "question": "Antonym of 'generous'?",
-        "options": ["Stingy", "Kind", "Giving", "Gentle"],
-        "answer": 0
+        "question": "Which is the next figure in the pattern: ◯, △, □, ◯, △, ___",
+        "options": ["◯", "△", "□", "☆"],
+        "answer": "□"
       },
       {
-        "question": "Choose the correct synonym for 'abundant'",
-        "options": ["Plenty", "Scarce", "Empty", "Poor"],
-        "answer": 0
+        "question": "If 'DELHI' is coded as '45389', how is 'MUMBAI' coded?",
+        "options": ["132129", "132139", "132149", "132159"],
+        "answer": "132129"
       },
       {
-        "question": "Choose the correct synonym for 'abundant'",
-        "options": ["Plenty", "Scarce", "Empty", "Poor"],
-        "answer": 0
+        "question": "Find the odd one out: Mercury, Venus, Earth, Mars, Jupiter",
+        "options": ["Mercury", "Venus", "Earth", "Jupiter"],
+        "answer": "Earth"
       },
       {
-        "question": "Choose the correct synonym for 'abundant'",
-        "options": ["Plenty", "Scarce", "Empty", "Poor"],
-        "answer": 0
-      }
-    ],
-    "Non-Verbal": [
-      {
-        "question": "Identify the next figure in the sequence",
-        "options": ["Option A", "Option B", "Option C", "Option D"],
-        "answer": 1
+        "question": "If 'SISTER' is to 'BROTHER', then 'MOTHER' is to:",
+        "options": ["FATHER", "SON", "DAUGHTER", "UNCLE"],
+        "answer": "FATHER"
       },
       {
-        "question": "Identify the next figure in the sequence",
-        "options": ["Option A", "Option B", "Option C", "Option D"],
-        "answer": 1
+        "question": "Complete the analogy: 5 : 25 :: 7 : ___",
+        "options": ["35", "42", "49", "56"],
+        "answer": "49"
       },
       {
-        "question": "Find the odd one out",
-        "options": ["Circle", "Square", "Triangle", "Apple"],
-        "answer": 3
+        "question": "If 'CLOCK' is to 'TIME', then 'COMPASS' is to:",
+        "options": ["DIRECTION", "MAGNET", "NORTH", "NEEDLE"],
+        "answer": "DIRECTION"
       },
       {
-        "question": "Find the odd one out",
-        "options": ["Circle", "Square", "Triangle", "Apple"],
-        "answer": 3
+        "question": "Find the missing number: 1, 3, 7, 15, ___",
+        "options": ["23", "27", "31", "35"],
+        "answer": "31"
       },
       {
-        "question": "Find the odd one out",
-        "options": ["Circle", "Square", "Triangle", "Apple"],
-        "answer": 3
+        "question": "If 'JANUARY' is written as 'FEBRUARY', how is 'AUGUST' written?",
+        "options": ["SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"],
+        "answer": "SEPTEMBER"
       },
       {
-        "question": "Identify the next figure in the sequence",
-        "options": ["Option A", "Option B", "Option C", "Option D"],
-        "answer": 1
+        "question": "Which word does not belong: Apple, Banana, Carrot, Mango",
+        "options": ["Apple", "Banana", "Carrot", "Mango"],
+        "answer": "Carrot"
       },
       {
-        "question": "Find the odd one out",
-        "options": ["Circle", "Square", "Triangle", "Apple"],
-        "answer": 3
-      },
-      {
-        "question": "Find the odd one out",
-        "options": ["Circle", "Square", "Triangle", "Apple"],
-        "answer": 3
-      },
-      {
-        "question": "Identify the next figure in the sequence",
-        "options": ["Option A", "Option B", "Option C", "Option D"],
-        "answer": 1
-      },
-      {
-        "question": "Identify the next figure in the sequence",
-        "options": ["Option A", "Option B", "Option C", "Option D"],
-        "answer": 1
-      }
-    ],
-    "Analytical": [
-      {
-        "question": "If John is older than Mary and Mary is older than Tom, who is oldest?",
-        "options": ["John", "Tom", "Mary", "Cannot say"],
-        "answer": 0
-      },
-      {
-        "question": "Which number comes next: 2, 4, 8, 16, ?",
-        "options": ["18", "32", "20", "24"],
-        "answer": 1
-      },
-      {
-        "question": "If John is older than Mary and Mary is older than Tom, who is oldest?",
-        "options": ["John", "Tom", "Mary", "Cannot say"],
-        "answer": 0
-      },
-      {
-        "question": "Which number comes next: 2, 4, 8, 16, ?",
-        "options": ["18", "32", "20", "24"],
-        "answer": 1
-      },
-      {
-        "question": "Which number comes next: 2, 4, 8, 16, ?",
-        "options": ["18", "32", "20", "24"],
-        "answer": 1
-      },
-      {
-        "question": "If John is older than Mary and Mary is older than Tom, who is oldest?",
-        "options": ["John", "Tom", "Mary", "Cannot say"],
-        "answer": 0
-      },
-      {
-        "question": "Which number comes next: 2, 4, 8, 16, ?",
-        "options": ["18", "32", "20", "24"],
-        "answer": 1
-      },
-      {
-        "question": "If John is older than Mary and Mary is older than Tom, who is oldest?",
-        "options": ["John", "Tom", "Mary", "Cannot say"],
-        "answer": 0
-      },
-      {
-        "question": "If John is older than Mary and Mary is older than Tom, who is oldest?",
-        "options": ["John", "Tom", "Mary", "Cannot say"],
-        "answer": 0
-      },
-      {
-        "question": "If John is older than Mary and Mary is older than Tom, who is oldest?",
-        "options": ["John", "Tom", "Mary", "Cannot say"],
-        "answer": 0
-      }
-    ],
-    "Puzzles": [
-      {
-        "question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
-        "options": ["M", "E", "T", "O"],
-        "answer": 0
-      },
-      {
-        "question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
-        "options": ["M", "E", "T", "O"],
-        "answer": 0
-      },
-      {
-        "question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
-        "options": ["M", "E", "T", "O"],
-        "answer": 0
-      },
-      {
-        "question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
-        "options": ["M", "E", "T", "O"],
-        "answer": 0
-      },
-      {
-        "question": "I speak without a mouth and hear without ears. What am I?",
-        "options": ["Echo", "Shadow", "Wind", "Whistle"],
-        "answer": 0
-      },
-      {
-        "question": "I speak without a mouth and hear without ears. What am I?",
-        "options": ["Echo", "Shadow", "Wind", "Whistle"],
-        "answer": 0
-      },
-      {
-        "question": "I speak without a mouth and hear without ears. What am I?",
-        "options": ["Echo", "Shadow", "Wind", "Whistle"],
-        "answer": 0
-      },
-      {
-        "question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
-        "options": ["M", "E", "T", "O"],
-        "answer": 0
-      },
-      {
-        "question": "What comes once in a minute, twice in a moment, but never in a thousand years?",
-        "options": ["M", "E", "T", "O"],
-        "answer": 0
-      },
-      {
-        "question": "I speak without a mouth and hear without ears. What am I?",
-        "options": ["Echo", "Shadow", "Wind", "Whistle"],
-        "answer": 0
+        "question": "If 'PALM' is to 'TREE', then 'FISH' is to:",
+        "options": ["OCEAN", "WATER", "ANIMAL", "BIRD"],
+        "answer": "ANIMAL"
       }
     ]
   }
