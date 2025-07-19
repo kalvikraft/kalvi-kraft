@@ -267,5 +267,53 @@
         localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
       });
     </script>
+
+    <!-- Cookie Consent -->
+    <div
+      id="cookie-consent"
+      style="
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #222;
+        color: #fff;
+        padding: 16px;
+        text-align: center;
+        font-size: 14px;
+        z-index: 9999;
+      "
+    >
+      We use cookies to improve your experience. By using our site, you agree to
+      our
+      <a href="privacy.html" style="color: #4ecdc4">Privacy Policy</a>.
+      <button
+        onclick="acceptCookies()"
+        style="
+          background: #4ecdc4;
+          border: none;
+          padding: 8px 16px;
+          margin-left: 12px;
+          color: #000;
+          font-weight: bold;
+          cursor: pointer;
+          border-radius: 5px;
+        "
+      >
+        Accept
+      </button>
+    </div>
+
+    <script>
+      function acceptCookies() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        document.getElementById('cookie-consent').style.display = 'none';
+      }
+
+      window.onload = function () {
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+          document.getElementById('cookie-consent').style.display = 'none';
+        }
+      };
+    </script>
   </body>
 </html>
