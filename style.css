@@ -630,14 +630,20 @@ footer a:hover {
 }
 
 /* === Footer Bar === */
+.footer-bar.hide {
+  transform: translateY(100px); /* slide down out of view */
+  opacity: 0;
+}
 .footer-bar {
   position: fixed;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  justify-content: center;
   display: flex;
   gap: 12px;
   z-index: 9999;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 .footer-bar a {
   display: flex;
