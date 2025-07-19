@@ -55,7 +55,6 @@ body {
   box-sizing: border-box;
 }
 
-
 /* === Title === */
 h1 {
   text-align: center;
@@ -678,7 +677,8 @@ footer a:hover {
 /* === Responsive === */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column;
   }
   .ads,
   .sidebar,
@@ -690,7 +690,7 @@ footer a:hover {
     order: 2;
   }
   .ads {
-    order: 3; 
+    order: 3;
     padding: 10px 15px;
   }
   .content {
@@ -755,7 +755,6 @@ footer a:hover {
   visibility: visible;
   opacity: 1;
 }
-
 
 /* === Definition cards === */
 .definition-card {
