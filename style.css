@@ -13,6 +13,25 @@
 }
 
 /* === Base Styles === */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.content {
+  width: 60%;
+  padding: 25px;
+  background-color: var(--bg-content);
+  border-radius: 15px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
 .content p {
   text-align: justify;
 }
@@ -36,14 +55,6 @@ body {
   box-sizing: border-box;
 }
 
-.content {
-  width: 60%;
-  padding: 25px;
-  background-color: var(--bg-content);
-  border-radius: 15px;
-  margin: 20px 0;
-  box-shadow: 0 4px 12px var(--shadow);
-}
 
 /* === Title === */
 h1 {
