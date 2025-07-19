@@ -315,5 +315,26 @@
         }
       };
     </script>
+
+    <!-- Auto Scroll -->
+    <script>
+      const footerBar = document.querySelector('.footer-bar');
+      let lastScrollTop = 0;
+
+      window.addEventListener('scroll', () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+          // Scrolling down
+          footerBar.classList.add('hide');
+        } else {
+          // Scrolling up
+          footerBar.classList.remove('hide');
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+    </script>
   </body>
 </html>
