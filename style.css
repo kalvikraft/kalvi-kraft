@@ -767,6 +767,24 @@ footer a:hover {
   opacity: 0;
 }
 
+/*== Privacy Policy and Terms ===*/
+.privacy-content {
+  display: flex;
+  flex-direction: column; /* stack items top to bottom */
+  gap: 1.5rem; /* space between sections */
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.terms-content {
+  display: flex;
+  flex-direction: column; /* stack items top to bottom */
+  gap: 1.5rem; /* space between sections */
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 /* === Dark Mode === */
 body.dark-mode {
   --primary: #90caf9;
