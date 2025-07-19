@@ -49,7 +49,7 @@
   },
   {
     "title": "Dense of \\(\\mathbb{Q}\\) in \\(\\mathbb{R}\\)",
-    "content": "Given \\(a,b \\in \\mathbb{R}\\) with \\(a<b\\) then there exists \\(x \\in \\mathbb{Q}\\) such that \\(a < x < b\\)."
+    "content": "Given \\(x,y \\in \\mathbb{R}\\) with \\(x<y\\) then there exists \\(q \\in \\mathbb{Q}\\) such that \\(x < q < y\\)."
   },
   {
     "title": "Existance of \\(n^{th}\\) root",
