@@ -1,26 +1,52 @@
 [
   {
     "university": "Bharathidasan University",
-    "month_year": "April 2025",
-    "subject": "Differential Calculus and Trigonometry",
+    "subject": "April 2025-Astronomy",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Astronomy.pdf"
+  },
+  {
+    "university": "Bharathidasan University",
+    "subject": "April 2025-Complex Analysis",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Complex%20Analysis.pdf"
+  },
+  {
+    "university": "Bharathidasan University",
+    "subject": "April 2025-Differential Calculus and Trigonometry",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Differential%20Calculus%20and%20Trigonometry.pdf"
   },
   {
     "university": "Bharathidasan University",
-    "month_year": "April 2025",
-    "subject": "Integral Calculus and Fourier Series",
+    "subject": "April 2025-Dynamics",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Dynamics.pdf"
+  },
+  {
+    "university": "Bharathidasan University",
+    "subject": "April 2025-Graph Theory",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Graph%20Theory.pdf"
+  },
+  {
+    "university": "Bharathidasan University",
+    "subject": "April 2025-Integral Calculus and Fourier Series",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Integral%20Calculus%20and%20Fourier%20Series.pdf"
   },
   {
     "university": "Bharathidasan University",
-    "month_year": "November 2020",
-    "subject": "Professional English for Physical Sciences I",
+    "subject": "April 2025-Linear Algebra",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Linear%20Algebra.pdf"
+  },
+  {
+    "university": "Bharathidasan University",
+    "subject": "April 2025-Mathematics for Competitive Examinations",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Mathematics%20for%20Competitive%20Examinations.pdf"
+  },
+  {
+    "university": "Bharathidasan University",
+    "subject": "November 2020-Professional English for Physical Sciences I",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-November%202020-Professional%20English%20for%20Physical%20Sciences%20I.pdf"
   },
   {
     "university": "Bharathidasan University",
-    "month_year": "November 2020",
-    "subject": "Soft Skills Development",
+    "subject": "November 2020-Soft Skills Development",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-November%202020-Soft%20Skills%20Development.pdf"
   }
 ]
