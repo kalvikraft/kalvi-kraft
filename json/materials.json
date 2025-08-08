@@ -6,6 +6,11 @@
   },
   {
     "university": "Common",
+    "subject": "Introduction to SciLab",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/study-materials/Common-Introduction%20to%20SciLab.pdf"
+  },
+  {
+    "university": "Common",
     "subject": "Unlocking Data Insights - Power BI",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/study-materials/Common-Unlocking%20Data%20Insights%20-%20Power%20BI.pdf"
   }
