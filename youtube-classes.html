@@ -120,7 +120,184 @@
     </div>
   </footer>
 
-  <!-- Reuse existing scripts from home page for notifications, leaderboard, dark mode, cookie consent -->
-  <script src="scripts.js"></script>
+  
+    <!-- Notifications Script -->
+    <script>
+      fetch('json/notifications.json')
+        .then((response) => response.json())
+        .then((data) => {
+          const list = document.getElementById('notification-list');
+          list.innerHTML = '';
+          data.slice(0, 5).forEach((item) => {
+            const li = document.createElement('li');
+            if (item.link) {
+              li.innerHTML = `<a href="${item.link}" target="_blank">${item.message}</a>`;
+            } else {
+              li.textContent = item.message;
+            }
+            list.appendChild(li);
+          });
+
+          // Auto scroll the list
+          let index = 0;
+          setInterval(() => {
+            const items = document.querySelectorAll('#notification-list li');
+            items.forEach((li, i) => {
+              li.style.display = i === index ? 'block' : 'none';
+            });
+            index = (index + 1) % items.length;
+          }, 2500);
+        })
+        .catch(() => {
+          document.getElementById('notification-list').innerHTML =
+            '<li>Failed to load notifications.</li>';
+        });
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: 'AIzaSyAGrQ2f94bl5bbQzqTM_fU0xwnRCusQN14',
+        authDomain: 'kalvi-kraft.firebaseapp.com',
+        databaseURL:
+          'https://kalvi-kraft-default-rtdb.asia-southeast1.firebasedatabase.app',
+        projectId: 'kalvi-kraft',
+        storageBucket: 'kalvi-kraft.appspot.com',
+        messagingSenderId: '535767835272',
+        appId: '1:535767835272:web:56d04e7c7d6f611194753d',
+        measurementId: 'G-S1YJCR79MN',
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      function loadLeaderboard() {
+        firebase
+          .database()
+          .ref('leaderboard')
+          .once('value')
+          .then((snapshot) => {
+            const scores = [];
+            snapshot.forEach((child) => {
+              scores.push(child.val());
+            });
+            scores.sort((a, b) => b.score - a.score);
+            const list = document.getElementById('leaderboard-list');
+            list.innerHTML = '';
+            scores.slice(0, 10).forEach((item, index) => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `<td>${index + 1}</td><td>${item.name}</td><td>${
+                item.score
+              }</td>`;
+              list.appendChild(tr);
+            });
+          })
+          .catch(() => {
+            document.getElementById('leaderboard-list').innerHTML =
+              '<tr><td colspan="3">⚠️ Failed to load leaderboard</td></tr>';
+          });
+      }
+
+      loadLeaderboard();
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-S1YJCR79MN"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-S1YJCR79MN');
+    </script>
+
+    <!-- Dark Mode -->
+    <script>
+      const toggleBtn = document.getElementById('toggleMode');
+      const body = document.body;
+
+      // Load saved preference
+      if (localStorage.getItem('dark-mode') === 'true') {
+        body.classList.add('dark-mode');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
+      });
+    </script>
+
+    <!-- Cookie Consent -->
+    <div
+      id="cookie-consent"
+      style="
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #222;
+        color: #fff;
+        padding: 16px;
+        text-align: center;
+        font-size: 14px;
+        z-index: 9999;
+      "
+    >
+      We use cookies to improve your experience. By using our site, you agree to
+      our
+      <a href="privacy.html" style="color: #4ecdc4">Privacy Policy</a>.
+      <button
+        onclick="acceptCookies()"
+        style="
+          background: #4ecdc4;
+          border: none;
+          padding: 8px 16px;
+          margin-left: 12px;
+          color: #000;
+          font-weight: bold;
+          cursor: pointer;
+          border-radius: 5px;
+        "
+      >
+        Accept
+      </button>
+    </div>
+
+    <script>
+      function acceptCookies() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        document.getElementById('cookie-consent').style.display = 'none';
+      }
+
+      window.onload = function () {
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+          document.getElementById('cookie-consent').style.display = 'none';
+        }
+      };
+    </script>
+
+    <!-- Auto Scroll -->
+    <script>
+      const footerBar = document.querySelector('.footer-bar');
+      let lastScrollTop = 0;
+
+      window.addEventListener('scroll', () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+          // Scrolling down
+          footerBar.classList.add('hide');
+        } else {
+          // Scrolling up
+          footerBar.classList.remove('hide');
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+    </script>
 </body>
 </html>
