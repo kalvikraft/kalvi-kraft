@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalvi Kraft – YouTube Classes</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <meta name="description" content="Watch Kalvi Kraft YouTube classes and enhance your learning experience.">
+  <meta name="keywords" content="math, YouTube classes, education, video lectures">
+  <meta name="author" content="Kalvi Kraft">
+  <style>
+    /* Material design style for video cards */
+    .video-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .video-card {
+      background: var(--card-bg, #fff);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .video-card iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+    }
+    .video-card .video-title {
+      padding: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Ad Column -->
+    <aside class="ads">
+      <div class="ad">
+        <!-- Ad Slot 1 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6602675729982728" data-ad-slot="9131927510" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      <div class="ad">
+        <!-- Ad Slot 2 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6602675729982728" data-ad-slot="2215165376" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <h1>📺 Kalvi Kraft YouTube Classes</h1>
+      <nav class="nav">
+        <a href="index.html"><img src="assets/logo.png" alt="Kalvi Kraft Logo" class="logo" style="height:15px"/></a>
+        <a href="materials.html">Study Materials</a>
+        <a href="old-qps.html">Old Question Papers</a>
+        <a href="youtube-classes.html" class="active">YouTube Classes</a>
+        <a href="quiz.html">Aptitude & Reasoning Quiz</a>
+        <a href="definitions.html">Definitions Treasures</a>
+      </nav>
+
+      <!-- Video Section -->
+      <section class="video-container">
+        <!-- Video Card 1 -->
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/watch?v=6ld_wYrB7MI&list=PLNq81H0M4s3hdCgSpAEBTLDqVkDv3bPzx" allowfullscreen></iframe>
+          <div class="video-title">Introduction to MATLAB</div>
+        </div>
+        <!-- Video Card 2 -->
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/watch?v=Jlyb-vkFVss&list=PLNq81H0M4s3hdCgSpAEBTLDqVkDv3bPzx&index=3" allowfullscreen></iframe>
+          <div class="video-title">Introduction to LATEX</div>
+        </div>
+        <!-- Add more videos -->
+      </section>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar">
+      <div class="notifications">
+        <ul id="notification-list">
+          <li>Loading notifications...</li>
+        </ul>
+      </div>
+      <div class="leaderboard">
+        <table id="leaderboard-table">
+          <thead>
+            <tr><th>Rank</th><th>Name</th><th>Score</th></tr>
+          </thead>
+          <tbody id="leaderboard-list"><tr><td colspan="3">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-bar">
+      <a href="https://youtube.com/@kalvikraft" target="_blank" class="youtube-bar">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="yt-logo"/>
+        <span>Kalvi Kraft YouTube</span>
+      </a>
+      <button id="toggleMode" class="mode-toggle ripple">🌓</button>
+      <a href="contact.html" class="contact-bar">
+        <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Contact" class="contact-icon"/>
+        <span>Contact Us</span>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Reuse existing scripts from home page for notifications, leaderboard, dark mode, cookie consent -->
+  <script src="scripts.js"></script>
+</body>
+</html>
