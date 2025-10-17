@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      defer
+    ></script>
+    <title>Games – Kalvi Kraft</title>
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <meta
+      name="description"
+      content="Play fun and educational games on Kalvi Kraft – including Kalvi Kraft Hopper and Memory Number Game."
+    />
+    <meta
+      name="keywords"
+      content="kalvi kraft, math games, memory game, hopper, educational games"
+    />
+    <meta name="author" content="Kalvi Kraft" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left Ad Column -->
+      <aside class="ads">
+        <div class="ad">
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728"
+            crossorigin="anonymous"
+          ></script>
+          <!-- kalvikraft game -->
+          <ins
+            class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-6602675729982728"
+            data-ad-slot="5336997905"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+        <h1>🎮 Kalvi Kraft Games</h1>
+        <nav class="nav">
+          <a href="index.html">
+            <img
+              src="assets/logo.png"
+              alt="Kalvi Kraft Logo"
+              class="logo"
+              style="height: 15px"
+            />
+          </a>
+          <a href="materials.html">Study Materials</a>
+          <a href="old-qps.html">Old Question Papers</a>
+          <a href="youtube-classes.html">YouTube Classes</a>
+          <a href="quiz.html">Aptitude & Reasoning Quiz</a>
+          <a href="definitions.html">Definitions Treasures</a>
+          <a href="game.html" class="active">Games</a>
+        </nav>
+
+        <section class="about-section">
+          <h2>🕹️ Available Games</h2>
+          <div class="game-list" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+            <a
+              href="hopper.html"
+              class="game-card"
+              style="
+                display: block;
+                background: linear-gradient(135deg, #f6d365, #fda085);
+                padding: 20px;
+                border-radius: 12px;
+                color: #000;
+                text-align: center;
+                text-decoration: none;
+                font-weight: 600;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+                transition: transform 0.2s ease;
+                width: 200px;
+              "
+              onmouseover="this.style.transform='scale(1.05)'"
+              onmouseout="this.style.transform='scale(1)'"
+            >
+              🐸 Kalvi Kraft Hopper
+            </a>
+
+            <a
+              href="memory.html"
+              class="game-card"
+              style="
+                display: block;
+                background: linear-gradient(135deg, #74ebd5, #acb6e5);
+                padding: 20px;
+                border-radius: 12px;
+                color: #000;
+                text-align: center;
+                text-decoration: none;
+                font-weight: 600;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+                transition: transform 0.2s ease;
+                width: 200px;
+              "
+              onmouseover="this.style.transform='scale(1.05)'"
+              onmouseout="this.style.transform='scale(1)'"
+            >
+              🧠 Memory Number Game
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <!-- Right Ad Column -->
+      <aside class="ads">
+        <div class="ad">
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728"
+            crossorigin="anonymous"
+          ></script>
+          <!-- kalvikraft game -->
+          <ins
+            class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-6602675729982728"
+            data-ad-slot="5336997905"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-bar">
+        <a
+          href="https://youtube.com/@kalvikraft"
+          target="_blank"
+          class="youtube-bar"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg"
+            alt="YouTube"
+            class="yt-logo"
+          />
+          <span>Kalvi Kraft YouTube</span>
+        </a>
+
+        <button id="toggleMode" class="mode-toggle ripple">🌓</button>
+
+        <a href="contact.html" class="contact-bar">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/561/561127.png"
+            alt="Contact"
+            class="contact-icon"
+          />
+          <span>Contact Us</span>
+        </a>
+      </div>
+    </footer>
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-S1YJCR79MN"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-S1YJCR79MN');
+    </script>
+
+    <!-- Dark Mode -->
+    <script>
+      const toggleBtn = document.getElementById('toggleMode');
+      const body = document.body;
+
+      if (localStorage.getItem('dark-mode') === 'true') {
+        body.classList.add('dark-mode');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
+      });
+    </script>
+
+    <!-- Cookie Consent -->
+    <div
+      id="cookie-consent"
+      style="
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #222;
+        color: #fff;
+        padding: 16px;
+        text-align: center;
+        font-size: 14px;
+        z-index: 9999;
+      "
+    >
+      We use cookies to improve your experience. By using our site, you agree to
+      our
+      <a href="privacy.html" style="color: #4ecdc4">Privacy Policy</a>.
+      <button
+        onclick="acceptCookies()"
+        style="
+          background: #4ecdc4;
+          border: none;
+          padding: 8px 16px;
+          margin-left: 12px;
+          color: #000;
+          font-weight: bold;
+          cursor: pointer;
+          border-radius: 5px;
+        "
+      >
+        Accept
+      </button>
+    </div>
+
+    <script>
+      function acceptCookies() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        document.getElementById('cookie-consent').style.display = 'none';
+      }
+
+      window.onload = function () {
+        if (localStorage.getItem('cookiesAccepted') === 'true') {
+          document.getElementById('cookie-consent').style.display = 'none';
+        }
+      };
+    </script>
+
+    <!-- Footer Auto Hide -->
+    <script>
+      const footerBar = document.querySelector('.footer-bar');
+      let lastScrollTop = 0;
+      window.addEventListener('scroll', () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop) {
+          footerBar.classList.add('hide');
+        } else {
+          footerBar.classList.remove('hide');
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+    </script>
+  </body>
+</html>
