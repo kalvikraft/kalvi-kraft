@@ -66,11 +66,12 @@
         <div class="hudRow">
           <div style="display:flex;gap:8px;align-items:center">
             <div class="stat">Score: <span id="score">0</span></div>
-            <!-- Top score box removed as requested -->
+            <div class="stat">High: <span id="high">0</span></div>
             <div class="stat">Combo: <span id="combo">x1</span></div>
           </div>
           <div class="controls">
             <button id="muteBtn">🔊</button>
+            <button id="fsBtn" title="Fullscreen">⛶</button>
             <button id="restartBtn" class="primary">Restart</button>
           </div>
         </div>
@@ -83,11 +84,9 @@
 
         <div style="display:flex;gap:12px;width:100%;align-items:flex-start">
           <div style="flex:1">
-            <p class="muted">How to play: Tap / Click / Space to jump. You have up to <strong>20 jumps</strong> in midair — each jump is shorter than the previous. You cannot jump past the top. Avoid obstacles and rack up combos.</p>
-            <p class="footerNote">Scores are local only (not saved to the database).</p>
+            <p class="footerNote">Scores are local only (saved on your browser).</p>
           </div>
           <div style="width:220px">
-            <!-- Removed Top Scores box per request -->
             <div style="background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;color:var(--muted)">
               <h4 style="margin:6px 0">Notifications</h4>
               <ul id="notification-list"><li>Loading...</li></ul>
@@ -140,11 +139,13 @@
 
     // DOM refs
     const scoreEl = document.getElementById('score');
+    const highEl = document.getElementById('high');
     const comboEl = document.getElementById('combo');
     const overlay = document.getElementById('overlay');
     const hudMsg = document.getElementById('hudMsg');
     const restartBtn = document.getElementById('restartBtn');
     const muteBtn = document.getElementById('muteBtn');
+    const fsBtn = document.getElementById('fsBtn');
 
     // audio helper
     let muted = localStorage.getItem('kk_muted') === 'true';
@@ -164,6 +165,34 @@
       }catch(e){}
     }
 
+    // Local high score
+    let high = parseInt(localStorage.getItem('kk_hs')||'0',10) || 0;
+    highEl.textContent = high;
+
+    // Fullscreen helper
+    function updateFsButton(){
+      const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement);
+      fsBtn.textContent = isFs ? '⤡' : '⛶';
+      fsBtn.title = isFs ? 'Exit Fullscreen (F)' : 'Fullscreen (F)';
+    }
+    fsBtn.addEventListener('click', async ()=>{
+      try{
+        if(!document.fullscreenElement){
+          await document.documentElement.requestFullscreen?.() ?? document.documentElement.webkitRequestFullscreen?.();
+        } else {
+          await document.exitFullscreen?.() ?? document.webkitExitFullscreen?.();
+        }
+      }catch(e){}
+    });
+    document.addEventListener('fullscreenchange', updateFsButton);
+    document.addEventListener('webkitfullscreenchange', updateFsButton);
+    // toggle via F key
+    window.addEventListener('keydown', (e)=>{
+      if(e.code === 'KeyF'){ e.preventDefault(); fsBtn.click(); }
+      if(e.code === 'KeyM'){ e.preventDefault(); muteBtn.click(); }
+    });
+    updateFsButton();
+
     // game state
     let running = true, gameOver = false;
     let score = 0;
@@ -174,11 +203,10 @@
     const gravity = 0.75;               // easier feel
     const TOP_LIMIT = 48;
 
-    // JUMP CONFIG: 20 jumps, first jump = 6, values decrease down to MIN_JUMP
+    // JUMP CONFIG: 20 jumps (generated)
     const MAX_JUMPS = 20;
     const FIRST_JUMP = 12;
     const MIN_JUMP = 0.6;
-    // generate decreasing jump strengths (linear)
     const jumpStrength = (function(){
       const arr = [];
       for(let i=0;i<MAX_JUMPS;i++){
@@ -190,8 +218,8 @@
 
     // obstacles
     let obstacles = [];
-    let spawnTimer = 100;
-    const baseSpeed = 2.0;
+    let spawnTimer = 80;                // slightly shorter initial spawn so gameplay is active
+    const baseSpeed = 2.6;              // increased base speed (a little faster)
     let speed = baseSpeed;
     let frames = 0;
 
@@ -217,9 +245,10 @@
     }
 
     function spawn(){
-      const h = Math.floor(rand(36,100));
+      // Increased obstacle height: taller obstacles (range raised)
+      const h = Math.floor(rand(80,160));  // taller obstacles
       const type = Math.random() < 0.62 ? 'bench' : 'books';
-      const w = type === 'bench' ? Math.floor(rand(56,80)) : Math.floor(rand(40,52));
+      const w = type === 'bench' ? Math.floor(rand(56,88)) : Math.floor(rand(40,60));
       obstacles.push({ x: W + 40, w, h, type, passed:false });
     }
 
@@ -250,6 +279,8 @@
 
     // restart
     function restart(){
+      // check and persist high before resetting (in case user clicks restart mid-run)
+      saveHighIfNeeded();
       score = 0;
       combo = 1; comboTimer = 0;
       obstacles = [];
@@ -262,8 +293,8 @@
       gameOver = false;
       running = true;
       frames = 0;
-      spawnTimer = 100;
-      hudMsg.textContent = 'Ready! Click / Space to play';
+      spawnTimer = 80;
+      hudMsg.textContent = '';
     }
     restartBtn.addEventListener('click', restart);
     muteBtn.addEventListener('click', ()=>{
@@ -294,24 +325,41 @@
     window.addEventListener('keydown', e=>{ if(e.code==='Space' || e.code==='ArrowUp'){ e.preventDefault(); doJump(); }});
     canvas.addEventListener('pointerdown', doJump);
 
+    // save high if needed
+    function saveHighIfNeeded(){
+      const sc = Math.floor(score);
+      if(sc > high){
+        high = sc;
+        localStorage.setItem('kk_hs', high);
+        highEl.textContent = high;
+        // show message briefly
+        hudMsg.textContent = 'New High Score! ' + high;
+        setTimeout(()=>{ if(!gameOver) hudMsg.textContent = ''; }, 1600);
+      }
+    }
+
     function handleCollisionHit(){
       gameOver = true;
       running = false;
       playTone(120,240,0.14);
       createExplosion(player.x, player.y, 26);
-      hudMsg.textContent = 'Game Over - click canvas to restart (scores not saved)';
+      // check and save high
+      saveHighIfNeeded();
+      hudMsg.textContent = 'Game Over - click canvas to restart';
     }
 
     // update
     function update(){
       if(!running || gameOver) return;
       frames++;
-      speed = baseSpeed + Math.min(frames / 2400, 3.0);
 
-      spawnTimer -= 0.7 + Math.min(score/220, 1.0);
+      // slightly faster ramp so game speeds up a bit more
+      speed = baseSpeed + Math.min(frames / 1800, 4.0);
+
+      spawnTimer -= 0.8 + Math.min(score/220, 1.2);
       if(spawnTimer <= 0){
         spawn();
-        spawnTimer = Math.max(72, Math.floor(rand(80 - Math.min(frames/900, 30), 160 - Math.min(frames/900,40))));
+        spawnTimer = Math.max(60, Math.floor(rand(70 - Math.min(frames/900, 30), 150 - Math.min(frames/900,40))));
       }
 
       // physics
@@ -478,7 +526,7 @@
     fitCanvas();
 
     // HUD init
-    hudMsg.textContent = 'Tip: 20 jumps (first = 6). Lower difficulty enabled.';
+    hudMsg.textContent = '';
     // pause on tab hide
     document.addEventListener('visibilitychange', ()=>{ if(document.hidden) running = false; else if(!gameOver) running = true; });
 
