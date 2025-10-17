@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Memory Number Game</title>
+
+  <style>
+    :root{
+      --bg1:#74ebd5;
+      --bg2:#acb6e5;
+      --card-front:#4b6cb7;
+      --card-back:#ffffff;
+      --matched:#8fd3f4;
+      --text:#222;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Inter, "Poppins", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:28px 18px 40px;
+      box-sizing:border-box;
+    }
+
+    header{
+      text-align:center;
+      margin-bottom:18px;
+    }
+    h1{ margin:0; font-size:28px; display:flex; gap:10px; align-items:center; justify-content:center; }
+    p.sub{ margin:6px 0 0; color:rgba(0,0,0,0.45); }
+
+    .controls{
+      margin:14px 0 20px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .stat{
+      background: rgba(255,255,255,0.25);
+      padding:8px 12px;
+      border-radius:999px;
+      backdrop-filter: blur(4px);
+      font-weight:600;
+    }
+
+    button.btn{
+      background:#222;
+      color:#fff;
+      border:none;
+      padding:8px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    button.btn:active{ transform:translateY(1px); }
+
+    /* Game board */
+    .board-wrap{
+      width:100%;
+      max-width:560px;
+      margin:0 auto;
+    }
+
+    .board{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+      perspective:1000px;
+      margin: 0 auto;
+    }
+
+    /* Card */
+    .card{
+      width:100%;
+      padding-top:100%; /* square using aspect ratio */
+      position:relative;
+      cursor:pointer;
+    }
+
+    .card-inner{
+      position:absolute;
+      inset:0;
+      transform-style:preserve-3d;
+      transition: transform 0.55s cubic-bezier(.2,.9,.4,1);
+      border-radius:12px;
+    }
+
+    .card.flipped .card-inner{
+      transform:rotateY(180deg);
+      cursor:default;
+    }
+
+    .face{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+      font-size:2.1rem;
+      font-weight:700;
+      user-select:none;
+    }
+
+    .face.front{
+      background:var(--card-front);
+      color:#fff;
+      transform:rotateY(0deg);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    .face.back{
+      background:var(--card-back);
+      color:var(--card-front);
+      transform:rotateY(180deg);
+      border:2px solid var(--card-front);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+    }
+
+    /* matched style */
+    .card.matched .face.front,
+    .card.matched .face.back{
+      background: var(--matched);
+      color: #222;
+      border: none;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+    }
+
+    /* message overlay when won */
+    .overlay{
+      position:fixed;
+      left:0;right:0;top:0;bottom:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,0.25);
+      visibility:hidden;
+      opacity:0;
+      transition:opacity .2s, visibility .2s;
+      z-index:40;
+    }
+    .overlay.show{
+      visibility:visible;
+      opacity:1;
+    }
+    .modal{
+      background:#fff;
+      padding:20px 22px;
+      border-radius:12px;
+      text-align:center;
+      min-width:260px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+    .modal h2{ margin:0 0 8px; }
+    .modal p{ margin:6px 0 14px; color:#333; }
+    .modal .modal-actions{ display:flex; gap:10px; justify-content:center; }
+
+    /* responsive */
+    @media (max-width:520px){
+      .board{ gap:10px; grid-template-columns: repeat(4, 1fr); max-width:420px; }
+      .face{ font-size:1.6rem; }
+    }
+    @media (max-width:380px){
+      .board{ gap:8px; grid-template-columns: repeat(3, 1fr); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>🧠 Memory Number Game</h1>
+      <p class="sub">Flip two cards to find the same number. Match all to win!</p>
+    </header>
+
+      <!-- Left Ad Column -->
+      <aside class="ads">
+        <div class="ad">
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728"
+            crossorigin="anonymous"
+          ></script>
+          <!-- kalvikraft 1 -->
+          <ins
+            class="adsbygoogle"
+            style="display: block"
+            data-ad-client="ca-pub-6602675729982728"
+            data-ad-slot="9131927510"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+        <div class="ad">
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728"
+            crossorigin="anonymous"
+          ></script>
+          <!-- kalvikraft2 -->
+          <ins
+            class="adsbygoogle"
+            style="display: block"
+            data-ad-client="ca-pub-6602675729982728"
+            data-ad-slot="2215165376"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+      </aside>
+
+
+    <div class="controls" aria-hidden="false">
+      <div class="stat">Moves: <span id="moves">0</span></div>
+      <div class="stat">Time: <span id="timer">00:00</span></div>
+      <button id="restart" class="btn" title="Restart game (new shuffle)">Restart</button>
+      <select id="difficulty" aria-label="Choose number of pairs">
+        <option value="6">6 pairs (3×4)</option>
+        <option value="8" selected>8 pairs (4×4)</option>
+        <option value="10">10 pairs (4×5)</option>
+      </select>
+      <button id="newgame" class="btn">New Game</button>
+    </div>
+
+    <div class="board-wrap">
+      <div id="board" class="board" role="grid" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <!-- Win overlay -->
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <h2>🎉 You won!</h2>
+      <p id="summary">Nice job — you matched all pairs.</p>
+      <div class="modal-actions">
+        <button id="play-again" class="btn">Play Again</button>
+        <button id="close-modal" class="btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const boardEl = document.getElementById('board');
+      const movesEl = document.getElementById('moves');
+      const timerEl = document.getElementById('timer');
+      const restartBtn = document.getElementById('restart');
+      const newGameBtn = document.getElementById('newgame');
+      const difficultySel = document.getElementById('difficulty');
+
+      const overlay = document.getElementById('overlay');
+      const summary = document.getElementById('summary');
+      const playAgain = document.getElementById('play-again');
+      const closeModal = document.getElementById('close-modal');
+
+      let pairsCount = parseInt(difficultySel.value,10) || 8;
+      let cards = [];               // array of numbers (duplicated)
+      let firstCard = null;
+      let secondCard = null;
+      let lockBoard = false;
+      let moves = 0;
+      let matchedPairs = 0;
+      let timer = null;
+      let seconds = 0;
+      let started = false;
+
+      // Helpers
+      function formatTime(s){
+        const mm = Math.floor(s/60).toString().padStart(2,'0');
+        const ss = (s % 60).toString().padStart(2,'0');
+        return mm + ':' + ss;
+      }
+
+      function startTimer(){
+        if(timer) return;
+        started = true;
+        timer = setInterval(()=>{
+          seconds++;
+          timerEl.textContent = formatTime(seconds);
+        }, 1000);
+      }
+
+      function stopTimer(){
+        if(timer){ clearInterval(timer); timer = null; }
+      }
+
+      function resetTimer(){
+        stopTimer();
+        seconds = 0;
+        started = false;
+        timerEl.textContent = '00:00';
+      }
+
+      function shuffleArray(a){
+        for(let i=a.length-1;i>0;i--){
+          const j = Math.floor(Math.random()*(i+1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function buildCardElement(number, idx){
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.dataset.number = number;
+        card.dataset.index = idx;
+        card.setAttribute('role','button');
+        card.tabIndex = 0;
+
+        const inner = document.createElement('div');
+        inner.className = 'card-inner';
+
+        const front = document.createElement('div');
+        front.className = 'face front';
+        front.setAttribute('aria-hidden','true');
+
+        const back = document.createElement('div');
+        back.className = 'face back';
+        back.textContent = number;
+        back.setAttribute('aria-hidden','true');
+
+        inner.appendChild(front);
+        inner.appendChild(back);
+        card.appendChild(inner);
+
+        // click + keyboard (Enter/Space)
+        card.addEventListener('click', onCardClick);
+        card.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            onCardClick.call(card, e);
+          }
+        });
+
+        return card;
+      }
+
+      function createBoard(pairs){
+        // reset state
+        stopTimer();
+        resetTimer();
+        boardEl.innerHTML = '';
+        firstCard = null;
+        secondCard = null;
+        lockBoard = false;
+        moves = 0;
+        matchedPairs = 0;
+        movesEl.textContent = '0';
+
+        // produce numbers 1..pairs and duplicate
+        const nums = Array.from({length: pairs}, (_,i) => i+1);
+        cards = shuffleArray([...nums, ...nums]);
+
+        // adjust grid columns/rows based on pairs for nicer layout
+        // For simplicity: pairs 6 -> 3x4, 8 -> 4x4, 10 -> 5x4 (or 4x5)
+        if(pairs === 6){
+          boardEl.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        } else if(pairs === 10){
+          boardEl.style.gridTemplateColumns = 'repeat(5, 1fr)';
+        } else {
+          boardEl.style.gridTemplateColumns = 'repeat(4, 1fr)';
+        }
+
+        cards.forEach((n, idx) => {
+          const cardEl = buildCardElement(n, idx);
+          boardEl.appendChild(cardEl);
+        });
+      }
+
+      function onCardClick(e){
+        if(lockBoard) return;
+        if(this.classList.contains('flipped') || this.classList.contains('matched')) return;
+
+        // start timer on first click of the game
+        if(!started) startTimer();
+
+        // flip visual
+        this.classList.add('flipped');
+
+        if(!firstCard){
+          firstCard = this;
+          return;
+        }
+
+        // if clicked the same card twice
+        if(firstCard === this) return;
+
+        secondCard = this;
+        lockBoard = true; // block further clicks until check finishes
+        moves++;
+        movesEl.textContent = String(moves);
+
+        // check for match (compare number)
+        const num1 = firstCard.dataset.number;
+        const num2 = secondCard.dataset.number;
+
+        if(num1 === num2){
+          // matched
+          firstCard.classList.add('matched');
+          secondCard.classList.add('matched');
+          matchedPairs++;
+
+          // reset selection
+          resetTurn();
+
+          // if all pairs matched -> win
+          if(matchedPairs === (cards.length/2)){
+            setTimeout(() => onWin(), 350);
+          }
+        } else {
+          // not matched -> flip back after short delay
+          setTimeout(() => {
+            firstCard.classList.remove('flipped');
+            secondCard.classList.remove('flipped');
+            resetTurn();
+          }, 700);
+        }
+      }
+
+      function resetTurn(){
+        [firstCard, secondCard] = [null, null];
+        lockBoard = false;
+      }
+
+      function onWin(){
+        stopTimer();
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden','false');
+
+        summary.textContent = `You finished in ${moves} moves and ${formatTime(seconds)}. Great!`;
+      }
+
+      // controls
+      restartBtn.addEventListener('click', ()=>{
+        // clear current board but keep difficulty
+        createBoard(pairsCount);
+      });
+
+      newGameBtn.addEventListener('click', ()=>{
+        pairsCount = parseInt(difficultySel.value,10) || 8;
+        createBoard(pairsCount);
+      });
+
+      difficultySel.addEventListener('change', ()=>{
+        // change selection but don't auto start new game until New Game clicked
+        pairsCount = parseInt(difficultySel.value,10) || 8;
+      });
+
+      playAgain.addEventListener('click', ()=>{
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden','true');
+        createBoard(pairsCount);
+      });
+
+      closeModal.addEventListener('click', ()=>{
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden','true');
+      });
+
+      // initialize default board
+      createBoard(pairsCount);
+
+      // accessibility: allow clicking overlay to close
+      overlay.addEventListener('click', (e)=>{
+        if(e.target === overlay){
+          overlay.classList.remove('show');
+          overlay.setAttribute('aria-hidden','true');
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
