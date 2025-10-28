@@ -1,6 +1,12 @@
 [
   {
     "university": "Bharathidasan University",
+    "month_year": "April 2024",
+    "subject": "Integral Calculus and Fourier Series",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202024-Integral%20Calculus%20and%20Fourier%20Series.pdf"
+  },
+  {
+    "university": "Bharathidasan University",
     "month_year": "April 2025",
     "subject": "Astronomy",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-April%202025-Astronomy.pdf"
@@ -58,5 +64,11 @@
     "month_year": "November 2020",
     "subject": "Soft Skills Development",
     "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-November%202020-Soft%20Skills%20Development.pdf"
+  },
+  {
+    "university": "Bharathidasan University",
+    "month_year": "November 2023",
+    "subject": "Integral Calculus and Fourier Series",
+    "download_url": "https://raw.githubusercontent.com/kalvikraft/kalvi-kraft/main/old-question-papers/Bharathidasan%20University-November%202023-Integral%20Calculus%20and%20Fourier%20Series.pdf"
   }
 ]
