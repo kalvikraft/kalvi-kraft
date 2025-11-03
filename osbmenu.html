@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Sweet Bite Menu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff8f0;
+            color: #4b3b2a;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #fceee6;
+        }
+
+        header img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        h1 {
+            margin: 10px 0 5px 0;
+            font-size: 2rem;
+        }
+
+        h2 {
+            margin-top: 40px;
+            font-size: 1.5rem;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+
+        .separator {
+            text-align: center;
+            color: #d1a87c;
+            margin: 5px 0 20px 0;
+            font-family: monospace;
+        }
+
+        .menu-section {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 25px; /* slightly more padding */
+            background-color: #f7e5d9; /* darker padding */
+            border-radius: 12px;
+        }
+
+        .menu-item {
+            margin: 12px 0;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            padding: 10px 15px;
+            background-color: #fff4e8;
+            border-radius: 8px;
+        }
+
+        .menu-item .description {
+            display: block;
+            font-size: 0.9rem;
+            color: #6e4f3a;
+            margin-top: 3px;
+        }
+
+        .menu-item span.price {
+            float: right;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin: 40px 0 20px 0;
+            font-size: 1rem;
+            color: #6e4f3a;
+        }
+
+        footer .contacts {
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        footer .offers {
+            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+
+        a {
+            color: #4b3b2a;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Ad container style */
+        .ad-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="assets/OSB Visiting Card.png" alt="One Sweet Bite">
+    <h1>One Sweet Bite (OSB)</h1>
+    <p>Affordable & Delicious Chocolate Treats 🤎</p>
+</header>
+
+<div class="menu-section">
+
+    <h2>☕ HOT CHOCOLATE</h2>
+    <div class="separator">────────────────────</div>
+    <div class="menu-item">🟤 Black Hot Chocolate <span class="price">₹50</span>
+        <span class="description">Rich dark cocoa flavor</span>
+    </div>
+    <div class="menu-item">⚪ White Hot Chocolate <span class="price">₹60</span>
+        <span class="description">Smooth, creamy white chocolate</span>
+    </div>
+    <div class="menu-item">🍶 Black & White Hot Chocolate <span class="price">₹60</span>
+        <span class="description">Blend of dark + white chocolate</span>
+    </div>
+
+    <h2>🥮 BROWNIES</h2>
+    <div class="separator">────────────────────</div>
+    <div class="menu-item">🍫 Classic Brownie <span class="price">₹60</span>
+        <span class="description">Fudgy and rich</span>
+    </div>
+    <div class="menu-item">🍨 Brownie with Ice Cream <span class="price">₹80</span>
+        <span class="description">Warm brownie + vanilla scoop</span>
+    </div>
+    <div class="menu-item">🍫 Brownie Black <span class="price">₹80</span>
+        <span class="description">With dark chocolate drizzle</span>
+    </div>
+    <div class="menu-item">⚪ Brownie White <span class="price">₹90</span>
+        <span class="description">With white chocolate drizzle</span>
+    </div>
+    <div class="menu-item">🍫⚪ Brownie B&W <span class="price">₹90</span>
+        <span class="description">With both drizzles</span>
+    </div>
+
+    <h2>🧇 WAFFLES</h2>
+    <div class="separator">────────────────────</div>
+    <div class="menu-item">🧇 Classic Waffle <span class="price">₹60</span>
+        <span class="description">Crisp golden waffle</span>
+    </div>
+    <div class="menu-item">🍨 Waffle with Ice Cream <span class="price">₹80</span>
+        <span class="description">Warm waffle + ice cream</span>
+    </div>
+    <div class="menu-item">🍫 Waffle with Chocolate Drizzle <span class="price">₹80</span>
+        <span class="description">Choice of black, white, or both</span>
+    </div>
+
+    <h2>🧋 MILKSHAKES</h2>
+    <div class="separator">────────────────────</div>
+    <div class="menu-item">🥤 Rose Milk <span class="price">₹70</span>
+        <span class="description">Creamy Rose milk</span>
+    </div>
+    <div class="menu-item">🍫 Chocolate Milk <span class="price">₹70</span>
+        <span class="description">Creamy Chocolate milk</span>
+    </div>
+   
+    <h2>🍫✨ COMBOS</h2>
+    <div class="separator">────────────────────</div>
+    <div class="menu-item">🥤 One Sweet Bite Combo <span class="price">₹150</span>
+        <span class="description">Any Hot Chocolate + Classic Brownie + Classic Waffle + Ice cream</span>
+    </div>
+    <div class="menu-item">🧇 Choco Treat Combo <span class="price">₹100</span>
+        <span class="description">Any Hot Chocolate + Classic Waffle/Brownie</span>
+    </div>
+
+</div>
+
+<!-- AdSense ad -->
+<div class="ad-container">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-client="ca-pub-6602675729982728"
+         data-ad-slot="5336997905"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
+<footer>
+    💬 Thank you for visiting One Sweet Bite!<br>
+    Follow us for more sweet(update)s 🍪💖
+    <div class="contacts">
+        📱 Mobile/Whatsapp: <a href="tel:+919942272631">+91 9942272631</a><br>
+        📸 Instagram: <a href="https://instagram.com/onesweetbite_osb" target="_blank">onesweetbite_osb</a>
+    </div>
+    <div class="offers">
+        🎉 Offers: <a href="https://kalvikraft.in/osb_spin_wheel.html" target="_blank">https://kalvikraft.in/osb_spin_wheel.html</a>
+    </div>
+</footer>
+
+</body>
+</html>
