@@ -211,7 +211,7 @@
     }else{
       spinBtn.disabled=true;spinBtn.textContent="Come Back Tomorrow";
       const next=new Date(parseInt(localStorage.getItem(key),10)+86400000);
-      nextNote.textContent="Next spin available after "+next.toLocaleTimeString();
+      nextNote.textContent="Next spin available tomorrow after "+next.toLocaleTimeString();
       nextNote.style.display="block";
     }
   }
@@ -266,4 +266,5 @@
 </script>
 </body>
 </html>
+
 
