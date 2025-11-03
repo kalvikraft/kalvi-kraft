@@ -31,13 +31,26 @@
   .ad-bottom{display:none;justify-content:center;margin-top:12px;}
   .wheel-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;}
   canvas{border-radius:999px;display:block;max-width:100%;height:auto;touch-action:none;}
-  .center-badge{
-    position:relative;width:240px;height:240px;border-radius:50%;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:18px;box-sizing:border-box;pointer-events:none;
-    background:radial-gradient(circle at 30% 30%, #fff 0%, #fff3e6 40%);
-    box-shadow:inset 0 6px 18px rgba(0,0,0,0.06);
-  }
+  .center-badge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+    box-sizing: border-box;
+    pointer-events: none;
+    background: radial-gradient(circle at 30% 30%, #fff 0%, #fff3e6 40%);
+    box-shadow: inset 0 6px 18px rgba(0,0,0,0.06);
+    transform: translate(-50%, -50%);
+}
+
   .center-badge .title{font-weight:700;font-size:18px;line-height:1.05;color:var(--accent);}
   .center-badge .subtitle{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.1;}
   .pointer{width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;
@@ -266,5 +279,6 @@
 </script>
 </body>
 </html>
+
 
 
