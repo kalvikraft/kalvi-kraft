@@ -5,162 +5,132 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>One Sweet Bite — Spin Wheel</title>
 <style>
-  :root {
-    --bg: #fff7f0;
-    --accent: #7b3f00;
-    --muted: #6b6b6b;
-    --panel: #fff;
+  :root{--bg:#fff7f0;--accent:#7b3f00;--muted:#6b6b6b;--panel:#fff;}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+  body{
+    background:linear-gradient(180deg,#fff7f0 0%,#ffeeda 100%);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;color:var(--accent);
   }
-  html, body {
-    height: 100%;
-    margin: 0;
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  .container{
+    max-width:1100px;width:100%;
+    display:grid;grid-template-columns:1fr 360px;
+    gap:24px;align-items:start;
   }
-  body {
-    background: linear-gradient(180deg, #fff7f0 0%, #ffeeda 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    color: var(--accent);
+  @media(max-width:900px){
+    .container{grid-template-columns:1fr;}
+    .ad-left,.ad-right{display:none;}
+    .ad-bottom{display:flex;}
   }
-  .container {
-    max-width: 1100px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 24px;
-    align-items: start;
-  }
-  @media (max-width: 900px) {
-    .container { grid-template-columns: 1fr; }
-    .sidebar { order: 2; }
-  }
-  .card {
-    background: var(--panel);
-    border-radius: 16px;
-    padding: 18px;
-    box-shadow: 0 8px 30px rgba(123,63,0,0.12);
-  }
-  .wheel-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .card{background:var(--panel);border-radius:16px;padding:18px;
+        box-shadow:0 8px 30px rgba(123,63,0,0.12);}
+  .wheel-ads-wrap{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+  .ad-slot{flex:0 0 auto;display:flex;justify-content:center;}
+  .ad-bottom{display:none;justify-content:center;margin-top:12px;}
+  .wheel-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;}
 
   /* responsive wheel container */
-  .wheel-container {
-    position: relative;
-    width: min(90vw, 640px);
-    aspect-ratio: 1 / 1;
+  .wheel-container{
+    position:relative;
+    width:min(90vw,640px);
+    aspect-ratio:1/1;
+  }
+  canvas{
+    width:100%;height:100%;
+    border-radius:999px;display:block;touch-action:none;
+    position:relative;z-index:2;
+  }
+  .center-badge{
+    position:absolute;top:50%;left:50%;
+    width:38%;height:38%;border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:12px;box-sizing:border-box;pointer-events:none;
+    background:radial-gradient(circle at 30% 30%,#fff 0%,#fff3e6 40%);
+    box-shadow:inset 0 6px 18px rgba(0,0,0,0.06);
+    transform:translate(-50%,-50%);z-index:3;
+  }
+  .center-badge .title{font-weight:700;font-size:1rem;color:var(--accent);}
+  .center-badge .subtitle{font-size:0.7rem;color:var(--muted);margin-top:4px;line-height:1.1;}
+
+  /* ✅ pointer sits below wheel */
+  .pointer{
+    position:absolute;top:0;left:50%;
+    transform:translate(-50%,-50%);
+    z-index:1;
+    width:0;height:0;
+    border-left:3vw solid transparent;
+    border-right:3vw solid transparent;
+    border-top:4.5vw solid #ff4f00;
+    filter:drop-shadow(0 3px 4px rgba(0,0,0,0.1));
   }
 
-  canvas {
-    width: 100%;
-    height: 100%;
-    border-radius: 999px;
-    display: block;
-    touch-action: none;
+  .spin-controls{margin-top:10px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+  button#spinBtn{
+    appearance:none;border:0;padding:12px 20px;border-radius:12px;
+    background:linear-gradient(180deg,#ff8f3a,#ff6f00);
+    color:white;font-weight:700;font-size:16px;cursor:pointer;
+    box-shadow:0 6px 18px rgba(255,111,0,0.25);
   }
-
-  .center-badge {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 38%;
-    height: 38%;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 12px;
-    box-sizing: border-box;
-    pointer-events: none;
-    background: radial-gradient(circle at 30% 30%, #fff 0%, #fff3e6 40%);
-    box-shadow: inset 0 6px 18px rgba(0,0,0,0.06);
-    transform: translate(-50%, -50%);
-    z-index: 20;
-  }
-  .center-badge .title { font-weight: 700; font-size: 1rem; color: var(--accent); }
-  .center-badge .subtitle { font-size: 0.7rem; color: var(--muted); margin-top: 4px; line-height: 1.1; }
-
-  .pointer {
-    position: absolute;
-    top: -4%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 30;
-    width: 0;
-    height: 0;
-    border-left: 3vw solid transparent;
-    border-right: 3vw solid transparent;
-    border-bottom: 4.5vw solid #ff4f00;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12));
-  }
-
-  .spin-controls { margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  button#spinBtn {
-    appearance: none;
-    border: 0;
-    padding: 12px 20px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, #ff8f3a, #ff6f00);
-    color: white;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 6px 18px rgba(255,111,0,0.25);
-  }
-  button#spinBtn[disabled] {
-    opacity: 0.45;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  .sidebar { position: sticky; top: 20px; }
-  .small { font-size: 13px; color: var(--muted); }
-
-  .modal {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.45);
-    z-index: 60;
-  }
-  .modal.show { display: flex; }
-  .modal-card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    max-width: 420px;
-    width: 92%;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  }
-  .modal-card h2 { margin: 0 0 8px; color: var(--accent); }
-  .modal-card p { margin: 0 0 14px; color: var(--muted); }
-  .btn-secondary {
-    background: #fff;
-    border: 1px solid #eee;
-    padding: 10px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-  }
+  button#spinBtn[disabled]{opacity:0.45;cursor:not-allowed;box-shadow:none;}
+  .sidebar{position:sticky;top:20px;}
+  .small{font-size:13px;color:var(--muted);}
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+         background:rgba(0,0,0,0.45);z-index:60;}
+  .modal.show{display:flex;}
+  .modal-card{background:white;padding:20px;border-radius:12px;
+              max-width:420px;width:92%;text-align:center;
+              box-shadow:0 10px 40px rgba(0,0,0,0.2);}
+  .modal-card h2{margin:0 0 8px;color:var(--accent);}
+  .modal-card p{margin:0 0 14px;color:var(--muted);}
+  .btn-secondary{background:#fff;border:1px solid #eee;
+                 padding:10px 14px;border-radius:10px;cursor:pointer;}
 </style>
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
 </head>
 
 <body>
 <div class="container">
-  <div class="card wheel-wrap">
-    <div class="wheel-container">
-      <canvas id="wheel" width="640" height="640"></canvas>
-
-      <div class="center-badge" id="centerBadge">
-        <div class="title">One Sweet Bite</div>
-        <div class="subtitle" style="margin-top:8px;font-weight:700;">Adirai’s first hot chocolate</div>
-        <div class="subtitle" style="margin-top:6px;">Brownies • Waffles • Hot Chocolate | Magic in Every Bite.</div>
+  <div class="card wheel-wrap" aria-live="polite">
+    <div class="wheel-ads-wrap">
+      <!-- Left Ad -->
+      <div class="ad-slot ad-left">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-6602675729982728"
+             data-ad-slot="5336997905"></ins>
+        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
       </div>
 
-      <div class="pointer"></div>
+      <!-- Wheel -->
+      <div class="wheel-container">
+        <div class="pointer"></div>
+        <canvas id="wheel" width="640" height="640"></canvas>
+        <div class="center-badge" id="centerBadge">
+          <div class="title">One Sweet Bite</div>
+          <div class="subtitle" style="margin-top:8px;font-weight:700;">Adirai’s first hot chocolate</div>
+          <div class="subtitle" style="margin-top:6px;">Brownies • Waffles • Hot Chocolate | Magic in Every Bite.</div>
+        </div>
+      </div>
+
+      <!-- Right Ad -->
+      <div class="ad-slot ad-right">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-6602675729982728"
+             data-ad-slot="5336997905"></ins>
+        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      </div>
+    </div>
+
+    <!-- Bottom ad for mobile -->
+    <div class="ad-slot ad-bottom">
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:100%;height:90px"
+           data-ad-client="ca-pub-6602675729982728"
+           data-ad-slot="5336997905"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
     </div>
 
     <div class="spin-controls">
@@ -175,12 +145,14 @@
       <li>Rs. 20/- off on orders above Rs. 100/-</li>
       <li>Rs. 10/- off</li>
       <li>Buy 2 Brownies Get a Hot Chocolate Free</li>
-      <li>10% Discount on your Bill</li>
+      <li>10 % Discount on your Bill</li>
     </ul>
     <p class="small" style="margin-top:12px;">You can spin once every 24 hours.</p>
+    <p class="small" style="margin-top:12px;">Click here for <a href="/osbmenu.html">menu</a>.</p>
   </aside>
 </div>
 
+<!-- Result Modal -->
 <div id="resultModal" class="modal">
   <div class="modal-card">
     <h2 id="resultTitle">You won!</h2>
@@ -195,115 +167,88 @@
 
 <script>
 (() => {
-  const canvas = document.getElementById('wheel');
-  const ctx = canvas.getContext('2d');
-  const spinBtn = document.getElementById('spinBtn');
-  const modal = document.getElementById('resultModal');
-  const resultTitle = document.getElementById('resultTitle');
-  const resultText = document.getElementById('resultText');
-  const closeModal = document.getElementById('closeModal');
-  const shareBtn = document.getElementById('shareBtn');
-  const nextNote = document.getElementById('nextSpinNote');
-  const centerBadge = document.getElementById('centerBadge');
+  const canvas=document.getElementById('wheel');
+  const ctx=canvas.getContext('2d');
+  const spinBtn=document.getElementById('spinBtn');
+  const modal=document.getElementById('resultModal');
+  const resultTitle=document.getElementById('resultTitle');
+  const resultText=document.getElementById('resultText');
+  const closeModal=document.getElementById('closeModal');
+  const shareBtn=document.getElementById('shareBtn');
+  const nextNote=document.getElementById('nextSpinNote');
+  const centerBadge=document.getElementById('centerBadge');
 
-  const prizes = [
-    { label: "Rs. 20/- off\n(on orders above Rs. 100/-)" },
-    { label: "Rs. 10/- off" },
-    { label: "Buy 2 Brownies\nGet a Hot Chocolate Free" },
-    { label: "10% Discount\non your Bill" },
+  const prizes=[
+    {label:"Rs. 20/- off\n(on orders above Rs. 100/-)"},
+    {label:"Rs. 10/- off"},
+    {label:"Buy 2 Brownies\nGet a Hot Chocolate Free"},
+    {label:"10 % Discount\non your Bill"}
   ];
+  const colors=["#ffecd6","#fff3e6","#ffe0c8","#fff7f0"];
+  const cx=canvas.width/2,cy=canvas.height/2,radius=Math.min(cx,cy)-6;
+  const segAngle=(2*Math.PI)/prizes.length;
 
-  const colors = ["#ffecd6","#fff3e6","#ffe0c8","#fff7f0"];
-  const cx = canvas.width / 2, cy = canvas.height / 2, radius = Math.min(cx, cy) - 6;
-  const segAngle = (2 * Math.PI) / prizes.length;
+  function drawWheel(rotation=0){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(rotation);
+    for(let i=0;i<prizes.length;i++){
+      const start=i*segAngle;
+      ctx.beginPath();ctx.moveTo(0,0);
+      ctx.arc(0,0,radius,start,start+segAngle);
+      ctx.closePath();ctx.fillStyle=colors[i%colors.length];ctx.fill();
+      ctx.strokeStyle="rgba(123,63,0,0.06)";ctx.stroke();
 
-  function drawWheel(rotation = 0) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(rotation);
-
-    for (let i = 0; i < prizes.length; i++) {
-      const start = i * segAngle;
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.arc(0, 0, radius, start, start + segAngle);
-      ctx.closePath();
-      ctx.fillStyle = colors[i % colors.length];
-      ctx.fill();
-      ctx.strokeStyle = "rgba(123,63,0,0.06)";
-      ctx.stroke();
-
-      ctx.save();
-      ctx.rotate(start + segAngle / 2);
-      ctx.translate(radius * 0.58, 0);
-      ctx.rotate(Math.PI / 2);
-      ctx.fillStyle = "#7b3f00";
-      ctx.font = "bold 18px Arial";
-      prizes[i].label.split("\\n").join("\n").split("\n").forEach((line, j) => {
-        ctx.fillText(line, -ctx.measureText(line).width / 2, (j - 1) * 22);
+      ctx.save();ctx.rotate(start+segAngle/2);ctx.translate(radius*0.58,0);ctx.rotate(Math.PI/2);
+      ctx.fillStyle="#7b3f00";ctx.font="bold 18px Arial";
+      prizes[i].label.split("\\n").join("\n").split("\n").forEach((line,j)=>{
+        ctx.fillText(line,-ctx.measureText(line).width/2,(j-1)*22);
       });
       ctx.restore();
     }
     ctx.restore();
 
-    // inner circle
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius * 0.34, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(255,255,255,0.95)";
-    ctx.fill();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "rgba(123,63,0,0.06)";
-    ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,radius*0.34,0,Math.PI*2);
+    ctx.fillStyle="rgba(255,255,255,0.95)";ctx.fill();
+    ctx.lineWidth=2;ctx.strokeStyle="rgba(123,63,0,0.06)";ctx.stroke();
   }
-
   drawWheel(0);
 
-  function rand(min, max) { return Math.random() * (max - min) + min; }
-  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+  function rand(min,max){return Math.random()*(max-min)+min;}
+  function easeOutCubic(t){return 1-Math.pow(1-t,3);}
+  const key="osb_spin_time_v1";
 
-  const key = "osb_spin_time_v1";
-  function canSpinNow() {
-    const last = localStorage.getItem(key);
-    if (!last) return true;
-    const diff = Date.now() - parseInt(last, 10);
-    return diff > 86400000;
+  function canSpinNow(){
+    const last=localStorage.getItem(key);
+    if(!last)return true;
+    return Date.now()-parseInt(last,10)>86400000;
   }
 
-  function updateButtonState() {
-    if (canSpinNow()) {
-      spinBtn.disabled = false;
-      spinBtn.textContent = "SPIN";
-      nextNote.style.display = "none";
-    } else {
-      spinBtn.disabled = true;
-      spinBtn.textContent = "Come Back Tomorrow";
-      const next = new Date(parseInt(localStorage.getItem(key), 10) + 86400000);
-      nextNote.textContent = "Next spin available after " + next.toLocaleTimeString();
-      nextNote.style.display = "block";
+  function updateButtonState(){
+    if(canSpinNow()){
+      spinBtn.disabled=false;spinBtn.textContent="SPIN";nextNote.style.display="none";
+    }else{
+      spinBtn.disabled=true;spinBtn.textContent="Come Back Tomorrow";
+      const next=new Date(parseInt(localStorage.getItem(key),10)+86400000);
+      nextNote.textContent="Next spin available after "+next.toLocaleTimeString();
+      nextNote.style.display="block";
     }
   }
 
-  function spin() {
-    if (!canSpinNow()) return alert("You can spin again tomorrow!");
-    spinBtn.disabled = true;
-
-    const chosen = Math.floor(rand(0, prizes.length));
-    const full = Math.floor(rand(4, 7));
-
-    // ✅ Corrected rotation formula for pointer alignment
-    const target = (2 * Math.PI * full) + (Math.PI / 2) - (chosen * segAngle + segAngle / 2);
-
-    const duration = rand(4200, 5600);
-    const start = performance.now();
-
-    function frame(now) {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = easeOutCubic(t);
-      drawWheel(target * eased);
-      if (t < 1) requestAnimationFrame(frame);
-      else {
-        localStorage.setItem(key, Date.now().toString());
+  function spin(){
+    if(!canSpinNow())return alert("You can spin again tomorrow!");
+    spinBtn.disabled=true;
+    const chosen=Math.floor(rand(0,prizes.length));
+    const full=Math.floor(rand(4,7));
+    const target=(2*Math.PI*full)+(Math.PI/2)-(chosen*segAngle+segAngle/2);
+    const duration=rand(4200,5600);
+    const start=performance.now();
+    function frame(now){
+      const t=Math.min(1,(now-start)/duration);
+      const eased=easeOutCubic(t);
+      drawWheel(target*eased);
+      if(t<1)requestAnimationFrame(frame);
+      else{
+        localStorage.setItem(key,Date.now().toString());
         showResult(chosen);
         updateButtonState();
       }
@@ -311,24 +256,20 @@
     requestAnimationFrame(frame);
   }
 
-  function showResult(i) {
-    centerBadge.innerHTML = `<div class="title" style="color:#ff6f00;">🎉 You Won! 🎉</div>
-      <div class="subtitle" style="margin-top:8px;font-weight:700;">${prizes[i].label.replace(/\n/g, '<br>')}</div>
+  function showResult(i){
+    centerBadge.innerHTML=`<div class="title" style="color:#ff6f00;">🎉 You Won! 🎉</div>
+      <div class="subtitle" style="margin-top:8px;font-weight:700;">${prizes[i].label.replace(/\n/g,'<br>')}</div>
       <div class="subtitle small" style="margin-top:8px;color:#7b3f00;">
       Take a screenshot & tag <code>@onesweetbite_osb</code></div>`;
-    resultTitle.textContent = "You won!";
-    resultText.innerHTML = `<strong>${prizes[i].label.replace(/\n/g, '<br>')}</strong><br><br>
+    resultTitle.textContent="You won!";
+    resultText.innerHTML=`<strong>${prizes[i].label.replace(/\n/g,'<br>')}</strong><br><br>
       <span style="color:#7b3f00;font-weight:600">How to claim:</span> Tag <code>@onesweetbite_osb</code> on Instagram.`;
     modal.classList.add('show');
   }
 
-  spinBtn.addEventListener('click', spin);
-  closeModal.addEventListener('click', () => modal.classList.remove('show'));
-  shareBtn.addEventListener('click', () => {
-    navigator.clipboard?.writeText("I just won from One Sweet Bite! Tagging @onesweetbite_osb — try the spin wheel!")
-      .then(() => alert("Share text copied!"));
-  });
-
+  spinBtn.addEventListener('click',spin);
+  closeModal.addEventListener('click',()=>modal.classList.remove('show'));
+  shareBtn.addEventListener('click',()=>navigator.clipboard?.writeText("I just won from One Sweet Bite! Tagging @onesweetbite_osb — try the spin wheel!").then(()=>alert("Share text copied!")));
   updateButtonState();
 })();
 </script>
