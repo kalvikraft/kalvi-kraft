@@ -51,17 +51,17 @@
   .center-badge .title{font-weight:700;font-size:1rem;color:var(--accent);}
   .center-badge .subtitle{font-size:0.7rem;color:var(--muted);margin-top:4px;line-height:1.1;}
 
-  /* ✅ Pointer now at the bottom of wheel, pointing upward */
+  /* Pointer at bottom of wheel */
   .pointer{
     position:absolute;
-    bottom:-4%;          /* positioned below wheel */
+    bottom:-4%;
     left:50%;
     transform:translateX(-50%);
     z-index:4;
     width:0;height:0;
     border-left:3vw solid transparent;
     border-right:3vw solid transparent;
-    border-bottom:4.5vw solid #ff4f00; /* upward-pointing triangle */
+    border-bottom:4.5vw solid #ff4f00;
     filter:drop-shadow(0 3px 4px rgba(0,0,0,0.1));
   }
 
@@ -124,13 +124,23 @@
       </div>
     </div>
 
+    <!-- Ad ABOVE spin button (kept) -->
+    <div class="ad-slot ad-bottom" style="margin-top:12px;">
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:100%;height:90px"
+           data-ad-client="ca-pub-6602675729982728"
+           data-ad-slot="5336997905"></ins>
+      <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+    </div>
+
+    <!-- Spin button -->
     <div class="spin-controls">
       <button id="spinBtn">SPIN</button>
       <p id="nextSpinNote" class="small" style="display:none;color:#7b3f00;"></p>
     </div>
-    
-    <!-- Bottom Ad for mobile -->
-    <div class="ad-slot ad-bottom">
+
+    <!-- ✅ New Ad BELOW spin button -->
+    <div class="ad-slot" style="margin-top:12px;">
       <ins class="adsbygoogle"
            style="display:inline-block;width:100%;height:90px"
            data-ad-client="ca-pub-6602675729982728"
@@ -152,6 +162,7 @@
   </aside>
 </div>
 
+<!-- Result Modal -->
 <div id="resultModal" class="modal">
   <div class="modal-card">
     <h2 id="resultTitle">You won!</h2>
@@ -160,7 +171,13 @@
       <button id="closeModal" class="btn-secondary">Close</button>
       <button id="shareBtn" class="btn-secondary">Copy share text</button>
     </div>
-    <p class="small" style="margin-top:10px;">Take a screenshot and post on Instagram tagging <strong>@onesweetbite_osb</strong>.</p>
+    <p class="small" style="margin-top:10px;">
+      Take a screenshot and post on Instagram tagging <strong>@onesweetbite_osb</strong>.
+    </p>
+    <!-- ✅ New line added -->
+    <p class="small" style="margin-top:6px;font-weight:600;color:#7b3f00;">
+      Follow our Instagram page <strong>@onesweetbite_osb</strong> for more surprises!
+    </p>
   </div>
 </div>
 
@@ -268,4 +285,3 @@
 </script>
 </body>
 </html>
-
