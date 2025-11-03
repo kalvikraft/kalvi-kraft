@@ -30,7 +30,17 @@
   .ad-slot{flex:0 0 auto;display:flex;justify-content:center;}
   .ad-bottom{display:none;justify-content:center;margin-top:12px;}
   .wheel-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;}
+
+  /* NEW: a fixed-size container exactly matching canvas size so absolute children center to canvas */
+  .wheel-container{
+    position: relative;             /* the absolute children (badge + pointer) are relative to this box */
+    width: 640px;
+    height: 640px;
+    display: inline-block;
+  }
+
   canvas{border-radius:999px;display:block;max-width:100%;height:auto;touch-action:none;}
+
   .center-badge {
     position: absolute;
     top: 50%;
@@ -49,13 +59,24 @@
     background: radial-gradient(circle at 30% 30%, #fff 0%, #fff3e6 40%);
     box-shadow: inset 0 6px 18px rgba(0,0,0,0.06);
     transform: translate(-50%, -50%);
-}
+    z-index: 20;
+  }
 
   .center-badge .title{font-weight:700;font-size:18px;line-height:1.05;color:var(--accent);}
   .center-badge .subtitle{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.1;}
-  .pointer{width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;
-           border-bottom:26px solid #ff4f00;transform:translateY(-12px);
-           filter:drop-shadow(0 4px 6px rgba(0,0,0,0.12));}
+
+  /* pointer positioned relative to the top center of the wheel-container */
+  .pointer{
+    position: absolute;
+    top: -16px;                 /* sits slightly above the wheel top */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;
+    border-bottom:26px solid #ff4f00;
+    filter:drop-shadow(0 4px 6px rgba(0,0,0,0.12));
+  }
+
   .spin-controls{margin-top:6px;display:flex;flex-direction:column;align-items:center;gap:8px;}
   button#spinBtn{
     appearance:none;border:0;padding:12px 20px;border-radius:12px;
@@ -81,56 +102,43 @@
   .btn-secondary{background:#fff;border:1px solid #eee;
                  padding:10px 14px;border-radius:10px;cursor:pointer;}
 </style>
-
-<!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
   <div class="card wheel-wrap" aria-live="polite">
     <div class="wheel-ads-wrap">
-      <!-- Left Ad -->
-      <div class="ad-slot ad-left">
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:160px;height:600px"
-             data-ad-client="ca-pub-6602675729982728"
-             data-ad-slot="5336997905"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <!-- Left Ad placeholder -->
+      <div class="ad-slot ad-left"></div>
+
+      <!-- Wheel container now sized to canvas; absolute badge/pointer center relative to canvas -->
+      <div class="wheel-container" aria-hidden="false">
+        <canvas id="wheel" width="640" height="640"></canvas>
+
+        <!-- Center badge sits exactly over the canvas center -->
+        <div class="center-badge" id="centerBadge">
+          <div class="title">One Sweet Bite</div>
+          <div class="subtitle" style="margin-top:8px;font-weight:700;">Adirai’s first hot chocolate</div>
+          <div class="subtitle" style="margin-top:6px;">Brownies • Waffles • Hot Chocolate | Magic in Every Bite.</div>
+        </div>
+
+        <!-- pointer is absolute and centered at the top of the canvas -->
+        <div class="pointer" role="img" aria-label="pointer"></div>
       </div>
 
-      <div style="position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;">
-        <canvas id="wheel" width="640" height="640"></canvas>
-        <div style="position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;">
-          <div class="center-badge">
-            <div class="title">One Sweet Bite</div>
-            <div class="subtitle" style="margin-top:8px;font-weight:700;">Adirai’s first hot chocolate</div>
-            <div class="subtitle" style="margin-top:6px;">Brownies • Waffles • Hot Chocolate | Magic in Every Bite.</div>
-          </div>
-        </div>
-        <div class="pointer"></div>
+      <!-- spin controls go outside the wheel-container so layout remains stable -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
         <div class="spin-controls">
           <button id="spinBtn">SPIN</button>
-          <p id="nextSpinNote" class="small" style="display:none;color:#7b3f00;"></p>
+          <p id="nextSpinNote" class="small" style="display:none;color:#7b3f00;margin-top:8px;"></p>
         </div>
       </div>
 
-      <!-- Right Ad -->
-      <div class="ad-slot ad-right">
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:160px;height:600px"
-             data-ad-client="ca-pub-6602675729982728"
-             data-ad-slot="5336997905"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
+      <!-- Right Ad placeholder -->
+      <div class="ad-slot ad-right"></div>
     </div>
 
     <!-- Bottom Ad for mobile -->
     <div class="ad-slot ad-bottom">
-      <ins class="adsbygoogle"
-           style="display:inline-block;width:100%;height:90px"
-           data-ad-client="ca-pub-6602675729982728"
-           data-ad-slot="5336997905"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </div>
 
@@ -170,6 +178,7 @@
   const closeModal = document.getElementById('closeModal');
   const shareBtn = document.getElementById('shareBtn');
   const nextNote = document.getElementById('nextSpinNote');
+  const centerBadge = document.getElementById('centerBadge');
 
   const prizes = [
     { label: "Rs. 20/- off\n(on orders above Rs. 100/-)" },
@@ -183,25 +192,44 @@
   const segAngle = (2*Math.PI)/prizes.length;
 
   function drawWheel(rotation=0){
+    // rotation is radians; 0 rotation means wheel drawn with slice 0 at +x axis.
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(rotation);
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(rotation);
     for(let i=0;i<prizes.length;i++){
       const start=i*segAngle;
-      ctx.beginPath();ctx.moveTo(0,0);
+      ctx.beginPath();
+      ctx.moveTo(0,0);
       ctx.arc(0,0,radius,start,start+segAngle);
-      ctx.closePath();ctx.fillStyle=colors[i%colors.length];ctx.fill();
-      ctx.strokeStyle="rgba(123,63,0,0.06)";ctx.stroke();
-      ctx.save();ctx.rotate(start+segAngle/2);ctx.translate(radius*0.58,0);ctx.rotate(Math.PI/2);
-      ctx.fillStyle="#7b3f00";ctx.font="bold 18px Arial";
+      ctx.closePath();
+      ctx.fillStyle=colors[i%colors.length];
+      ctx.fill();
+      ctx.strokeStyle="rgba(123,63,0,0.06)";
+      ctx.stroke();
+
+      // draw text along radius
+      ctx.save();
+      ctx.rotate(start + segAngle/2);
+      ctx.translate(radius*0.58,0);
+      ctx.rotate(Math.PI/2);
+      ctx.fillStyle="#7b3f00";
+      ctx.font="bold 18px Arial";
       prizes[i].label.split("\\n").join("\n").split("\n").forEach((line,j)=>{
         ctx.fillText(line,-ctx.measureText(line).width/2,(j-1)*22);
       });
       ctx.restore();
     }
     ctx.restore();
-    ctx.beginPath();ctx.arc(cx,cy,radius*0.34,0,Math.PI*2);
-    ctx.fillStyle="rgba(255,255,255,0.95)";ctx.fill();
-    ctx.lineWidth=2;ctx.strokeStyle="rgba(123,63,0,0.06)";ctx.stroke();
+
+    // inner circle (white)
+    ctx.beginPath();
+    ctx.arc(cx,cy,radius*0.34,0,Math.PI*2);
+    ctx.fillStyle="rgba(255,255,255,0.95)";
+    ctx.fill();
+    ctx.lineWidth=2;
+    ctx.strokeStyle="rgba(123,63,0,0.06)";
+    ctx.stroke();
   }
   drawWheel(0);
 
@@ -209,14 +237,12 @@
   function easeOutCubic(t){return 1-Math.pow(1-t,3);}
 
   const key="osb_spin_time_v1";
-
   function canSpinNow(){
     const last=localStorage.getItem(key);
     if(!last)return true;
     const diff=Date.now()-parseInt(last,10);
     return diff>86400000; // 24h
   }
-
   function updateButtonState(){
     if(canSpinNow()){
       spinBtn.disabled=false;spinBtn.textContent="SPIN";
@@ -236,9 +262,18 @@
       return;
     }
     spinBtn.disabled=true;
-    const chosen=Math.floor(rand(0,prizes.length));
-    const full=Math.floor(rand(4,7));
-    const target=(2*Math.PI*full)+((prizes.length-chosen)*segAngle)-(segAngle/2);
+    const chosen=Math.floor(rand(0,prizes.length)); // chosen slice index
+    const full=Math.floor(rand(4,7));               // full rotations
+
+    // --- CORRECTED rotation math ---
+    // We want the center of the chosen slice to end up at the top (pointer).
+    // Slice i center angle (no rotation) relative to +X axis = i*segAngle + segAngle/2.
+    // Pointer top angle = -Math.PI/2. To make slice center equal pointer:
+    // rotation = targetRotation where: (i*segAngle + segAngle/2) + rotation = -PI/2 (mod 2PI)
+    // => rotation = - (i*segAngle + segAngle/2) + k*(2PI)
+    // We choose k = full so rotation positive: rotation = full*2PI - (i*segAngle + segAngle/2)
+    const target = (2*Math.PI*full) - (chosen*segAngle + segAngle/2);
+
     const duration=rand(4200,5600);
     const start=performance.now();
     function frame(now){
@@ -256,8 +291,7 @@
   }
 
   function showResult(i){
-    const badge=document.querySelector('.center-badge');
-    badge.innerHTML=`<div class="title" style="color:#ff6f00;">🎉 You Won! 🎉</div>
+    centerBadge.innerHTML = `<div class="title" style="color:#ff6f00;">🎉 You Won! 🎉</div>
       <div class="subtitle" style="margin-top:8px;font-weight:700;">${prizes[i].label.replace(/\n/g,'<br>')}</div>
       <div class="subtitle small" style="margin-top:8px;color:#7b3f00;">
       Take a screenshot & tag <code>@onesweetbite_osb</code></div>`;
@@ -269,16 +303,10 @@
 
   spinBtn.addEventListener('click',spin);
   closeModal.addEventListener('click',()=>modal.classList.remove('show'));
-  shareBtn.addEventListener('click',()=>{
-    navigator.clipboard?.writeText("I just won from One Sweet Bite! Tagging @onesweetbite_osb — try the spin wheel!")
-      .then(()=>alert("Share text copied!"));
-  });
+  shareBtn.addEventListener('click',()=>{ navigator.clipboard?.writeText("I just won from One Sweet Bite! Tagging @onesweetbite_osb — try the spin wheel!").then(()=>alert("Share text copied!")); });
 
   updateButtonState();
 })();
 </script>
 </body>
 </html>
-
-
-
