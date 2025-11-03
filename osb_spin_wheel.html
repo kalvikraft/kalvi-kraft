@@ -20,13 +20,16 @@
   @media(max-width:900px){
     .container{grid-template-columns:1fr;}
     .ad-left,.ad-right{display:none;}
-    .ad-bottom{display:flex;}
+    .ad-bottom{display:none;} /* hide large banners */
+    .mobile-ads{display:flex;flex-direction:column;gap:10px;width:100%;margin-top:10px;}
+  }
+  @media(min-width:901px){
+    .mobile-ads{display:none;}
   }
   .card{background:var(--panel);border-radius:16px;padding:18px;
         box-shadow:0 8px 30px rgba(123,63,0,0.12);}
   .wheel-ads-wrap{display:flex;align-items:flex-start;justify-content:center;gap:12px;flex-wrap:wrap;}
   .ad-slot{flex:0 0 auto;display:flex;justify-content:center;}
-  .ad-bottom{display:none;justify-content:center;margin-top:12px;}
   .wheel-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;}
 
   .wheel-container{
@@ -51,7 +54,7 @@
   .center-badge .title{font-weight:700;font-size:1rem;color:var(--accent);}
   .center-badge .subtitle{font-size:0.7rem;color:var(--muted);margin-top:4px;line-height:1.1;}
 
-  /* Pointer at bottom of wheel */
+  /* Pointer bottom */
   .pointer{
     position:absolute;
     bottom:-4%;
@@ -124,7 +127,7 @@
       </div>
     </div>
 
-    <!-- Ad ABOVE spin button (kept) -->
+    <!-- Desktop ad under wheel -->
     <div class="ad-slot ad-bottom" style="margin-top:12px;">
       <ins class="adsbygoogle"
            style="display:inline-block;width:100%;height:90px"
@@ -139,8 +142,12 @@
       <p id="nextSpinNote" class="small" style="display:none;color:#7b3f00;"></p>
     </div>
 
-    <!-- ✅ New Ad BELOW spin button -->
-    <div class="ad-slot" style="margin-top:12px;">
+    <!-- ✅ Mobile ads (both below spin button) -->
+    <div class="mobile-ads">
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:100%;height:90px"
+           data-ad-client="ca-pub-6602675729982728"
+           data-ad-slot="5336997905"></ins>
       <ins class="adsbygoogle"
            style="display:inline-block;width:100%;height:90px"
            data-ad-client="ca-pub-6602675729982728"
@@ -174,7 +181,6 @@
     <p class="small" style="margin-top:10px;">
       Take a screenshot and post on Instagram tagging <strong>@onesweetbite_osb</strong>.
     </p>
-    <!-- ✅ New line added -->
     <p class="small" style="margin-top:6px;font-weight:600;color:#7b3f00;">
       Follow our Instagram page <strong>@onesweetbite_osb</strong> for more surprises!
     </p>
