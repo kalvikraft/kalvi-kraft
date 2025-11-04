@@ -7,21 +7,39 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fff8f0;
+            background: linear-gradient(180deg, #fff8f0 0%, #fdeee0 100%);
             color: #4b3b2a;
             margin: 0;
             padding: 0;
+            animation: fadeInBody 1s ease-in;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         header {
             text-align: center;
             padding: 20px;
             background-color: #fceee6;
+            animation: fadeDown 1s ease-out;
+        }
+
+        @keyframes fadeDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         header img {
             max-width: 200px;
             height: auto;
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
         h1 {
@@ -34,6 +52,20 @@
             font-size: 1.5rem;
             text-align: center;
             padding-bottom: 10px;
+            color: #3d2b1f;
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: #d1a87c;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
         }
 
         .separator {
@@ -46,9 +78,16 @@
         .menu-section {
             max-width: 600px;
             margin: 20px auto;
-            padding: 25px; /* slightly more padding */
-            background-color: #f7e5d9; /* darker padding */
+            padding: 25px;
+            background-color: #f7e5d9;
             border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(100, 50, 0, 0.1);
+            animation: fadeUp 1s ease-in-out;
+        }
+
+        @keyframes fadeUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .menu-item {
@@ -58,6 +97,13 @@
             padding: 10px 15px;
             background-color: #fff4e8;
             border-radius: 8px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(75, 59, 42, 0.2);
+            background-color: #fff7ef;
         }
 
         .menu-item .description {
@@ -77,6 +123,12 @@
             margin: 40px 0 20px 0;
             font-size: 1rem;
             color: #6e4f3a;
+            animation: fadeInFooter 1.5s ease-in;
+        }
+
+        @keyframes fadeInFooter {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         footer .contacts {
@@ -92,16 +144,19 @@
         a {
             color: #4b3b2a;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         a:hover {
             text-decoration: underline;
+            color: #a46b37;
         }
 
         /* Ad container style */
         .ad-container {
             text-align: center;
             margin: 30px 0;
+            animation: fadeUp 1.5s ease-in-out;
         }
     </style>
 </head>
@@ -159,10 +214,10 @@
 
     <h2>🧋 MILKSHAKES</h2>
     <div class="separator">────────────────────</div>
-    <div class="menu-item">🥤 Rose Milk <span class="price">₹70</span>
+    <div class="menu-item">🥤 Rose Milk <span class="price">₹50</span>
         <span class="description">Creamy Rose milk</span>
     </div>
-    <div class="menu-item">🍫 Chocolate Milk <span class="price">₹70</span>
+    <div class="menu-item">🍫 Chocolate Milk <span class="price">₹50</span>
         <span class="description">Creamy Chocolate milk</span>
     </div>
    
@@ -205,6 +260,3 @@
 
 </body>
 </html>
-
-
-
