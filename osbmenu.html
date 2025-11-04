@@ -1,180 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Sweet Bite Menu</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(180deg, #fff8f0 0%, #fdeee0 100%);
-            color: #4b3b2a;
-            margin: 0;
-            padding: 0;
-            animation: fadeInBody 1s ease-in;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Sweet Bite Menu</title>
+<style>
+    /* ===== Base Styling ===== */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(120deg, #fff8f0, #fdeee0, #fff3e3);
+        background-size: 300% 300%;
+        animation: gradientFlow 15s ease infinite;
+        color: #4b3b2a;
+        margin: 0;
+        padding: 0;
+        animation: fadeInBody 1s ease-in;
+    }
 
-        @keyframes fadeInBody {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    @keyframes fadeInBody {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
 
-        header {
-            text-align: center;
-            padding: 20px;
-            background-color: #fceee6;
-            animation: fadeDown 1s ease-out;
-        }
+    /* ===== Animated Background ===== */
+    @keyframes gradientFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-        @keyframes fadeDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+    /* ===== Header ===== */
+    header {
+        text-align: center;
+        padding: 20px;
+        background-color: #fceee6cc;
+        backdrop-filter: blur(4px);
+        border-bottom: 2px solid #e2c2a0;
+        animation: fadeDown 1s ease-out;
+    }
 
-        header img {
-            max-width: 200px;
-            height: auto;
-            animation: floatLogo 3s ease-in-out infinite;
-        }
+    @keyframes fadeDown {
+        from { transform: translateY(-20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
 
-        @keyframes floatLogo {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
+    header img {
+        max-width: 200px;
+        height: auto;
+        animation: floatLogo 3s ease-in-out infinite;
+    }
 
-        h1 {
-            margin: 10px 0 5px 0;
-            font-size: 2rem;
-        }
+    @keyframes floatLogo {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
 
-        h2 {
-            margin-top: 40px;
-            font-size: 1.5rem;
-            text-align: center;
-            padding-bottom: 10px;
-            color: #3d2b1f;
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
+    h1 {
+        margin: 10px 0 5px 0;
+        font-size: 2rem;
+    }
 
-        h2.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* ===== Section Titles ===== */
+    h2 {
+        margin-top: 40px;
+        font-size: 1.5rem;
+        text-align: center;
+        padding-bottom: 10px;
+        color: #3d2b1f;
+        position: relative;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
 
-        h2::after {
-            content: "";
-            position: absolute;
-            width: 40px;
-            height: 3px;
-            background-color: #d1a87c;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 3px;
-        }
+    h2.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-        .separator {
-            text-align: center;
-            color: #d1a87c;
-            margin: 5px 0 20px 0;
-            font-family: monospace;
-        }
+    h2::after {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 3px;
+        background-color: #d1a87c;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 3px;
+    }
 
-        .menu-section {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 25px;
-            background-color: #f7e5d9;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(100, 50, 0, 0.1);
-            animation: fadeUp 1s ease-in-out;
-        }
+    .separator {
+        text-align: center;
+        color: #d1a87c;
+        margin: 5px 0 20px 0;
+        font-family: monospace;
+    }
 
-        @keyframes fadeUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+    /* ===== Menu Section ===== */
+    .menu-section {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #f7e5d9d0;
+        backdrop-filter: blur(6px);
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(100, 50, 0, 0.15);
+        animation: fadeUp 1s ease-in-out;
+    }
 
-        .menu-item {
-            margin: 12px 0;
-            font-size: 1.1rem;
-            line-height: 1.4;
-            padding: 10px 15px;
-            background-color: #fff4e8;
-            border-radius: 8px;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            opacity: 0;
-            transform: translateY(20px);
-        }
+    @keyframes fadeUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
 
-        .menu-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
+    /* ===== Menu Items ===== */
+    .menu-item {
+        margin: 12px 0;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        padding: 10px 15px;
+        background-color: #fff4e8;
+        border-radius: 10px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        opacity: 0;
+        transform: translateY(20px);
+    }
 
-        .menu-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(75, 59, 42, 0.2);
-            background-color: #fff7ef;
-        }
+    .menu-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
 
-        .menu-item .description {
-            display: block;
-            font-size: 0.9rem;
-            color: #6e4f3a;
-            margin-top: 3px;
-        }
+    .menu-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(75, 59, 42, 0.25);
+        background-color: #fff9f3;
+    }
 
-        .menu-item span.price {
-            float: right;
-            font-weight: bold;
-        }
+    .menu-item .description {
+        display: block;
+        font-size: 0.9rem;
+        color: #6e4f3a;
+        margin-top: 3px;
+    }
 
-        footer {
-            text-align: center;
-            margin: 40px 0 20px 0;
-            font-size: 1rem;
-            color: #6e4f3a;
-            animation: fadeInFooter 1.5s ease-in;
-        }
+    .menu-item span.price {
+        float: right;
+        font-weight: bold;
+    }
 
-        @keyframes fadeInFooter {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    /* ===== Footer ===== */
+    footer {
+        text-align: center;
+        margin: 40px 0 20px 0;
+        font-size: 1rem;
+        color: #6e4f3a;
+        animation: fadeInFooter 1.5s ease-in;
+    }
 
-        footer .contacts {
-            margin-top: 10px;
-            font-size: 0.95rem;
-        }
+    @keyframes fadeInFooter {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
 
-        footer .offers {
-            margin-top: 5px;
-            font-size: 0.95rem;
-        }
+    footer .contacts {
+        margin-top: 10px;
+        font-size: 0.95rem;
+    }
 
-        a {
-            color: #4b3b2a;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    footer .offers {
+        margin-top: 5px;
+        font-size: 0.95rem;
+    }
 
-        a:hover {
-            text-decoration: underline;
-            color: #a46b37;
-        }
+    a {
+        color: #4b3b2a;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
 
-        /* Ad container style */
-        .ad-container {
-            text-align: center;
-            margin: 30px 0;
-            animation: fadeUp 1.5s ease-in-out;
-        }
-    </style>
+    a:hover {
+        text-decoration: underline;
+        color: #a46b37;
+    }
+
+    /* ===== Ad Section ===== */
+    .ad-container {
+        text-align: center;
+        margin: 30px 0;
+        animation: fadeUp 1.5s ease-in-out;
+    }
+</style>
 </head>
 <body>
 
@@ -236,7 +254,7 @@
     <div class="menu-item">🍫 Chocolate Milk <span class="price">₹50</span>
         <span class="description">Creamy Chocolate milk</span>
     </div>
-   
+
     <h2>🍫✨ COMBOS</h2>
     <div class="separator">────────────────────</div>
     <div class="menu-item">🥤 One Sweet Bite Combo <span class="price">₹150</span>
@@ -245,10 +263,9 @@
     <div class="menu-item">🧇 Choco Treat Combo <span class="price">₹100</span>
         <span class="description">Any Hot Chocolate + Classic Waffle/Brownie</span>
     </div>
-
 </div>
 
-<!-- AdSense ad -->
+<!-- Google Ad -->
 <div class="ad-container">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <ins class="adsbygoogle"
