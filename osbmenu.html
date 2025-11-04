@@ -54,6 +54,14 @@
             padding-bottom: 10px;
             color: #3d2b1f;
             position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        h2.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h2::after {
@@ -98,6 +106,14 @@
             background-color: #fff4e8;
             border-radius: 8px;
             transition: transform 0.25s ease, box-shadow 0.25s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .menu-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
         .menu-item:hover {
@@ -212,7 +228,7 @@
         <span class="description">Choice of black, white, or both</span>
     </div>
 
-    <h2>🧋 MILKSHAKES</h2>
+    <h2>😊 MILKSHAKES</h2>
     <div class="separator">────────────────────</div>
     <div class="menu-item">🥤 Rose Milk <span class="price">₹50</span>
         <span class="description">Creamy Rose milk</span>
@@ -257,6 +273,22 @@
         🎉 Offers: <a href="https://kalvikraft.in/osb_spin_wheel.html" target="_blank">https://kalvikraft.in/osb_spin_wheel.html</a>
     </div>
 </footer>
+
+<script>
+    // Fade-in animation on scroll for menu items & headings
+    const fadeElements = document.querySelectorAll('.menu-item, h2');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, index * 100);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    fadeElements.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
