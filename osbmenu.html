@@ -13,7 +13,7 @@
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #4b3b2a;
-        background: #fff8f0 url('https://i.imgur.com/YHt0XxC.png') repeat; /* light dessert icons texture */
+        background: #fff8f0 url('https://github.com/kalvikraft/kalvi-kraft/blob/main/assets/dessert-icon.jpg?raw=true') repeat;
         background-size: 150px 150px;
         margin: 0;
         padding: 0;
@@ -53,7 +53,7 @@
 
     h2 {
         font-size: 1.4rem;
-        text-align: center;
+        text-align: left;
         color: #3d2b1f;
         margin-top: 30px;
         margin-bottom: 10px;
@@ -67,8 +67,7 @@
         height: 3px;
         background-color: #d1a87c;
         bottom: -4px;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
         border-radius: 3px;
     }
 
@@ -77,6 +76,7 @@
         color: #d1a87c;
         font-family: monospace;
         margin: 5px 0 15px 0;
+        break-inside: avoid;
     }
 
     .menu-item {
@@ -174,10 +174,10 @@
     <h2>🥪 SANDWICHES</h2>
     <div class="separator">────────────────────</div>
     <div class="menu-item">🥪 Veg Sandwich <span class="price">₹50</span>
-        <span class="description">Grilled with veggies & cheese</span>
+        <span class="description">Grilled with veggies & veg mayo</span>
     </div>
     <div class="menu-item">🧀 Cheese Sandwich <span class="price">₹65</span>
-        <span class="description">Loaded with melted cheese</span>
+        <span class="description">Veg Sandwich loaded with cheese</span>
     </div>
 
     <h2>😊 MILKSHAKES</h2>
