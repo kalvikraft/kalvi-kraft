@@ -8,15 +8,30 @@
     /* ===== A4 Page Setup ===== */
     @page {
         size: A4;
-        margin: 20mm;
+        margin: 15mm;
     }
+
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #4b3b2a;
-        background: #fff8f0 url('https://github.com/kalvikraft/kalvi-kraft/blob/main/assets/dessert-icon.jpg?raw=true') repeat;
-        background-size: 150px 150px;
+        background-color: #fff8f0;
         margin: 0;
         padding: 0;
+        position: relative;
+    }
+
+    /* ===== Background with opacity ===== */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://github.com/kalvikraft/kalvi-kraft/blob/main/assets/dessert-icon.jpg?raw=true') repeat;
+        background-size: 150px 150px;
+        opacity: 0.3; /* Reduced to 30% */
+        z-index: -1;
     }
 
     /* ===== Header ===== */
@@ -25,18 +40,21 @@
         padding: 15px 0;
         background-color: #fceee6cc;
         border-bottom: 2px solid #e2c2a0;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
+
     header img {
         max-width: 150px;
         height: auto;
         display: block;
         margin: 0 auto 5px auto;
     }
+
     header h1 {
         margin: 5px 0;
         font-size: 1.8rem;
     }
+
     header p {
         margin: 0;
         font-size: 1rem;
@@ -46,20 +64,21 @@
     /* ===== Menu Layout ===== */
     .menu-wrapper {
         column-count: 2;
-        column-gap: 30px;
-        max-width: 100%;
-        padding: 10px 30px;
+        column-gap: 40px;
+        padding: 10px 40px 0 40px;
+        max-height: 260mm; /* makes columns taller to fit more */
     }
 
     h2 {
         font-size: 1.4rem;
         text-align: left;
         color: #3d2b1f;
-        margin-top: 30px;
-        margin-bottom: 10px;
+        margin-top: 28px;
+        margin-bottom: 8px;
         break-inside: avoid;
         position: relative;
     }
+
     h2::after {
         content: "";
         position: absolute;
@@ -75,7 +94,7 @@
         text-align: center;
         color: #d1a87c;
         font-family: monospace;
-        margin: 5px 0 15px 0;
+        margin: 5px 0 12px 0;
         break-inside: avoid;
     }
 
@@ -88,13 +107,16 @@
         line-height: 1.3;
         break-inside: avoid;
     }
+
     .menu-item:hover {
         background-color: #fff9f3;
     }
+
     .menu-item span.price {
         float: right;
         font-weight: bold;
     }
+
     .description {
         display: block;
         font-size: 0.9rem;
@@ -102,18 +124,25 @@
         margin-top: 2px;
     }
 
+    /* ===== Force "WAFFLES" heading on left, items on right ===== */
+    .waffle-heading {
+        break-after: column; /* ends left column here */
+    }
+
     /* ===== Footer ===== */
     footer {
         text-align: center;
         font-size: 0.9rem;
         color: #6e4f3a;
-        margin-top: 30px;
+        margin-top: 25px;
         padding: 10px;
     }
+
     footer a {
         color: #4b3b2a;
         text-decoration: none;
     }
+
     footer a:hover {
         text-decoration: underline;
     }
@@ -159,8 +188,11 @@
         <span class="description">With both drizzles</span>
     </div>
 
-    <h2>🧇 WAFFLES</h2>
+    <!-- "WAFFLES" heading only in left column -->
+    <h2 class="waffle-heading">🧇 WAFFLES</h2>
     <div class="separator">────────────────────</div>
+
+    <!-- Items appear in right column -->
     <div class="menu-item">🧇 Classic Waffle <span class="price">₹60</span>
         <span class="description">Crisp golden waffle</span>
     </div>
