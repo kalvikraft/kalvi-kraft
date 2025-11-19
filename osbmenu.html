@@ -5,43 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>One Sweet Bite Menu</title>
 <style>
-    /* ===== A4 Page Setup ===== */
-    @page {
-        size: A4;
-        margin: 10mm;
+    :root {
+        --primary: #ff6b8b;
+        --primary-light: #ffd6de;
+        --secondary: #6c63ff;
+        --success: #4caf50;
+        --warning: #ff9800;
+        --danger: #f44336;
+        --light: #f8f9fa;
+        --dark: #343a40;
+        --text: #333;
+        --text-light: #6c757d;
+        --border-radius: 12px;
+        --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        --transition: all 0.3s ease;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
 
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: url('https://github.com/kalvikraft/kalvi-kraft/blob/main/assets/dessert-icon.jpg?raw=true') repeat;
-        background-size: 200px;
-        color: #4b3b2a;
-        margin: 0;
-        padding: 0;
-        position: relative;
+        background: linear-gradient(135deg, #f9f7fe 0%, #fff5f7 100%);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 20px;
     }
 
-    /* Light overlay for readability */
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: rgba(255, 248, 240, 0.9);
-        z-index: -1;
+    .menu-container {
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
-    /* ===== Header ===== */
-    header {
+    /* Header Section */
+    .menu-header {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        padding: 30px;
+        border-radius: var(--border-radius);
+        margin-bottom: 25px;
+        box-shadow: var(--box-shadow);
         text-align: center;
-        padding: 15px 0 10px 0;
-        background-color: #fceee6cc;
-        backdrop-filter: blur(4px);
-        border-bottom: 2px solid #e2c2a0;
+        position: relative;
+        overflow: hidden;
     }
 
-    header img {
-        max-width: 150px;
-        height: auto;
+    .menu-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+        background-size: cover;
+    }
+
+    .logo-container {
+        margin-bottom: 15px;
+    }
+
+    .logo {
+        height: 100px;
+        width: auto;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         animation: floatLogo 3s ease-in-out infinite;
     }
 
@@ -50,263 +80,391 @@
         50% { transform: translateY(-5px); }
     }
 
-    h1 {
-        margin: 10px 0 4px 0;
-        font-size: 1.8rem;
-    }
-
-    header p {
-        margin: 0;
-        font-size: 1rem;
-        color: #6e4f3a;
-    }
-
-    /* ===== Column Menu Layout ===== */
-    .menu-section {
-        column-count: 3;
-        column-gap: 30px;
-        max-width: 100%;
-        width: 90%;
-        margin: 20px auto;
-        padding: 20px 25px;
-        background-color: #f7e5d9d0;
-        border-radius: 14px;
-        box-shadow: 0 4px 14px rgba(100, 50, 0, 0.15);
-        backdrop-filter: blur(6px);
-    }
-
-    h2 {
-        margin-top: 25px;
-        font-size: 1.4rem;
-        text-align: center;
-        padding-bottom: 8px;
-        color: #3d2b1f;
+    .menu-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
         position: relative;
-        break-inside: avoid;
+        z-index: 2;
     }
 
-    h2::after {
-        content: "";
-        position: absolute;
-        width: 40px;
-        height: 3px;
-        background-color: #d1a87c;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        border-radius: 3px;
+    .menu-header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
     }
 
-    .separator {
-        text-align: center;
-        color: #d1a87c;
-        margin: 5px 0 12px 0;
-        font-family: monospace;
-        break-inside: avoid;
+    .opening-hours {
+        background: rgba(255,255,255,0.2);
+        padding: 12px 20px;
+        border-radius: var(--border-radius);
+        display: inline-block;
+        font-weight: 600;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Menu Layout */
+    .menu-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .menu-column {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 25px;
+        box-shadow: var(--box-shadow);
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--primary-light);
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     .menu-item {
-        margin: 10px 0;
-        padding: 10px 12px;
-        background-color: #fff4e8;
-        border-radius: 8px;
-        font-size: 1rem;
-        line-height: 1.3;
-        break-inside: avoid;
-        transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 15px 0;
+        border-bottom: 1px solid #f0f0f0;
+        transition: var(--transition);
     }
 
     .menu-item:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 10px rgba(75, 59, 42, 0.2);
-        background-color: #fff9f3;
+        transform: translateX(5px);
+        background-color: rgba(255, 107, 139, 0.05);
+        border-radius: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
-    .menu-item span.price {
-        float: right;
-        font-weight: bold;
+    .item-info {
+        flex: 1;
     }
 
-    .description {
-        display: block;
+    .item-name {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        color: var(--dark);
+    }
+
+    .item-description {
         font-size: 0.9rem;
-        color: #6e4f3a;
-        margin-top: 2px;
+        color: var(--text-light);
+        line-height: 1.4;
     }
 
-    /* ===== Footer ===== */
-    footer {
-        text-align: center;
-        margin: 25px 0 15px 0;
-        font-size: 0.95rem;
-        color: #6e4f3a;
+    .item-price {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--primary);
+        margin-left: 15px;
+        white-space: nowrap;
     }
 
-    footer .contacts,
-    footer .offers {
-        margin-top: 5px;
-        font-size: 0.9rem;
-    }
-
-    a {
-        color: #4b3b2a;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-        color: #a46b37;
-    }
-
-    /* ===== Ad Section ===== */
+    /* Ad Section */
     .ad-container {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 20px;
+        box-shadow: var(--box-shadow);
+        margin-bottom: 30px;
         text-align: center;
-        margin: 20px 0;
-        break-inside: avoid;
     }
 
-    /* Print optimization */
+    /* Footer */
+    .menu-footer {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 30px;
+        box-shadow: var(--box-shadow);
+        text-align: center;
+    }
+
+    .thank-you {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: var(--dark);
+    }
+
+    .contacts, .offers {
+        margin-bottom: 15px;
+    }
+
+    .contacts a, .offers a {
+        color: var(--secondary);
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+    .contacts a:hover, .offers a:hover {
+        color: var(--primary);
+        text-decoration: underline;
+    }
+
+    /* Print Styles */
     @media print {
         body {
-            background: none !important;
+            background: white !important;
+            padding: 0;
         }
-        body::before {
-            display: none;
-        }
-        .menu-section {
+        .menu-header, .menu-column, .menu-footer {
             box-shadow: none;
-            background: #fff;
+            border: 1px solid #ddd;
         }
         .ad-container {
-            page-break-before: always;
+            display: none;
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .menu-content {
+            grid-template-columns: 1fr;
+        }
+        
+        .menu-header h1 {
+            font-size: 2rem;
+        }
+        
+        .menu-header {
+            padding: 20px;
         }
     }
 </style>
 </head>
 <body>
 
-<header>
-    <img src="assets/OSB_logo.png" alt="One Sweet Bite Logo">
-    <h1>One Sweet Bite (OSB)</h1>
-    <p>Affordable & Delicious Chocolate Treats 🤎</p>
-</header>
-
-<div class="menu-section">
-
-    <h2>☕ HOT CHOCOLATE</h2>
-    <div class="separator">────────────────────</div>
-    <div class="menu-item">🟤 Black Hot Chocolate <span class="price">₹50</span>
-        <span class="description">Rich dark cocoa flavor</span>
-    </div>
-    <div class="menu-item">⚪ White Hot Chocolate <span class="price">₹60</span>
-        <span class="description">Smooth, creamy white chocolate</span>
-    </div>
-    <div class="menu-item">🍶 Black & White Hot Chocolate <span class="price">₹60</span>
-        <span class="description">Blend of dark + white chocolate</span>
+<div class="menu-container">
+    <!-- Header -->
+    <div class="menu-header">
+        <div class="logo-container">
+            <img src="assets/OSB_logo.png" alt="One Sweet Bite Logo" class="logo">
+        </div>
+        <h1>One Sweet Bite (OSB)</h1>
+        <p>Affordable & Delicious Chocolate Treats 🤎</p>
+        <div class="opening-hours">
+            <i class="far fa-clock"></i> Opening Hours: Everyday 4 PM to 10 PM
+        </div>
     </div>
 
-    <h2>🥮 BROWNIES</h2>
-    <div class="separator">────────────────────</div>
-    <div class="menu-item">🍫 Classic Brownie <span class="price">₹50</span>
-        <span class="description">Fudgy and rich</span>
-    </div>
-    <div class="menu-item">🍨 Brownie with Ice Cream <span class="price">₹80</span>
-        <span class="description">Warm brownie + vanilla scoop</span>
-    </div>
-    <div class="menu-item">🍫 Brownie Black <span class="price">₹80</span>
-        <span class="description">With dark chocolate drizzle</span>
-    </div>
-    <div class="menu-item">⚪ Brownie White <span class="price">₹90</span>
-        <span class="description">With white chocolate drizzle</span>
-    </div>
-    <div class="menu-item">🍫⚪ Brownie B&W <span class="price">₹90</span>
-        <span class="description">With both drizzles</span>
+    <!-- Menu Content -->
+    <div class="menu-content">
+        <!-- Column 1 -->
+        <div class="menu-column">
+            <h2 class="section-title">☕ HOT CHOCOLATE</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🟤 Black Hot Chocolate</div>
+                    <div class="item-description">Rich dark cocoa flavor</div>
+                </div>
+                <div class="item-price">₹50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">⚪ White Hot Chocolate</div>
+                    <div class="item-description">Smooth, creamy white chocolate</div>
+                </div>
+                <div class="item-price">₹60</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍶 Black & White Hot Chocolate</div>
+                    <div class="item-description">Blend of dark + white chocolate</div>
+                </div>
+                <div class="item-price">₹60</div>
+            </div>
+
+            <h2 class="section-title">🥮 BROWNIES</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍫 Classic Brownie</div>
+                    <div class="item-description">Fudgy and rich</div>
+                </div>
+                <div class="item-price">₹50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍨 Brownie with Ice Cream</div>
+                    <div class="item-description">Warm brownie + vanilla scoop</div>
+                </div>
+                <div class="item-price">₹80</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍫 Brownie Black</div>
+                    <div class="item-description">With dark chocolate drizzle</div>
+                </div>
+                <div class="item-price">₹80</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">⚪ Brownie White</div>
+                    <div class="item-description">With white chocolate drizzle</div>
+                </div>
+                <div class="item-price">₹90</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍫⚪ Brownie B&W</div>
+                    <div class="item-description">With both drizzles</div>
+                </div>
+                <div class="item-price">₹90</div>
+            </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="menu-column">
+            <h2 class="section-title">🧇 WAFFLES</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🧇 Classic Waffle</div>
+                    <div class="item-description">Crisp golden waffle</div>
+                </div>
+                <div class="item-price">₹60</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍨 Waffle with Ice Cream</div>
+                    <div class="item-description">Warm waffle + ice cream</div>
+                </div>
+                <div class="item-price">₹90</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍫 Waffle with Chocolate Drizzle</div>
+                    <div class="item-description">Choice of black, white, or both</div>
+                </div>
+                <div class="item-price">₹90</div>
+            </div>
+            <h2 class="section-title">🥪 SANDWICHES</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🥪 Veg Sandwich</div>
+                    <div class="item-description">Grilled with veggies & veg mayo</div>
+                </div>
+                <div class="item-price">₹50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🧀 Cheese Sandwich</div>
+                    <div class="item-description">Veg sandwich loaded with cheese</div>
+                </div>
+                <div class="item-price">₹65</div>
+            </div>
+            <h2 class="section-title">😊 MILKSHAKES</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🥤 Rose Milk</div>
+                    <div class="item-description">Creamy rose milk</div>
+                </div>
+                <div class="item-price">₹50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍫 Chocolate Milk</div>
+                    <div class="item-description">Creamy chocolate milk</div>
+                </div>
+                <div class="item-price">₹50</div>
+            </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="menu-column">
+            <h2 class="section-title">🍜 MAGGI</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍜 Classic Maggi</div>
+                    <div class="item-description">Simple & tasty classic Maggi</div>
+                </div>
+                <div class="item-price">₹50</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🧀 Cheesy Maggi</div>
+                    <div class="item-description">Loaded with melted cheese</div>
+                </div>
+                <div class="item-price">₹65</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🥚 Egg Maggi</div>
+                    <div class="item-description">Maggi with egg mix</div>
+                </div>
+                <div class="item-price">₹65</div>
+            </div>
+
+            <h2 class="section-title">🍫✨ COMBOS</h2>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🥤 One Sweet Bite Combo</div>
+                    <div class="item-description">Any Hot Chocolate + Classic Brownie + Classic Waffle + Ice cream</div>
+                </div>
+                <div class="item-price">₹150</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🧇 Choco Treat Combo</div>
+                    <div class="item-description">Any Hot Chocolate + Classic Waffle/Brownie</div>
+                </div>
+                <div class="item-price">₹100</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🥮🧇 Brownie Waffle Combo</div>
+                    <div class="item-description">Classic Brownie + Classic Waffle/Brownie</div>
+                </div>
+                <div class="item-price">₹100</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <div class="item-name">🍜🥪 One Spice Combo</div>
+                    <div class="item-description">Classic Maggi + Classic Sandwich + Ice cream</div>
+                </div>
+                <div class="item-price">₹100</div>
+            </div>
+        </div>
     </div>
 
-    <h2>🧇 WAFFLES</h2>
-    <div class="separator">────────────────────</div>
-    <div class="menu-item">🧇 Classic Waffle <span class="price">₹60</span>
-        <span class="description">Crisp golden waffle</span>
-    </div>
-    <div class="menu-item">🍨 Waffle with Ice Cream <span class="price">₹90</span>
-        <span class="description">Warm waffle + ice cream</span>
-    </div>
-    <div class="menu-item">🍫 Waffle with Chocolate Drizzle <span class="price">₹90</span>
-        <span class="description">Choice of black, white, or both</span>
-    </div>
-
-    <!-- ⭐⭐⭐ NEW MAGGI SECTION ⭐⭐⭐ -->
-    <h2>🍜 MAGGI</h2>
-    <div class="separator">────────────────────</div>
-    <div class="menu-item">🍜 Classic Maggi <span class="price">₹50</span>
-        <span class="description">Simple & tasty classic Maggi</span>
-    </div>
-    <div class="menu-item">🧀 Cheesy Maggi <span class="price">₹65</span>
-        <span class="description">Loaded with melted cheese</span>
-    </div>
-    <div class="menu-item">🥚 Egg Maggi <span class="price">₹65</span>
-        <span class="description">Maggi with egg mix</span>
+    <!-- Google Ad -->
+    <div class="ad-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-client="ca-pub-6602675729982728"
+             data-ad-slot="5336997905"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
-    <h2>🥪 SANDWICHES</h2>
-    <div class="separator">────────────────────</div>
-    <div class="menu-item">🥪 Veg Sandwich <span class="price">₹50</span>
-        <span class="description">Grilled with veggies & veg mayo</span>
-    </div>
-    <div class="menu-item">🧀 Cheese Sandwich <span class="price">₹65</span>
-        <span class="description">Veg sandwich loaded with cheese</span>
-    </div>
-
-    <h2>😊 MILKSHAKES</h2>
-    <div class="separator">────────────────────</div>
-    <div class="menu-item">🥤 Rose Milk <span class="price">₹50</span>
-        <span class="description">Creamy rose milk</span>
-    </div>
-    <div class="menu-item">🍫 Chocolate Milk <span class="price">₹50</span>
-        <span class="description">Creamy chocolate milk</span>
-    </div>
-
-    <h2>🍫✨ COMBOS</h2>
-    <div class="separator">────────────────────</div>
-    <div class="menu-item">🥤 One Sweet Bite Combo <span class="price">₹150</span>
-        <span class="description">Any Hot Chocolate + Classic Brownie + Classic Waffle + Ice cream</span>
-    </div>
-    <div class="menu-item">🧇 Choco Treat Combo <span class="price">₹100</span>
-        <span class="description">Any Hot Chocolate + Classic Waffle/Brownie</span>
-    </div>
-    <div class="menu-item">🥮🧇 Brownie Waffle Combo <span class="price">₹100</span>
-        <span class="description">Classic Brownie + Classic Waffle/Brownie</span>
-    </div>
-    <div class="menu-item">🍜🥪 One Spice Combo <span class="price">₹100</span>
-        <span class="description">Classic Maggi + Classic Sandwich+ Ice cream</span>
+    <!-- Footer -->
+    <div class="menu-footer">
+        <div class="thank-you">💖 Thank you for visiting One Sweet Bite!</div>
+        <div class="contacts">
+            📱 Mobile/Whatsapp: <a href="tel:+919942272631">+91 9942272631</a><br>
+            📸 Instagram: <a href="https://instagram.com/onesweetbite_osb" target="_blank">onesweetbite_osb</a>
+        </div>
+        <div class="offers">
+            🎉 Offers: <a href="https://kalvikraft.in/osb_spin_wheel.html" target="_blank">https://kalvikraft.in/osb_spin_wheel.html</a>
+        </div>
+        <p style="margin-top: 15px; color: var(--text-light);">Follow us for more sweet(update)s 🍪💖</p>
     </div>
 </div>
 
-<!-- Google Ad (kept intact) -->
-<div class="ad-container">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-client="ca-pub-6602675729982728"
-         data-ad-slot="5336997905"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-
-<footer>
-    💬 Thank you for visiting One Sweet Bite!<br>
-    Follow us for more sweet(update)s 🍪💖
-    <div class="contacts">
-        📱 Mobile/Whatsapp: <a href="tel:+919942272631">+91 9942272631</a><br>
-        📸 Instagram: <a href="https://instagram.com/onesweetbite_osb" target="_blank">onesweetbite_osb</a>
-    </div>
-    <div class="offers">
-        🎉 Offers: <a href="https://kalvikraft.in/osb_spin_wheel.html" target="_blank">https://kalvikraft.in/osb_spin_wheel.html</a>
-    </div>
-</footer>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 </body>
 </html>
