@@ -425,15 +425,17 @@
             radial-gradient(circle at 100% 0, rgba(129,140,248,0.16), transparent 65%),
             #020617;
         display: grid;
-        grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
+        grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr) auto;
         gap: 10px;
         font-size: 0.86rem;
         color: var(--muted);
+        align-items: center;
     }
 
     @media (max-width: 768px) {
         .footer {
             grid-template-columns: 1fr;
+            text-align: left;
         }
     }
 
@@ -445,6 +447,16 @@
     .footer a:hover {
         color: #f97316;
         text-decoration: underline;
+    }
+
+    .footer-logo-wrap {
+        justify-self: flex-end;
+    }
+
+    .footer-logo {
+        max-height: 52px;
+        width: auto;
+        filter: drop-shadow(0 4px 10px rgba(0,0,0,0.45));
     }
 
     /* Small note */
@@ -471,7 +483,7 @@
                 <span class="tagline-pill">Affordable &amp; delicious treats 🤎</span>
             </div>
             <p class="hero-sub">
-                Everyday <strong>4:00 PM – 10:00 PM</strong> · Opp. college hangout spot · Cash / UPI accepted.
+                Everyday <strong>4:00 PM – 10:00 PM</strong> · Opp. to ALM School, Adirampattinam. · Cash / UPI accepted.
             </p>
             <div class="hero-meta">
                 <div class="meta-chip">
@@ -525,10 +537,12 @@
         <!-- COLUMN 1 -->
         <section class="menu-panel">
             <div class="section-heading">
-                <h2>Hot Chocolate</h2>
-                <span>Signature drinks</span>
+                <h2>Hot Chocolate &amp; Brownies</h2>
+                <span>Signature sweets</span>
             </div>
             <div class="divider"></div>
+
+            <div class="group-label">Hot Chocolate</div>
 
             <article class="item">
                 <span class="bullet">🟤</span>
@@ -617,6 +631,30 @@
                         <span class="item-price">₹90</span>
                     </div>
                     <p class="item-desc">Best of both: dark and white chocolate drizzles together.</p>
+                </div>
+            </article>
+
+            <div class="group-label">Milkshakes</div>
+
+            <article class="item">
+                <span class="bullet">🥤</span>
+                <div class="item-main">
+                    <div class="item-header">
+                        <span class="item-name">Rose Milk</span>
+                        <span class="item-price">₹50</span>
+                    </div>
+                    <p class="item-desc">Chilled, creamy rose-flavoured milk.</p>
+                </div>
+            </article>
+
+            <article class="item">
+                <span class="bullet">🍫</span>
+                <div class="item-main">
+                    <div class="item-header">
+                        <span class="item-name">Chocolate Milk</span>
+                        <span class="item-price">₹50</span>
+                    </div>
+                    <p class="item-desc">Classic chilled chocolate milkshake style drink.</p>
                 </div>
             </article>
         </section>
@@ -731,30 +769,6 @@
                         <span class="item-price">₹65</span>
                     </div>
                     <p class="item-desc">Egg sandwich packed with gooey cheese.</p>
-                </div>
-            </article>
-
-            <div class="group-label">Milkshakes</div>
-
-            <article class="item">
-                <span class="bullet">🥤</span>
-                <div class="item-main">
-                    <div class="item-header">
-                        <span class="item-name">Rose Milk</span>
-                        <span class="item-price">₹50</span>
-                    </div>
-                    <p class="item-desc">Chilled, creamy rose-flavoured milk.</p>
-                </div>
-            </article>
-
-            <article class="item">
-                <span class="bullet">🍫</span>
-                <div class="item-main">
-                    <div class="item-header">
-                        <span class="item-name">Chocolate Milk</span>
-                        <span class="item-price">₹50</span>
-                    </div>
-                    <p class="item-desc">Classic chilled chocolate milkshake style drink.</p>
                 </div>
             </article>
         </section>
@@ -876,7 +890,7 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER WITH LOGO -->
     <footer class="footer">
         <div>
             <strong>Thank you for visiting One Sweet Bite 💖</strong><br>
@@ -888,10 +902,13 @@
             kalvikraft.in/osb_spin_wheel.html</a><br>
             Follow for new flavours, collabs and seasonal menus.
         </div>
+        <div class="footer-logo-wrap">
+            <img src="assets/OSB_logo.png" alt="One Sweet Bite Logo" class="footer-logo">
+        </div>
     </footer>
 
     <div class="note">
-        Prices inclusive of basic charges. Menu design inspired by modern card layouts.[web:26][web:35]
+        Prices inclusive of basic charges. Menu design designed by Kalvi Kraft. Contact for designs: +91 9942272631.
     </div>
 
 </div>
