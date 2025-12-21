@@ -6,122 +6,289 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Google AdSense -->
-<script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-660267572"
-    crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
 
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: #f4f6fb;
-    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #2c3e50;
+    line-height: 1.6;
 }
 
 /* HEADER */
 header {
-    background: linear-gradient(135deg, #1e1e2f, #34345a);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
-    padding: 50px 20px;
+    padding: 60px 20px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
-header img { width: 90px; margin-bottom: 15px; }
-header h1 { font-size: 40px; margin: 10px 0; }
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+header img { 
+    width: 100px; 
+    height: 100px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+header h1 { 
+    font-size: 48px; 
+    margin: 0 0 15px 0;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+header p { 
+    font-size: 20px; 
+    margin: 0;
+    opacity: 0.95;
+}
 
 /* CONTAINER */
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: auto;
-    padding: 40px 20px;
+    padding: 0 20px 40px;
 }
-.section { margin-bottom: 60px; }
+
+/* ADS */
+.ad {
+    margin: 40px auto;
+    max-width: 100%;
+    padding: 20px 0;
+}
+
+/* APP DESCRIPTION */
+.app-description {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    padding: 50px 40px;
+    border-radius: 25px;
+    margin: 40px 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.app-description h2 {
+    font-size: 36px;
+    color: #1a1a2e;
+    margin-bottom: 25px;
+}
+.app-description p {
+    font-size: 18px;
+    color: #4a5568;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    line-height: 1.8;
+}
+
+/* SECTION */
+.section { 
+    margin-bottom: 80px; 
+}
 .section h2 {
     text-align: center;
-    font-size: 32px;
-    margin-bottom: 35px;
-    color: #1e1e2f;
+    font-size: 38px;
+    margin-bottom: 45px;
+    color: #1a1a2e;
+    position: relative;
+}
+.section h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    margin: 15px auto 0;
+    border-radius: 2px;
 }
 
 /* FEATURES */
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
 }
 .feature-box {
-    background: #fff;
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(15px);
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255,255,255,0.3);
+    position: relative;
+    overflow: hidden;
+}
+.feature-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
 }
 .feature-box img {
     width: 100%;
-    border-radius: 10px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 15px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
 }
-.feature-box img:hover { transform: scale(1.03); }
-.feature-box h3 { margin: 15px 0 10px; }
-.feature-box ul { padding-left: 18px; }
+.feature-box img:hover { 
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+.feature-box h3 { 
+    margin: 0 0 18px 0;
+    font-size: 24px;
+    color: #1a1a2e;
+}
+.feature-box ul { 
+    padding-left: 20px;
+    margin: 0;
+}
+.feature-box li {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #4a5568;
+}
 
 /* PRICING */
-.pricing {
-    background: #fff;
-    padding: 40px;
-    border-radius: 14px;
+.pricing-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 40px;
+    border-radius: 25px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    color: white;
+    box-shadow: 0 25px 70px rgba(102,126,234,0.3);
+    position: relative;
+    overflow: hidden;
+}
+.pricing-section::before {
+    content: '🔥 LIMITED TIME OFFER 🔥';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff4757;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.pricing-section h2 {
+    color: white;
+    font-size: 38px;
+    margin-bottom: 10px;
 }
 .old-price {
     text-decoration: line-through;
-    color: #999;
-    font-size: 22px;
+    color: rgba(255,255,255,0.7);
+    font-size: 24px;
+    margin: 10px 0;
 }
 .new-price {
-    font-size: 48px;
-    color: #e74c3c;
-    font-weight: bold;
+    font-size: 64px;
+    color: #ffd700;
+    font-weight: 800;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    margin: 15px 0;
+}
+.pricing-subtitle {
+    font-size: 18px;
+    margin-bottom: 35px;
+    opacity: 0.95;
 }
 .action-buttons {
-    margin-top: 25px;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
 }
 .call-btn, .wa-btn {
-    padding: 14px 35px;
-    border-radius: 30px;
-    font-size: 18px;
-    font-weight: bold;
+    padding: 18px 45px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
     text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 .call-btn {
-    background: #1e1e2f;
+    background: #ff6b6b;
     color: #fff;
+}
+.call-btn:hover {
+    background: #ff5252;
+    transform: translateY(-3px);
 }
 .wa-btn {
     background: #25D366;
     color: #fff;
 }
+.wa-btn:hover {
+    background: #20b358;
+    transform: translateY(-3px);
+}
 
 /* CONTACT */
 .contact {
     text-align: center;
-    font-size: 18px;
+    background: rgba(255,255,255,0.9);
+    padding: 50px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+.contact h3 {
+    font-size: 28px;
+    color: #1a1a2e;
+    margin-bottom: 30px;
+}
+.contact p {
+    font-size: 20px;
+    margin: 15px 0;
 }
 .contact a {
-    font-weight: bold;
+    font-weight: 700;
     text-decoration: none;
+    transition: all 0.3s ease;
+}
+.contact a:hover {
+    text-shadow: 0 2px 10px rgba(37,211,102,0.5);
 }
 
 /* FOOTER */
 footer {
-    background: #1e1e2f;
-    color: #aaa;
+    background: #1a1a2e;
+    color: #bdc3c7;
     text-align: center;
-    padding: 20px;
-    font-size: 14px;
+    padding: 30px 20px;
+    font-size: 15px;
 }
 
 /* LIGHTBOX */
@@ -133,22 +300,36 @@ footer {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.92);
     justify-content: center;
     align-items: center;
 }
 .lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
+    max-width: 92%;
+    max-height: 92%;
+    border-radius: 15px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
 }
 .lightbox span {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 35px;
+    top: 30px;
+    right: 40px;
+    font-size: 40px;
     color: #fff;
     cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+.lightbox span:hover { color: #ff6b6b; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    header h1 { font-size: 36px; }
+    .app-description, .pricing-section, .contact { padding: 30px 20px; }
+    .new-price { font-size: 48px; }
+    .action-buttons { flex-direction: column; align-items: center; }
+    .call-btn, .wa-btn { width: 100%; max-width: 300px; }
+    .features { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -158,123 +339,180 @@ footer {
 <header>
     <img src="assets/logo.png" alt="Kalvi Kraft Logo">
     <h1>Kalvi Kraft Billing Software</h1>
-    <p>Professional Desktop Billing & POS Solution</p>
+    <p>Professional Desktop Billing & POS Solution for Small Businesses</p>
 </header>
 
 <div class="container">
 
-<!-- ADS -->
-<div class="section">
+<!-- FIRST AD -->
+<div class="ad">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
+    <!-- kalvikraft 1 -->
     <ins class="adsbygoogle"
          style="display:block"
-         data-ad-client="ca-pub-660267572"
-         data-ad-slot="5336997905"
+         data-ad-client="ca-pub-6602675729982728"
+         data-ad-slot="9131927510"
          data-ad-format="auto"
          data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
+<!-- APP DESCRIPTION -->
+<div class="app-description">
+    <h2>🚀 Transform Your Business Operations</h2>
+    <p>Kalvi Kraft is a fully <strong>customizable desktop billing software</strong> designed for small businesses. Edit your logo, store name, address, and contact details. Configure discount settings (before or after GST) and set default GST rates. Enjoy lifetime access with one-time payment and regular updates.</p>
+</div>
+
 <!-- FEATURES -->
 <div class="section">
-<h2>Key Features</h2>
-<div class="features">
+    <h2>Key Features</h2>
+    <div class="features">
 
-<div class="feature-box">
-<img src="assets/dash.jpg" onclick="openLightbox(this.src)">
-<h3>📊 Dashboard</h3>
-<ul><li>Daily & Monthly Sales</li><li>Profit Tracking</li><li>Low Stock Alerts</li></ul>
+        <div class="feature-box">
+            <img src="assets/dash.jpg" onclick="openLightbox(this.src)" alt="Dashboard">
+            <h3>📊 Dashboard</h3>
+            <ul>
+                <li>Daily & Monthly Sales Overview</li>
+                <li>Real-time Profit Tracking</li>
+                <li>Low Stock & Expiry Alerts</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <img src="assets/bill.jpg" onclick="openLightbox(this.src)" alt="Billing POS">
+            <h3>🧾 Billing (POS)</h3>
+            <ul>
+                <li>Barcode Scanning Support</li>
+                <li>Cash, UPI, Card Payments</li>
+                <li>Automatic GST Calculation</li>
+                <li>Thermal & A4 Print Support</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <img src="assets/inv.jpg" onclick="openLightbox(this.src)" alt="Inventory">
+            <h3>📦 Inventory Management</h3>
+            <ul>
+                <li>Add/Edit/Delete Products</li>
+                <li>Real-time Stock Tracking</li>
+                <li>Barcode Generation</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <img src="assets/exp.jpg" onclick="openLightbox(this.src)" alt="Expenses">
+            <h3>💵 Expenses Tracking</h3>
+            <ul>
+                <li>Add/Edit/Delete Expenses</li>
+                <li>Category-wise Tracking</li>
+                <li>Monthly Expenses Summary</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <img src="assets/cust.jpg" onclick="openLightbox(this.src)" alt="Customers">
+            <h3>👥 Customer Management</h3>
+            <ul>
+                <li>Complete Customer Database</li>
+                <li>Transaction History</li>
+                <li>Loyalty Points System</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <img src="assets/rep.jpg" onclick="openLightbox(this.src)" alt="Reports">
+            <h3>📈 Advanced Reports</h3>
+            <ul>
+                <li>Sales & Expense Reports</li>
+                <li>Stock & Inventory Reports</li>
+                <li>CSV/PDF Export Options</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <img src="assets/user.jpg" onclick="openLightbox(this.src)" alt="User Management">
+            <h3>🔐 User Management</h3>
+            <ul>
+                <li>Add/Edit/Delete Users</li>
+                <li>Admin & Staff Roles</li>
+                <li>Secure Login/Logout</li>
+            </ul>
+        </div>
+
+        <div class="feature-box">
+            <img src="assets/set.jpg" onclick="openLightbox(this.src)" alt="Settings">
+            <h3>⚙️ Full Customization</h3>
+            <ul>
+                <li>Shop Details & Logo</li>
+                <li>GST & Discount Settings</li>
+                <li>Backup & Restore</li>
+            </ul>
+        </div>
+
+    </div>
 </div>
 
-<div class="feature-box">
-<img src="assets/bill.jpg" onclick="openLightbox(this.src)">
-<h3>🧾 Billing (POS)</h3>
-<ul><li>Barcode Scanning</li><li>Cash, UPI, Card</li><li>GST Calculation</li><li>Thermal & A4 Print</li></ul>
-</div>
-
-<div class="feature-box">
-<img src="assets/inv.jpg" onclick="openLightbox(this.src)">
-<h3>📦 Inventory</h3>
-<ul><li>Add / Edit / Delete</li><li>Stock Tracking</li><li>Barcode Generation</li></ul>
-</div>
-
-<div class="feature-box">
-<img src="assets/exp.jpg" onclick="openLightbox(this.src)">
-<h3>💵 Expensens</h3>
-<ul><li>Add / Edit / Delete</li><li>Expenses Tracking</li><li>Expenses Summary</li></ul>
-</div>
-
-<div class="feature-box">
-<img src="assets/cust.jpg" onclick="openLightbox(this.src)">
-<h3>👥 Customers</h3>
-<ul><li>Customer Database</li><li>Transaction History</li><li>Loyalty Points</li></ul>
-</div>
-
-<div class="feature-box">
-<img src="assets/rep.jpg" onclick="openLightbox(this.src)">
-<h3>📈 Reports</h3>
-<ul><li>Sales & Expense Reports</li><li>Stock Reports</li><li>CSV / PDF Export</li></ul>
-</div>
-
-<div class="feature-box">
-<img src="assets/user.jpg" onclick="openLightbox(this.src)">
-<h3>🔐 User Management</h3>
-<ul><li>Admin / Staff</li><li>Login / Logout</li></ul>
-</div>
-
-<div class="feature-box">
-<img src="assets/set.jpg" onclick="openLightbox(this.src)">
-<h3>⚙️ Settings</h3>
-<ul><li>Shop Details</li><li>Logo Upload</li><li>Backup & Restore</li></ul>
-</div>
-
-</div>
+<!-- SECOND AD -->
+<div class="ad">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
+    <!-- kalvikraft2 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6602675729982728"
+         data-ad-slot="2215165376"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
 <!-- PRICING -->
 <div class="section">
-<h2>Limited Time Offer</h2>
-<div class="pricing">
-<p class="old-price">₹ 5,000</p>
-<p class="new-price">₹ 2,500</p>
-<p>One-Time Purchase • Lifetime Use</p>
-
-<div class="action-buttons">
-<a href="tel:+919942272631" class="call-btn">📞 Call Now</a>
-<a href="https://wa.me/919942272631" target="_blank" class="wa-btn">💬 WhatsApp Now</a>
-</div>
-</div>
+    <div class="pricing-section">
+        <h2>One-Time Payment</h2>
+        <p class="old-price">₹ 5,000</p>
+        <p class="new-price">₹ 2,500</p>
+        <p class="pricing-subtitle">Lifetime License • No Recurring Fees</p>
+        <div class="action-buttons">
+            <a href="tel:+919942272631" class="call-btn">📞 Call Now</a>
+            <a href="https://wa.me/919942272631" target="_blank" class="wa-btn">💬 WhatsApp</a>
+        </div>
+    </div>
 </div>
 
 <!-- CONTACT -->
 <div class="section contact">
-<p>📞 +91 99422 72631</p>
-<p>💬 <a href="https://wa.me/919942272631" target="_blank" style="color:#25D366;">Chat on WhatsApp</a></p>
-<p>📧 kalvikraft@gmail.com</p>
+    <h3>Ready to Get Started?</h3>
+    <p>📞 <a href="tel:+919942272631">+91 99422 72631</a></p>
+    <p>💬 <a href="https://wa.me/919942272631" target="_blank">Chat on WhatsApp</a></p>
+    <p>📧 <a href="mailto:kalvikraft@gmail.com">kalvikraft@gmail.com</a></p>
 </div>
 
 </div>
 
 <footer>
-© 2025 Kalvi Kraft Billing Software | Developed by Kalvi Kraft.
+    © 2025 Kalvi Kraft Billing Software | Developed by Kalvi Kraft | All Rights Reserved | Update Policies may change.
 </footer>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-<span onclick="closeLightbox()">×</span>
-<img id="lightboxImg">
+    <span onclick="closeLightbox()">×</span>
+    <img id="lightboxImg">
 </div>
 
 <script>
 function openLightbox(src) {
     document.getElementById("lightbox").style.display = "flex";
     document.getElementById("lightboxImg").src = src;
+    document.body.style.overflow = "hidden";
 }
 function closeLightbox() {
     document.getElementById("lightbox").style.display = "none";
+    document.body.style.overflow = "auto";
 }
+document.getElementById("lightbox").onclick = function(e) {
+    if (e.target === this) closeLightbox();
+};
 </script>
 
 </body>
 </html>
-
-
