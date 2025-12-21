@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Kalvi Kraft Billing Software</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="HandheldFriendly" content="true">
 
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
@@ -15,6 +16,7 @@ body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     color: #2c3e50;
     line-height: 1.6;
+    touch-action: manipulation;
 }
 
 /* HEADER */
@@ -67,6 +69,13 @@ header p {
     margin: 40px auto;
     max-width: 100%;
     padding: 20px 0;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+}
+
+/* SPACER */
+.spacer {
+    height: 60px;
 }
 
 /* APP DESCRIPTION */
@@ -152,6 +161,7 @@ header p {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-bottom: 20px;
+    touch-action: manipulation;
 }
 .feature-box img:hover { 
     transform: scale(1.05);
@@ -173,28 +183,36 @@ header p {
 }
 
 /* PRICING */
+.pricing-wrapper {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    padding: 40px 20px;
+    border-radius: 25px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.2);
+}
 .pricing-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 60px 40px;
+    padding: 70px 50px;
     border-radius: 25px;
     text-align: center;
     color: white;
-    box-shadow: 0 25px 70px rgba(102,126,234,0.3);
+    box-shadow: 0 25px 70px rgba(102,126,234,0.4);
     position: relative;
     overflow: hidden;
+    max-width: 600px;
+    margin: 0 auto;
 }
-.pricing-section::before {
-    content: '🔥 LIMITED TIME OFFER 🔥';
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ff4757;
-    color: white;
-    padding: 10px 30px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: bold;
+.pricing-badge {
+    background: #ffd700;
+    color: #1a1a2e;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: inline-block;
+    box-shadow: 0 8px 25px rgba(255,215,0,0.4);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -238,12 +256,13 @@ header p {
     align-items: center;
     gap: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    touch-action: manipulation;
 }
 .call-btn {
     background: #ff6b6b;
     color: #fff;
 }
-.call-btn:hover {
+.call-btn:hover, .call-btn:active {
     background: #ff5252;
     transform: translateY(-3px);
 }
@@ -251,7 +270,7 @@ header p {
     background: #25D366;
     color: #fff;
 }
-.wa-btn:hover {
+.wa-btn:hover, .wa-btn:active {
     background: #20b358;
     transform: translateY(-3px);
 }
@@ -295,7 +314,7 @@ footer {
 .lightbox {
     display: none;
     position: fixed;
-    z-index: 9999;
+    z-index: 10000;
     left: 0;
     top: 0;
     width: 100%;
@@ -309,6 +328,7 @@ footer {
     max-height: 92%;
     border-radius: 15px;
     box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    touch-action: manipulation;
 }
 .lightbox span {
     position: absolute;
@@ -319,6 +339,8 @@ footer {
     cursor: pointer;
     font-weight: bold;
     transition: color 0.3s;
+    z-index: 10001;
+    touch-action: manipulation;
 }
 .lightbox span:hover { color: #ff6b6b; }
 
@@ -330,6 +352,7 @@ footer {
     .action-buttons { flex-direction: column; align-items: center; }
     .call-btn, .wa-btn { width: 100%; max-width: 300px; }
     .features { grid-template-columns: 1fr; }
+    .pricing-section { padding: 50px 30px; }
 }
 </style>
 </head>
@@ -465,9 +488,13 @@ footer {
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
+<!-- SPACER -->
+<div class="spacer"></div>
+
 <!-- PRICING -->
-<div class="section">
+<div class="pricing-wrapper">
     <div class="pricing-section">
+        <div class="pricing-badge">💰 Buy Kalvi Kraft App</div>
         <h2>One-Time Payment</h2>
         <p class="old-price">₹ 5,000</p>
         <p class="new-price">₹ 2,500</p>
@@ -500,18 +527,61 @@ footer {
 </div>
 
 <script>
+let lightboxOpen = false;
+
 function openLightbox(src) {
-    document.getElementById("lightbox").style.display = "flex";
-    document.getElementById("lightboxImg").src = src;
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    
+    lightboxImg.src = src;
+    lightbox.style.display = "flex";
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    lightboxOpen = true;
+    
+    // Prevent back button from closing page
+    history.pushState(null, null, location.href);
 }
+
 function closeLightbox() {
-    document.getElementById("lightbox").style.display = "none";
+    const lightbox = document.getElementById("lightbox");
+    lightbox.style.display = "none";
     document.body.style.overflow = "auto";
+    document.body.style.position = "";
+    lightboxOpen = false;
 }
+
+// Close lightbox on outside click
 document.getElementById("lightbox").onclick = function(e) {
-    if (e.target === this) closeLightbox();
+    if (e.target === this) {
+        closeLightbox();
+    }
 };
+
+// Prevent back button from closing page when lightbox is open
+window.onpopstate = function(event) {
+    if (lightboxOpen) {
+        history.pushState(null, null, location.href);
+        return false;
+    }
+};
+
+// Close lightbox with ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightboxOpen) {
+        closeLightbox();
+    }
+});
+
+// Prevent double tap zoom
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
 </script>
 
 </body>
