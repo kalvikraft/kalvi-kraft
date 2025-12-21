@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kalvi Kraft Billing Software</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google AdSense -->
+<script async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-660267572"
+    crossorigin="anonymous"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f6fb;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #1e1e2f, #34345a);
+    color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
+header img { width: 90px; margin-bottom: 15px; }
+header h1 { font-size: 40px; margin: 10px 0; }
+
+/* CONTAINER */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 20px;
+}
+.section { margin-bottom: 60px; }
+.section h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 35px;
+    color: #1e1e2f;
+}
+
+/* FEATURES */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+.feature-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+.feature-box img {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.feature-box img:hover { transform: scale(1.03); }
+.feature-box h3 { margin: 15px 0 10px; }
+.feature-box ul { padding-left: 18px; }
+
+/* PRICING */
+.pricing {
+    background: #fff;
+    padding: 40px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 22px;
+}
+.new-price {
+    font-size: 48px;
+    color: #e74c3c;
+    font-weight: bold;
+}
+.action-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.call-btn, .wa-btn {
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.call-btn {
+    background: #1e1e2f;
+    color: #fff;
+}
+.wa-btn {
+    background: #25D366;
+    color: #fff;
+}
+
+/* CONTACT */
+.contact {
+    text-align: center;
+    font-size: 18px;
+}
+.contact a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+    background: #1e1e2f;
+    color: #aaa;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+}
+
+/* LIGHTBOX */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+}
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+}
+.lightbox span {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 35px;
+    color: #fff;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/logo.png" alt="Kalvi Kraft Logo">
+    <h1>Kalvi Kraft Billing Software</h1>
+    <p>Professional Desktop Billing & POS Solution</p>
+</header>
+
+<div class="container">
+
+<!-- ADS -->
+<div class="section">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-660267572"
+         data-ad-slot="5336997905"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+<h2>Key Features</h2>
+<div class="features">
+
+<div class="feature-box">
+<img src="assets/dash.png" onclick="openLightbox(this.src)">
+<h3>📊 Dashboard</h3>
+<ul><li>Daily & Monthly Sales</li><li>Profit Tracking</li><li>Low Stock Alerts</li></ul>
+</div>
+
+<div class="feature-box">
+<img src="assets/bill.png" onclick="openLightbox(this.src)">
+<h3>🧾 Billing (POS)</h3>
+<ul><li>Barcode Scanning</li><li>Cash, UPI, Card</li><li>GST Calculation</li><li>Thermal & A4 Print</li></ul>
+</div>
+
+<div class="feature-box">
+<img src="assets/inv.png" onclick="openLightbox(this.src)">
+<h3>📦 Inventory</h3>
+<ul><li>Add / Edit / Delete</li><li>Stock Tracking</li><li>Barcode Generation</li></ul>
+</div>
+
+<div class="feature-box">
+<img src="assets/cust.png" onclick="openLightbox(this.src)">
+<h3>👥 Customers</h3>
+<ul><li>Customer Database</li><li>Transaction History</li><li>Loyalty Points</li></ul>
+</div>
+
+<div class="feature-box">
+<img src="assets/rep.png" onclick="openLightbox(this.src)">
+<h3>📈 Reports</h3>
+<ul><li>Sales & Expense Reports</li><li>Stock Reports</li><li>CSV / PDF Export</li></ul>
+</div>
+
+<div class="feature-box">
+<img src="assets/user.png" onclick="openLightbox(this.src)">
+<h3>🔐 User Management</h3>
+<ul><li>Admin / Staff</li><li>Login / Logout</li></ul>
+</div>
+
+<div class="feature-box">
+<img src="assets/set.png" onclick="openLightbox(this.src)">
+<h3>⚙️ Settings</h3>
+<ul><li>Shop Details</li><li>Logo Upload</li><li>Backup & Restore</li></ul>
+</div>
+
+</div>
+</div>
+
+<!-- PRICING -->
+<div class="section">
+<h2>Limited Time Offer</h2>
+<div class="pricing">
+<p class="old-price">₹ 5,000</p>
+<p class="new-price">₹ 2,500</p>
+<p>One-Time Purchase • Lifetime Use</p>
+
+<div class="action-buttons">
+<a href="tel:+919942272631" class="call-btn">📞 Call Now</a>
+<a href="https://wa.me/919942272631" target="_blank" class="wa-btn">💬 WhatsApp Now</a>
+</div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div class="section contact">
+<p>📞 +91 99422 72631</p>
+<p>💬 <a href="https://wa.me/919942272631" target="_blank" style="color:#25D366;">Chat on WhatsApp</a></p>
+<p>📧 kalvikraft@gmail.com</p>
+</div>
+
+</div>
+
+<footer>
+© 2025 Kalvi Kraft Billing Software | Developed by Kalvi Kraft.
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+<span onclick="closeLightbox()">×</span>
+<img id="lightboxImg">
+</div>
+
+<script>
+function openLightbox(src) {
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightboxImg").src = src;
+}
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+</script>
+
+</body>
+</html>
