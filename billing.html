@@ -3,372 +3,656 @@
 <head>
 <meta charset="UTF-8">
 <title>Kalvi Kraft Billing Software</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <meta name="HandheldFriendly" content="true">
+<meta name="theme-color" content="#667eea">
 
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
 
 <style>
-body {
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --accent-color: #ff6b6b;
+    --success-color: #25D366;
+    --gold-color: #ffd700;
+    --text-dark: #1a1a2e;
+    --text-medium: #4a5568;
+    --text-light: #fff;
+    --shadow-light: 0 10px 30px rgba(0,0,0,0.1);
+    --shadow-medium: 0 15px 40px rgba(0,0,0,0.15);
+    --shadow-heavy: 0 20px 60px rgba(0,0,0,0.2);
+    --border-radius: 20px;
+    --transition: all 0.3s ease;
+}
+
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    color: #2c3e50;
+    background: var(--secondary-gradient);
+    color: var(--text-dark);
     line-height: 1.6;
-    touch-action: manipulation;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* IMPROVED TOUCH HANDLING */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    touch-action: pan-y pinch-zoom;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* HEADER */
-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
-    padding: 60px 20px;
+.header {
+    background: var(--primary-gradient);
+    color: var(--text-light);
+    padding: 4rem 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
 }
-header::before {
+
+.header::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.3;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
 }
-header img { 
-    width: 100px; 
-    height: 100px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
 }
-header h1 { 
-    font-size: 48px; 
-    margin: 0 0 15px 0;
-    font-weight: 700;
+
+.logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.5rem;
+    border-radius: 25px;
+    box-shadow: var(--shadow-heavy);
+    background: white;
+    padding: 10px;
+    object-fit: contain;
+}
+
+.header h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1rem;
+    font-weight: 800;
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    line-height: 1.2;
 }
-header p { 
-    font-size: 20px; 
-    margin: 0;
+
+.header-tagline {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
     opacity: 0.95;
+    font-weight: 300;
 }
 
 /* CONTAINER */
 .container {
     max-width: 1300px;
-    margin: auto;
-    padding: 0 20px 40px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
 }
 
 /* ADS */
-.ad {
-    margin: 40px auto;
-    max-width: 100%;
-    padding: 20px 0;
-    border-radius: 15px;
+.ad-container {
+    margin: 3rem auto;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
     background: rgba(255,255,255,0.1);
-}
-
-/* SPACER */
-.spacer {
-    height: 60px;
-}
-
-/* APP DESCRIPTION */
-.app-description {
-    background: rgba(255,255,255,0.95);
     backdrop-filter: blur(10px);
-    padding: 50px 40px;
-    border-radius: 25px;
-    margin: 40px 0;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    text-align: center;
     border: 1px solid rgba(255,255,255,0.2);
 }
-.app-description h2 {
-    font-size: 36px;
-    color: #1a1a2e;
-    margin-bottom: 25px;
+
+/* HERO SECTION */
+.hero {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(15px);
+    padding: clamp(2.5rem, 5vw, 4rem);
+    border-radius: var(--border-radius);
+    margin: 2rem 0 4rem;
+    box-shadow: var(--shadow-light);
+    border: 1px solid rgba(255,255,255,0.3);
+    text-align: center;
 }
-.app-description p {
-    font-size: 18px;
-    color: #4a5568;
-    max-width: 900px;
-    margin: 0 auto 30px;
+
+.hero h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.hero h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-medium);
+    max-width: 800px;
+    margin: 0 auto 2rem;
     line-height: 1.8;
 }
 
-/* SECTION */
-.section { 
-    margin-bottom: 80px; 
+.highlight {
+    background: linear-gradient(120deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    font-weight: 600;
 }
-.section h2 {
+
+/* FEATURES GRID */
+.section-title {
     text-align: center;
-    font-size: 38px;
-    margin-bottom: 45px;
-    color: #1a1a2e;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 3rem;
+    color: var(--text-dark);
     position: relative;
 }
-.section h2::after {
+
+.section-title::after {
     content: '';
     display: block;
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    margin: 15px auto 0;
+    background: var(--primary-gradient);
+    margin: 1rem auto 0;
     border-radius: 2px;
 }
 
-/* FEATURES */
-.features {
+.features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
 }
-.feature-box {
+
+.feature-card {
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(15px);
-    padding: 30px 25px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-    transition: all 0.4s ease;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: var(--transition);
     border: 1px solid rgba(255,255,255,0.3);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
-.feature-box::before {
+
+.feature-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: var(--primary-gradient);
 }
-.feature-box:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
 }
-.feature-box img {
+
+.feature-image {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
     border-radius: 15px;
+    margin-bottom: 1.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-    touch-action: manipulation;
+    transition: var(--transition);
+    -webkit-tap-highlight-color: transparent;
 }
-.feature-box img:hover { 
-    transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+
+.feature-image:hover {
+    transform: scale(1.03);
 }
-.feature-box h3 { 
-    margin: 0 0 18px 0;
-    font-size: 24px;
-    color: #1a1a2e;
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
-.feature-box ul { 
-    padding-left: 20px;
+
+.feature-list {
+    list-style: none;
+    padding: 0;
     margin: 0;
+    flex-grow: 1;
 }
-.feature-box li {
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #4a5568;
+
+.feature-list li {
+    padding: 0.5rem 0;
+    color: var(--text-medium);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.feature-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
 }
 
 /* PRICING */
-.pricing-wrapper {
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    padding: 40px 20px;
-    border-radius: 25px;
-    margin: 20px 0;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.2);
-}
 .pricing-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 70px 50px;
-    border-radius: 25px;
+    background: var(--primary-gradient);
+    padding: clamp(3rem, 5vw, 5rem);
+    border-radius: var(--border-radius);
     text-align: center;
-    color: white;
+    color: var(--text-light);
     box-shadow: 0 25px 70px rgba(102,126,234,0.4);
     position: relative;
     overflow: hidden;
+    margin: 4rem 0;
+}
+
+.pricing-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255,255,255,0.05) 0%, transparent 40%);
+}
+
+.pricing-content {
+    position: relative;
+    z-index: 2;
     max-width: 600px;
     margin: 0 auto;
 }
-.pricing-badge {
-    background: #ffd700;
-    color: #1a1a2e;
-    padding: 12px 30px;
+
+.price-badge {
+    background: var(--gold-color);
+    color: var(--text-dark);
+    padding: 0.8rem 2rem;
     border-radius: 50px;
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
     display: inline-block;
     box-shadow: 0 8px 25px rgba(255,215,0,0.4);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-.pricing-section h2 {
-    color: white;
-    font-size: 38px;
-    margin-bottom: 10px;
-}
-.old-price {
-    text-decoration: line-through;
-    color: rgba(255,255,255,0.7);
-    font-size: 24px;
-    margin: 10px 0;
-}
-.new-price {
-    font-size: 64px;
-    color: #ffd700;
+
+.price-amount {
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: var(--gold-color);
     font-weight: 800;
     text-shadow: 0 3px 10px rgba(0,0,0,0.3);
-    margin: 15px 0;
+    margin: 1rem 0;
+    line-height: 1;
 }
-.pricing-subtitle {
-    font-size: 18px;
-    margin-bottom: 35px;
+
+.price-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
     opacity: 0.95;
 }
+
+/* BUTTONS */
 .action-buttons {
     display: flex;
-    justify-content: center;
-    gap: 25px;
     flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-top: 2rem;
 }
-.call-btn, .wa-btn {
-    padding: 18px 45px;
-    border-radius: 50px;
-    font-size: 20px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s ease;
+
+.btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    cursor: pointer;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
+    min-height: 60px;
 }
-.call-btn {
-    background: #ff6b6b;
-    color: #fff;
-}
-.call-btn:hover, .call-btn:active {
-    background: #ff5252;
+
+.btn:hover {
     transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
-.wa-btn {
-    background: #25D366;
-    color: #fff;
+
+.btn:active {
+    transform: translateY(-1px);
 }
-.wa-btn:hover, .wa-btn:active {
-    background: #20b358;
-    transform: translateY(-3px);
+
+.btn-call {
+    background: var(--accent-color);
+    color: var(--text-light);
+}
+
+.btn-whatsapp {
+    background: var(--success-color);
+    color: var(--text-light);
+}
+
+.btn-icon {
+    font-size: 1.3rem;
 }
 
 /* CONTACT */
-.contact {
-    text-align: center;
+.contact-section {
     background: rgba(255,255,255,0.9);
-    padding: 50px 30px;
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    padding: 3rem 2rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    margin: 4rem 0;
 }
-.contact h3 {
-    font-size: 28px;
-    color: #1a1a2e;
-    margin-bottom: 30px;
+
+.contact-section h3 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
 }
-.contact p {
-    font-size: 20px;
-    margin: 15px 0;
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
 }
-.contact a {
-    font-weight: 700;
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.2rem;
+    color: var(--text-medium);
+}
+
+.contact-link {
+    color: var(--text-dark);
     text-decoration: none;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    transition: var(--transition);
+    border-bottom: 2px solid transparent;
 }
-.contact a:hover {
-    text-shadow: 0 2px 10px rgba(37,211,102,0.5);
+
+.contact-link:hover {
+    color: #667eea;
+    border-bottom-color: #667eea;
 }
 
 /* FOOTER */
-footer {
-    background: #1a1a2e;
+.footer {
+    background: var(--text-dark);
     color: #bdc3c7;
     text-align: center;
-    padding: 30px 20px;
-    font-size: 15px;
+    padding: 2.5rem 1.5rem;
+    font-size: 0.95rem;
+    margin-top: 4rem;
 }
 
-/* LIGHTBOX */
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* LIGHTBOX - IMPROVED */
 .lightbox {
     display: none;
     position: fixed;
-    z-index: 10000;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.92);
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    touch-action: pan-y pinch-zoom;
+}
+
+.lightbox.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 95%;
+    max-height: 95%;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.lightbox img {
-    max-width: 92%;
-    max-height: 92%;
-    border-radius: 15px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-    touch-action: manipulation;
+
+.lightbox-img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    -webkit-user-drag: none;
+    user-select: none;
+    touch-action: pan-y pinch-zoom;
 }
-.lightbox span {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 40px;
-    color: #fff;
+
+.lightbox-close {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    font-size: 3rem;
+    color: white;
     cursor: pointer;
-    font-weight: bold;
-    transition: color 0.3s;
-    z-index: 10001;
-    touch-action: manipulation;
+    z-index: 10000;
+    background: none;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
 }
-.lightbox span:hover { color: #ff6b6b; }
+
+.lightbox-close:hover {
+    color: var(--accent-color);
+}
+
+/* BACK BUTTON OVERLAY */
+.back-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 9998;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.back-overlay.active {
+    display: flex;
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    header h1 { font-size: 36px; }
-    .app-description, .pricing-section, .contact { padding: 30px 20px; }
-    .new-price { font-size: 48px; }
-    .action-buttons { flex-direction: column; align-items: center; }
-    .call-btn, .wa-btn { width: 100%; max-width: 300px; }
-    .features { grid-template-columns: 1fr; }
-    .pricing-section { padding: 50px 30px; }
+    .container {
+        padding: 0 1rem 2rem;
+    }
+    
+    .header {
+        padding: 3rem 1rem;
+    }
+    
+    .logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature-card {
+        padding: 1.5rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .pricing-section {
+        padding: 2.5rem 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .lightbox-close {
+        top: 10px;
+        right: 20px;
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 2rem 1rem;
+    }
+    
+    .price-amount {
+        font-size: 2.5rem;
+    }
+    
+    .btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feature-card {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.feature-card:nth-child(2) { animation-delay: 0.1s; }
+.feature-card:nth-child(3) { animation-delay: 0.2s; }
+.feature-card:nth-child(4) { animation-delay: 0.3s; }
+.feature-card:nth-child(5) { animation-delay: 0.4s; }
+.feature-card:nth-child(6) { animation-delay: 0.5s; }
+.feature-card:nth-child(7) { animation-delay: 0.6s; }
+.feature-card:nth-child(8) { animation-delay: 0.7s; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4192 100%);
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <img src="assets/logo.png" alt="Kalvi Kraft Logo">
-    <h1>Kalvi Kraft Billing Software</h1>
-    <p>Professional Desktop Billing & POS Solution for Small Businesses</p>
+<!-- HEADER -->
+<header class="header">
+    <div class="header-content">
+        <img src="assets/logo.png" alt="Kalvi Kraft Logo" class="logo">
+        <h1>Kalvi Kraft Billing Software</h1>
+        <p class="header-tagline">Professional Desktop Billing & POS Solution for Small Businesses</p>
+    </div>
 </header>
 
 <div class="container">
 
 <!-- FIRST AD -->
-<div class="ad">
+<div class="ad-container">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
     <!-- kalvikraft 1 -->
     <ins class="adsbygoogle"
@@ -380,103 +664,103 @@ footer {
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- APP DESCRIPTION -->
-<div class="app-description">
+<!-- HERO SECTION -->
+<section class="hero">
     <h2>🚀 Transform Your Business Operations</h2>
-    <p>Kalvi Kraft is a fully <strong>customizable desktop billing software</strong> designed for small businesses. Edit your logo, store name, address, and contact details. Configure discount settings (before or after GST) and set default GST rates. Enjoy lifetime access with one-time payment and regular updates.</p>
-</div>
+    <p class="hero-description">
+        Kalvi Kraft is a fully <span class="highlight">customizable desktop billing software</span> designed for small businesses. Edit your logo, store name, address, and contact details. Configure discount settings (before or after GST) and set default GST rates. Enjoy lifetime access with one-time payment and regular updates.
+    </p>
+</section>
 
 <!-- FEATURES -->
-<div class="section">
-    <h2>Key Features</h2>
-    <div class="features">
+<h2 class="section-title">Key Features</h2>
+<div class="features-grid">
 
-        <div class="feature-box">
-            <img src="assets/dash.jpg" onclick="openLightbox(this.src)" alt="Dashboard">
-            <h3>📊 Dashboard</h3>
-            <ul>
-                <li>Daily & Monthly Sales Overview</li>
-                <li>Real-time Profit Tracking</li>
-                <li>Low Stock & Expiry Alerts</li>
-            </ul>
-        </div>
-
-        <div class="feature-box">
-            <img src="assets/bill.jpg" onclick="openLightbox(this.src)" alt="Billing POS">
-            <h3>🧾 Billing (POS)</h3>
-            <ul>
-                <li>Barcode Scanning Support</li>
-                <li>Cash, UPI, Card Payments</li>
-                <li>Automatic GST Calculation</li>
-                <li>Thermal & A4 Print Support</li>
-            </ul>
-        </div>
-
-        <div class="feature-box">
-            <img src="assets/inv.jpg" onclick="openLightbox(this.src)" alt="Inventory">
-            <h3>📦 Inventory Management</h3>
-            <ul>
-                <li>Add/Edit/Delete Products</li>
-                <li>Real-time Stock Tracking</li>
-                <li>Barcode Generation</li>
-            </ul>
-        </div>
-
-        <div class="feature-box">
-            <img src="assets/exp.jpg" onclick="openLightbox(this.src)" alt="Expenses">
-            <h3>💵 Expenses Tracking</h3>
-            <ul>
-                <li>Add/Edit/Delete Expenses</li>
-                <li>Category-wise Tracking</li>
-                <li>Monthly Expenses Summary</li>
-            </ul>
-        </div>
-
-        <div class="feature-box">
-            <img src="assets/cust.jpg" onclick="openLightbox(this.src)" alt="Customers">
-            <h3>👥 Customer Management</h3>
-            <ul>
-                <li>Complete Customer Database</li>
-                <li>Transaction History</li>
-                <li>Loyalty Points System</li>
-            </ul>
-        </div>
-
-        <div class="feature-box">
-            <img src="assets/rep.jpg" onclick="openLightbox(this.src)" alt="Reports">
-            <h3>📈 Advanced Reports</h3>
-            <ul>
-                <li>Sales & Expense Reports</li>
-                <li>Stock & Inventory Reports</li>
-                <li>CSV/PDF Export Options</li>
-            </ul>
-        </div>
-
-        <div class="feature-box">
-            <img src="assets/user.jpg" onclick="openLightbox(this.src)" alt="User Management">
-            <h3>🔐 User Management</h3>
-            <ul>
-                <li>Add/Edit/Delete Users</li>
-                <li>Admin & Staff Roles</li>
-                <li>Secure Login/Logout</li>
-            </ul>
-        </div>
-
-        <div class="feature-box">
-            <img src="assets/set.jpg" onclick="openLightbox(this.src)" alt="Settings">
-            <h3>⚙️ Full Customization</h3>
-            <ul>
-                <li>Shop Details & Logo</li>
-                <li>GST & Discount Settings</li>
-                <li>Backup & Restore</li>
-            </ul>
-        </div>
-
+    <div class="feature-card">
+        <img src="assets/dash.jpg" class="feature-image" alt="Dashboard" data-lightbox>
+        <h3><span>📊</span> Dashboard</h3>
+        <ul class="feature-list">
+            <li>Daily & Monthly Sales Overview</li>
+            <li>Real-time Profit Tracking</li>
+            <li>Low Stock & Expiry Alerts</li>
+        </ul>
     </div>
+
+    <div class="feature-card">
+        <img src="assets/bill.jpg" class="feature-image" alt="Billing POS" data-lightbox>
+        <h3><span>🧾</span> Billing (POS)</h3>
+        <ul class="feature-list">
+            <li>Barcode Scanning Support</li>
+            <li>Cash, UPI, Card Payments</li>
+            <li>Automatic GST Calculation</li>
+            <li>Thermal & A4 Print Support</li>
+        </ul>
+    </div>
+
+    <div class="feature-card">
+        <img src="assets/inv.jpg" class="feature-image" alt="Inventory" data-lightbox>
+        <h3><span>📦</span> Inventory Management</h3>
+        <ul class="feature-list">
+            <li>Add/Edit/Delete Products</li>
+            <li>Real-time Stock Tracking</li>
+            <li>Barcode Generation</li>
+        </ul>
+    </div>
+
+    <div class="feature-card">
+        <img src="assets/exp.jpg" class="feature-image" alt="Expenses" data-lightbox>
+        <h3><span>💵</span> Expenses Tracking</h3>
+        <ul class="feature-list">
+            <li>Add/Edit/Delete Expenses</li>
+            <li>Category-wise Tracking</li>
+            <li>Monthly Expenses Summary</li>
+        </ul>
+    </div>
+
+    <div class="feature-card">
+        <img src="assets/cust.jpg" class="feature-image" alt="Customers" data-lightbox>
+        <h3><span>👥</span> Customer Management</h3>
+        <ul class="feature-list">
+            <li>Complete Customer Database</li>
+            <li>Transaction History</li>
+            <li>Loyalty Points System</li>
+        </ul>
+    </div>
+
+    <div class="feature-card">
+        <img src="assets/rep.jpg" class="feature-image" alt="Reports" data-lightbox>
+        <h3><span>📈</span> Advanced Reports</h3>
+        <ul class="feature-list">
+            <li>Sales & Expense Reports</li>
+            <li>Stock & Inventory Reports</li>
+            <li>CSV/PDF Export Options</li>
+        </ul>
+    </div>
+
+    <div class="feature-card">
+        <img src="assets/user.jpg" class="feature-image" alt="User Management" data-lightbox>
+        <h3><span>🔐</span> User Management</h3>
+        <ul class="feature-list">
+            <li>Add/Edit/Delete Users</li>
+            <li>Admin & Staff Roles</li>
+            <li>Secure Login/Logout</li>
+        </ul>
+    </div>
+
+    <div class="feature-card">
+        <img src="assets/set.jpg" class="feature-image" alt="Settings" data-lightbox>
+        <h3><span>⚙️</span> Full Customization</h3>
+        <ul class="feature-list">
+            <li>Shop Details & Logo</li>
+            <li>GST & Discount Settings</li>
+            <li>Backup & Restore</li>
+        </ul>
+    </div>
+
 </div>
 
 <!-- SECOND AD -->
-<div class="ad">
+<div class="ad-container">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6602675729982728" crossorigin="anonymous"></script>
     <!-- kalvikraft2 -->
     <ins class="adsbygoogle"
@@ -488,100 +772,217 @@ footer {
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
 
-<!-- SPACER -->
-<div class="spacer"></div>
-
 <!-- PRICING -->
-<div class="pricing-wrapper">
-    <div class="pricing-section">
-        <div class="pricing-badge">💰 Buy Kalvi Kraft App</div>
+<section class="pricing-section">
+    <div class="pricing-content">
+        <div class="price-badge">💰 Buy Kalvi Kraft App</div>
         <h2>One-Time Payment</h2>
-        <p class="old-price">₹ 5,000</p>
-        <p class="new-price">₹ 2,500</p>
-        <p class="pricing-subtitle">Lifetime License • No Recurring Fees</p>
+        <p style="text-decoration: line-through; opacity: 0.8; font-size: 1.5rem;">₹ 5,000</p>
+        <div class="price-amount">₹ 2,500</div>
+        <p class="price-subtitle">Lifetime License • No Recurring Fees</p>
+        
         <div class="action-buttons">
-            <a href="tel:+919942272631" class="call-btn">📞 Call Now</a>
-            <a href="https://wa.me/919942272631" target="_blank" class="wa-btn">💬 WhatsApp</a>
+            <a href="tel:+919942272631" class="btn btn-call">
+                <span class="btn-icon">📞</span>
+                Call Now
+            </a>
+            <a href="https://wa.me/919942272631" target="_blank" class="btn btn-whatsapp">
+                <span class="btn-icon">💬</span>
+                WhatsApp
+            </a>
         </div>
     </div>
-</div>
+</section>
 
 <!-- CONTACT -->
-<div class="section contact">
+<section class="contact-section">
     <h3>Ready to Get Started?</h3>
-    <p>📞 <a href="tel:+919942272631">+91 99422 72631</a></p>
-    <p>💬 <a href="https://wa.me/919942272631" target="_blank">Chat on WhatsApp</a></p>
-    <p>📧 <a href="mailto:kalvikraft@gmail.com">kalvikraft@gmail.com</a></p>
-</div>
+    <div class="contact-info">
+        <div class="contact-item">
+            <span>📞</span>
+            <a href="tel:+919942272631" class="contact-link">+91 99422 72631</a>
+        </div>
+        <div class="contact-item">
+            <span>💬</span>
+            <a href="https://wa.me/919942272631" target="_blank" class="contact-link">Chat on WhatsApp</a>
+        </div>
+        <div class="contact-item">
+            <span>📧</span>
+            <a href="mailto:kalvikraft@gmail.com" class="contact-link">kalvikraft@gmail.com</a>
+        </div>
+    </div>
+</section>
 
 </div>
 
-<footer>
-    © 2025 Kalvi Kraft Billing Software | Developed by Kalvi Kraft | All Rights Reserved | Update Policies may change.
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>© 2025 Kalvi Kraft Billing Software | Developed by Kalvi Kraft | All Rights Reserved</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8;">Update Policies may change.</p>
+    </div>
 </footer>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-    <span onclick="closeLightbox()">×</span>
-    <img id="lightboxImg">
+    <button class="lightbox-close" aria-label="Close lightbox">×</button>
+    <div class="lightbox-content">
+        <img src="" class="lightbox-img" alt="Enlarged view" id="lightbox-img">
+    </div>
+</div>
+
+<!-- BACK BUTTON OVERLAY -->
+<div class="back-overlay" id="backOverlay">
+    <div>
+        <p>Press back again to close the image viewer</p>
+        <button onclick="closeLightbox()" style="margin-top: 1rem; padding: 0.5rem 1.5rem; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Close Image
+        </button>
+    </div>
 </div>
 
 <script>
+// Improved Lightbox System
 let lightboxOpen = false;
+let backButtonPressed = false;
+
+// Initialize all lightbox images
+document.addEventListener('DOMContentLoaded', function() {
+    const lightboxImages = document.querySelectorAll('[data-lightbox]');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const backOverlay = document.getElementById('backOverlay');
+    
+    // Add click event to all lightbox images
+    lightboxImages.forEach(img => {
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            openLightbox(this.src);
+        });
+        
+        // Enable double-tap zoom for mobile
+        let lastTap = 0;
+        img.addEventListener('touchend', function(e) {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTap;
+            
+            if (tapLength < 300 && tapLength > 0) {
+                // Double tap detected - open lightbox
+                e.preventDefault();
+                openLightbox(this.src);
+            }
+            lastTap = currentTime;
+        });
+    });
+    
+    // Close lightbox
+    closeBtn.addEventListener('click', closeLightbox);
+    
+    // Close on overlay click
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+    
+    // Handle back button
+    window.addEventListener('popstate', function(e) {
+        if (lightboxOpen) {
+            if (!backButtonPressed) {
+                // First back press - show warning
+                backButtonPressed = true;
+                backOverlay.classList.add('active');
+                
+                // Hide warning after 2 seconds
+                setTimeout(() => {
+                    backButtonPressed = false;
+                    backOverlay.classList.remove('active');
+                }, 2000);
+                
+                // Push state again to prevent navigation
+                history.pushState(null, null, null);
+            } else {
+                // Second back press - close lightbox
+                closeLightbox();
+            }
+        }
+    });
+    
+    // Close with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightboxOpen) {
+            closeLightbox();
+        }
+    });
+    
+    // Prevent zoom on double tap (except for images)
+    document.addEventListener('touchstart', function(e) {
+        if (e.touches.length > 1) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    // Allow zoom on images with pinch gesture
+    document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+    });
+});
 
 function openLightbox(src) {
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightboxImg");
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
     
     lightboxImg.src = src;
-    lightbox.style.display = "flex";
-    document.body.style.overflow = "hidden";
-    document.body.style.position = "fixed";
+    lightbox.classList.add('active');
     lightboxOpen = true;
+    backButtonPressed = false;
     
-    // Prevent back button from closing page
-    history.pushState(null, null, location.href);
+    // Add entry to history
+    history.pushState({ lightbox: true }, '', '#lightbox');
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
-    const lightbox = document.getElementById("lightbox");
-    lightbox.style.display = "none";
-    document.body.style.overflow = "auto";
-    document.body.style.position = "";
+    const lightbox = document.getElementById('lightbox');
+    const backOverlay = document.getElementById('backOverlay');
+    
+    lightbox.classList.remove('active');
+    backOverlay.classList.remove('active');
     lightboxOpen = false;
+    backButtonPressed = false;
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+    
+    // Go back in history if we're in lightbox state
+    if (window.location.hash === '#lightbox') {
+        history.back();
+    }
 }
 
-// Close lightbox on outside click
-document.getElementById("lightbox").onclick = function(e) {
-    if (e.target === this) {
-        closeLightbox();
-    }
-};
-
-// Prevent back button from closing page when lightbox is open
-window.onpopstate = function(event) {
-    if (lightboxOpen) {
-        history.pushState(null, null, location.href);
-        return false;
-    }
-};
-
-// Close lightbox with ESC key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && lightboxOpen) {
-        closeLightbox();
-    }
+// Initialize AdSense ads
+window.addEventListener('load', function() {
+    // AdSense already initialized via async script
 });
 
-// Prevent double tap zoom
-let lastTouchEnd = 0;
-document.addEventListener('touchend', function (event) {
-    const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
+// Improved touch handling
+document.addEventListener('touchmove', function(e) {
+    if (lightboxOpen && e.touches.length > 1) {
+        // Allow multi-touch for zooming in lightbox
+        e.stopPropagation();
     }
-    lastTouchEnd = now;
-}, false);
+}, { passive: true });
+
+// Prevent context menu on images
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+        return false;
+    }
+});
 </script>
 
 </body>
